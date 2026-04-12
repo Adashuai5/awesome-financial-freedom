@@ -1,0 +1,42 @@
+{
+  "id": "rebalancing",
+  "title": "资产再平衡",
+  "chapter": "04-allocation",
+  "tags": ["再平衡", "资产配置", "风险控制", "投资"],
+  "question_patterns": [
+    "什么是资产再平衡",
+    "如何进行再平衡",
+    "投资组合什么时候需要调整",
+    "再平衡频率多少合适"
+  ],
+  "answer": {
+    "summary": "资产再平衡是定期调整投资组合中各类资产的比例，使其回到目标配置，从而控制风险并保持长期投资策略。",
+    "core_concept": "随着市场涨跌，不同资产的占比会偏离原定目标。再平衡通过卖出涨幅大的资产、买入跌幅大的资产，实现\"低买高卖\"，同时控制整体风险水平。",
+    "formula": "调整后资产 = 目标比例 × 当前总资产",
+    "example": {
+      "scenario": "小王的目标配置是60%股票/40%债券，一年后股票大涨，比例变成70%股票/30%债券。",
+      "calculation": "假设总资产100万：目标股票=60万，目标债券=40万。当前股票=70万，债券=30万。需要卖出10万股票，买入10万债券。",
+      "explanation": "通过卖出部分股票锁定收益，同时以较低价格买入债券，让组合回到目标风险水平。"
+    },
+    "limitations": [
+      "频繁再平衡会增加交易成本",
+      "可能错过单边上涨行情",
+      "税务影响需要考虑（ taxable account）",
+      "市场剧烈波动时可能难以精确执行"
+    ]
+  },
+  "action_item": "检查你当前投资组合的资产比例，与目标配置对比。如果偏离超过5%，考虑进行再平衡。",
+  "related_nodes": [
+    "asset-allocation-basics",
+    "dual-wheel-allocation",
+    "stock-bond-balance"
+  ],
+  "source": {
+    "primary": "资产配置再平衡原则",
+    "books": ["《让钱去工作》", "《聪明钱》", "The Simple Path to Wealth"],
+    "references": [
+      "https://www.investopedia.com/terms/r/rebalancing.asp",
+      "https://www.vanguard.com/investor-resources-education/portfolio-management"
+    ]
+  }
+}
