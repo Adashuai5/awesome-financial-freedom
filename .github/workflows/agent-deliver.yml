@@ -1,0 +1,40 @@
+name: Agent Delivery
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate knowledge nodes
+        run: npm run validate
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build skills
+        run: npm run build:skills
+
+      - name: Generate agent task payload
+        run: npm run generate:task > task_payload.md
+
+      - name: Deliver to OpenClaw/Hermes Agent
+        env:
+          AGENT_TOKEN: ${{ secrets.AGENT_TOKEN }}
+        run: |
+          curl -X POST https://openclaw.example/api/tasks \
+            -H "Authorization: Bearer $AGENT_TOKEN" \
+            -H "Content-Type: text/markdown" \
+            --data-binary @task_payload.md
