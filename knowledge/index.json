@@ -1,0 +1,35 @@
+{
+  "01-mindset": [
+    "what-is-financial-freedom",
+    "money-as-tool",
+    "happiness-marginal-utility"
+  ],
+  "02-foundation": [
+    "net-worth-calculation",
+    "emergency-fund",
+    "good-debt-vs-bad-debt",
+    "insurance-basics"
+  ],
+  "03-accumulation": [
+    "savings-rate",
+    "income-growth-framework",
+    "side-hustle-starter"
+  ],
+  "04-allocation": [
+    "asset-allocation-basics",
+    "dual-wheel-allocation",
+    "index-fund-why",
+    "stock-bond-balance"
+  ],
+  "05-automation": [
+    "auto-saving-system",
+    "dollar-cost-averaging",
+    "rebalancing"
+  ],
+  "06-freedom": [
+    "fire-types",
+    "four-percent-rule",
+    "withdrawal-strategies",
+    "geo-arbitrage"
+  ]
+}
