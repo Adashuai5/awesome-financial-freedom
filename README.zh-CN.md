@@ -1,10 +1,23 @@
 # Awesome Financial Freedom 🕊️
 
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
 > 一个面向财务自由的结构化知识库，以 AI Skill 形式呈现，让对话式学习变得轻松省力。
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+## 🧭 项目导航
+
+- **文档入口**：[`docs/README.md`](docs/README.md)
+- **快速入门**：[`docs/tutorials/getting-started.md`](docs/tutorials/getting-started.md)
+- **书籍摘要**：[`docs/book-summaries`](docs/book-summaries)
+- **Skill 提示模板**：[`prompts/system-prompt.md`](prompts/system-prompt.md)
+- **知识节点**：[`knowledge/nodes/`](knowledge/nodes)
+- **Skills**：[`skills/`](skills)
+- **工具**：[`tools/`](tools)
+- **贡献指南**：[`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## 🤔 这是什么？
 

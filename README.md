@@ -8,6 +8,17 @@
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
+## 🧭 Project Navigation
+
+- **Docs portal**: [`docs/README.md`](docs/README.md)
+- **Getting started**: [`docs/tutorials/getting-started.md`](docs/tutorials/getting-started.md)
+- **Book summaries**: [`docs/book-summaries`](docs/book-summaries)
+- **Skill prompts**: [`prompts/system-prompt.md`](prompts/system-prompt.md)
+- **Knowledge nodes**: [`knowledge/nodes/`](knowledge/nodes)
+- **Skills**: [`skills/`](skills)
+- **Tools**: [`tools/`](tools)
+- **Contributing**: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+
 ## 🤔 What is this?
 
 **Awesome Financial Freedom** is an open-source, AI-native knowledge base for financial freedom. It combines the structured curation of awesome lists with AI Skill conversational capabilities, enabling "effortless" learning.

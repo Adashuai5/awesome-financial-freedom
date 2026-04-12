@@ -2,6 +2,8 @@
 
 Thanks for your interest in contributing! This project aims to build the most comprehensive, AI-ready knowledge base for financial freedom.
 
+For onboarding and docs, see `docs/README.md`, `README.md`, and `README.zh-CN.md`.
+
 ## Ways to Contribute
 
 1. **Add a new knowledge node** (see JSON schema below)
