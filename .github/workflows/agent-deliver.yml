@@ -33,8 +33,14 @@ jobs:
       - name: Deliver to OpenClaw/Hermes Agent
         env:
           AGENT_TOKEN: ${{ secrets.AGENT_TOKEN }}
+          AGENT_URL: ${{ secrets.AGENT_URL }}
         run: |
-          curl -X POST https://openclaw.example/api/tasks \
+          if [ -z "$AGENT_URL" ] || [ -z "$AGENT_TOKEN" ]; then
+            echo "Skipping delivery: AGENT_URL or AGENT_TOKEN is not configured."
+            exit 0
+          fi
+
+          curl -X POST "$AGENT_URL" \
             -H "Authorization: Bearer $AGENT_TOKEN" \
             -H "Content-Type: text/markdown" \
             --data-binary @task_payload.md

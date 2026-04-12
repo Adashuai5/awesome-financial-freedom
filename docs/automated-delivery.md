@@ -12,7 +12,8 @@
 ## 配置要求
 
 - 在仓库 Secrets 中添加 `AGENT_TOKEN`，值为代理 Webhook 的认证令牌。
-- 将 `.github/workflows/agent-deliver.yml` 中的 Webhook URL 替换为实际地址。
+- 在仓库 Secrets 中添加 `AGENT_URL`，值为代理的 Webhook URL，例如 `https://your-agent.example/api/tasks`。
+- `.github/workflows/agent-deliver.yml` 将使用 `AGENT_URL` 和 `AGENT_TOKEN`；如果未配置，这一步会自动跳过。
 
 ## 任务格式示例
 
