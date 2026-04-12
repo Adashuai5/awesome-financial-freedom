@@ -20,7 +20,7 @@
     },
     "limitations": ["个人情况差异大（如负债、收入波动），需结合具体状况调整"]
   },
-  "action_item": "对照 docs/learning-path.md 中的初学者阶段清单，勾选你已完成的项目。",
+  "action_item": "对照 playbooks/guides/learning-path.md 中的初学者阶段清单，勾选你已完成的项目。",
   "related_nodes": [
     "emergency-fund",
     "four-percent-rule",

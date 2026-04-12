@@ -12,7 +12,7 @@ Money OS 是将 `awesome-financial-freedom` 仓库从“半结构化知识库”
 
 - `playbooks/`
   - 存放人类可读的操作手册、教程和书籍摘要。
-  - 迁移自原来的 `docs/tutorials/` 和 `docs/book-summaries/`，用于提供背景知识与实践指南。
+  - 迁移自原来的 `docs/`，用于提供背景知识与实践指南。
 
 - `prompts/`
   - 存放原子级 Prompt 模板，用于驱动工作流中的具体交互步骤。

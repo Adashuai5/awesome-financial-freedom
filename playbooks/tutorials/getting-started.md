@@ -11,7 +11,7 @@ awesome-financial-freedom/
 ├── knowledge/          # 核心知识库
 ├── skills/            # AI技能配置
 ├── tools/             # 计算器工具
-└── docs/              # 补充文档
+└── playbooks/          # 手册与指南
 ```
 
 ## 第二步：与AI对话

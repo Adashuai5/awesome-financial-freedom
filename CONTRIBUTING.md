@@ -2,7 +2,7 @@
 
 Thanks for your interest in contributing! This project aims to build the most comprehensive, AI-ready knowledge base for financial freedom.
 
-For onboarding and docs, see `docs/README.md`, `README.md`, and `README.zh-CN.md`.
+For onboarding and docs, see `playbooks/guides/README.md`, `README.md`, and `README.zh-CN.md`.
 
 ## Ways to Contribute
 
@@ -10,7 +10,7 @@ For onboarding and docs, see `docs/README.md`, `README.md`, and `README.zh-CN.md
 2. **Improve an existing node** (fix errors, add examples, update sources)
 3. **Translate nodes** to other languages
 4. **Improve the AI Skill prompts**
-5. **Add book summaries** to `/docs/book-summaries`
+5. **Add book summaries** to `/playbooks/book-summaries`
 
 ## Knowledge Node JSON Schema
 

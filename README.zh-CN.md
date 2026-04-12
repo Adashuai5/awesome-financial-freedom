@@ -18,8 +18,8 @@
 - **Prompts**：[`prompts/`](prompts)
 - **Agents**：[`agents/`](agents)
 - **Data**：[`data/`](data)
-- **文档入口**：[`docs/README.md`](docs/README.md)
-- **系统架构**：[`docs/money-os-architecture.md`](docs/money-os-architecture.md)
+- **手册入口**：[`playbooks/guides/README.md`](playbooks/guides/README.md)
+- **系统架构**：[`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md)
 - **快速入门**：[`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
 - **书籍摘要**：[`playbooks/book-summaries`](playbooks/book-summaries)
 - **Skill 提示模板**：[`prompts/system-prompt.md`](prompts/system-prompt.md)
@@ -40,7 +40,7 @@
   - _“帮我看看我的组合：70% 标普 500，30% 债券。”_
   - _“什么是‘双轮资产配置’方法？”_
 - 🧮 内置计算器和公式，提供透明、逐步的答案
-- ✅ **可立即执行的行动清单**，请查看 [`docs/actionable-steps.md`](docs/actionable-steps.md)
+- ✅ **可立即执行的行动清单**，请查看 [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md)
 
 **零配置，直接对话。**
 

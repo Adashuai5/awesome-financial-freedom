@@ -10,7 +10,7 @@
   ],
   "answer": {
     "summary": "你的下一步行动取决于当前阶段。请告诉我你是否已建立应急基金、是否开始投资、是否计算过FIRE目标。",
-    "core_concept": "这是一个交互式节点，AI将根据用户的回答动态推荐学习内容和行动。通用路径见 docs/learning-path.md。",
+    "core_concept": "这是一个交互式节点，AI将根据用户的回答动态推荐学习内容和行动。通用路径见 playbooks/guides/learning-path.md。",
     "formula": "",
     "example": {
       "scenario": "用户回答：已建立3个月应急基金，但尚未开始定投，也没有计算FIRE目标。",

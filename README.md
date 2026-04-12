@@ -18,8 +18,8 @@
 - **Prompts**: [`prompts/`](prompts)
 - **Agents**: [`agents/`](agents)
 - **Data**: [`data/`](data)
-- **Docs portal**: [`docs/README.md`](docs/README.md)
-- **Architecture**: [`docs/money-os-architecture.md`](docs/money-os-architecture.md)
+- **Playbook guides**: [`playbooks/guides/README.md`](playbooks/guides/README.md)
+- **Architecture**: [`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md)
 - **Getting started**: [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
 - **Book summaries**: [`playbooks/book-summaries`](playbooks/book-summaries)
 - **Knowledge nodes**: [`knowledge/nodes/`](knowledge/nodes)
@@ -40,7 +40,7 @@ Instead of just a static list of links, this repo provides:
   - _"What's the 'Dual-Wheel Asset Allocation' method?"_
 - 🧮 **Embedded calculators** and formulas for transparent, step-by-step answers.
 - 📍 **Learning path guide** for stage-based progression and personalized financial goals.
-- ✅ **Actionable steps guide** for quick wins and risk-aware first moves, see [`docs/actionable-steps.md`](docs/actionable-steps.md).
+- ✅ **Actionable steps guide** for quick wins and risk-aware first moves, see [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md).
 
 **Zero setup. Just chat.**
 
