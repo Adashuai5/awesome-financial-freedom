@@ -14,7 +14,6 @@ Thanks for your interest in contributing! This project aims to build the most co
 
 All knowledge nodes must follow this structure:
 
-```json
 {
   "id": "unique-kebab-case-id",
   "title": "Human readable title",
@@ -39,3 +38,23 @@ All knowledge nodes must follow this structure:
     "books": ["Book 1, Chapter X", "Book 2, Chapter Y"]
   }
 }
+
+## Submission Process
+
+1. Fork the repository
+2. Create a new branch: git checkout -b add-node-{your-node-id}
+3. Add your JSON file in the correct chapter folder
+4. Submit a Pull Request with a clear description
+
+## Quality Standards
+
+- **Accuracy**: Information must be factually correct and cite reputable sources
+- **Clarity**: Avoid financial jargon; explain as if to a complete beginner
+- **Actionability**: Every node must include a concrete action_item
+- **No Product Recommendations**: Do not recommend specific stocks, funds, or services
+
+## Non-Financial Advice Reminder
+
+This project is for **educational purposes only**. Do not provide personalized investment advice.
+
+Thank you for helping make financial freedom knowledge accessible to everyone!
