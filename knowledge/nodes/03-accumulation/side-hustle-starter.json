@@ -1,0 +1,33 @@
+{
+  "id": "side-hustle-starter",
+  "title": "副业入门",
+  "chapter": "03-accumulation",
+  "tags": ["副业", "收入", "实践"],
+  "question_patterns": [
+    "如何开始副业",
+    "副业有哪些选择",
+    "兼职怎么赚钱",
+    "副业适合什么人"
+  ],
+  "answer": {
+    "summary": "副业是一种增加收入的有效方式，关键是选择时间成本低、匹配你技能的项目。",
+    "core_concept": "从现有能力出发，先做小规模验证，再逐步放大投入，避免用副业换掉主业稳定性。",
+    "formula": "净额收入 = 副业收入 - 额外成本 - 时间成本",
+    "example": {
+      "scenario": "小张周末做线上写作，月收入4000元，额外成本500元。",
+      "calculation": "净额收入 = 4000 - 500 = 3500",
+      "explanation": "这是她额外的可储蓄资金，同时风险低，不影响工作。"
+    },
+    "limitations": [
+      "副业不能无限扩张，需控制时间成本",
+      "初期收入通常不高，需要耐心",
+      "不适合必须完全休息的高强度工作者"
+    ]
+  },
+  "action_item": "写下你可以用10小时/周做的三项技能，选择其中一项做一个两周的小测试。 ",
+  "related_nodes": ["income-growth-framework", "savings-rate", "auto-saving-system"],
+  "source": {
+    "primary": "现代兼职与副业实践",
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "income-growth-framework",
+  "title": "收入增长框架",
+  "chapter": "03-accumulation",
+  "tags": ["收入", "成长", "策略"],
+  "question_patterns": [
+    "如何提高收入",
+    "收入增长策略",
+    "工资怎么涨得快",
+    "稳定增长收入的方法"
+  ],
+  "answer": {
+    "summary": "收入增长可通过三个维度提升：技能、机会和资本。",
+    "core_concept": "工资上涨不仅靠努力，还要靠提高价值、寻找机会和让钱为你工作。",
+    "formula": "收入增长 = 技能提升 + 机会把握 + 资本回报",
+    "example": {
+      "scenario": "小王每年通过培训提升技能、申请晋升，并投资指数基金。",
+      "calculation": "技能增长贡献3%，岗位提升贡献5%，投资回报贡献4%：总增长≈12%",
+      "explanation": "收入增长不是单一渠道，而是组合动作的结果。"
+    },
+    "limitations": [
+      "机会因行业和区域不同而不同",
+      "资本回报有风险，不能保证持续",
+      "技能提升需要时间和成本"
+    ]
+  },
+  "action_item": "列出你当前收入的三条增长路径，并为每条路径设定下个月的具体行动。",
+  "related_nodes": ["savings-rate", "side-hustle-starter", "dual-wheel-allocation"],
+  "source": {
+    "primary": "个人财务成长框架",
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]
+  }
+}

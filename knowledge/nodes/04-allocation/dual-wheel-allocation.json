@@ -1,0 +1,33 @@
+{
+  "id": "dual-wheel-allocation",
+  "title": "双轮配置法",
+  "chapter": "04-allocation",
+  "tags": ["资产配置", "双轮", "风险控制"],
+  "question_patterns": [
+    "什么是双轮配置法",
+    "双轮资产配置怎么做",
+    "如何用双轮配置降低风险",
+    "让钱去工作 双轮"
+  ],
+  "answer": {
+    "summary": "双轮配置法把资产分成安全轮和风险轮，既保留安全，又追求增长。",
+    "core_concept": "安全轮负责保障日常资金，风险轮负责长期增值。两轮并行可以在市场波动中保持稳定。",
+    "formula": "总资产 = 安全轮 + 风险轮",
+    "example": {
+      "scenario": "小王把70%资金放安全轮，30%放风险轮。",
+      "calculation": "安全轮=70万，风险轮=30万",
+      "explanation": "安全轮在低风险资产中保护本金，风险轮在高增长资产中追求长期收益。"
+    },
+    "limitations": [
+      "安全轮回报较低，长期增长有限",
+      "风险轮仍需承受市场波动",
+      "需要定期检查两轮比例是否符合目标"
+    ]
+  },
+  "action_item": "把你的资产按安全轮和风险轮分类，并判断当前比例是否符合你对稳健与增长的平衡。 ",
+  "related_nodes": ["asset-allocation-basics", "rebalancing", "four-percent-rule"],
+  "source": {
+    "primary": "《让钱去工作》双轮配置理念",
+    "books": ["《让钱去工作》", "《聪明钱》"]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "net-worth-calculation",
+  "title": "净资产计算",
+  "chapter": "02-foundation",
+  "tags": ["财务健康", "资产负债", "诊断"],
+  "question_patterns": [
+    "净资产怎么计算",
+    "如何知道我有多少钱",
+    "资产负债表是什么",
+    "我的财务健康怎么评估"
+  ],
+  "answer": {
+    "summary": "净资产等于你拥有的资产减去你欠的负债，是衡量财务健康的核心数字。",
+    "core_concept": "净资产显示你目前的财富状况，是判断你是否能抵御风险、实现目标的基础。",
+    "formula": "净资产 = 总资产 - 总负债",
+    "example": {
+      "scenario": "小王有银行存款10万、基金20万、房产净值100万，欠房贷50万、信用卡欠款1万。",
+      "calculation": "净资产 = (10+20+100) - (50+1) = 79万",
+      "explanation": "他真正能支配的财富是79万元，而不仅仅是账户中的现金。"
+    },
+    "limitations": [
+      "净资产不等于每月现金流",
+      "不考虑资产流动性和未实现收益",
+      "资产估值会随市场波动"
+    ]
+  },
+  "action_item": "列出你当前所有资产和负债，算出净资产，并把它记录为本月财务健康基线。",
+  "related_nodes": ["emergency-fund", "savings-rate", "what-is-financial-freedom"],
+  "source": {
+    "primary": "财务规划基础原则",
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]
+  }
+}

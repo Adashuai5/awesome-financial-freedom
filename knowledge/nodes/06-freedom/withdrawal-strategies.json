@@ -1,0 +1,33 @@
+{
+  "id": "withdrawal-strategies",
+  "title": "提款策略",
+  "chapter": "06-freedom",
+  "tags": ["提款", "退休", "现金流"],
+  "question_patterns": [
+    "退休后怎么提款",
+    "4%法则之外的策略",
+    "提款策略有哪些",
+    "如何安全取钱"
+  ],
+  "answer": {
+    "summary": "安全提款策略有多种，常见包括4%法则、固定金额法和动态调整法。",
+    "core_concept": "重要的是控制提款比例，保持本金增长潜力，同时确保支出可持续。",
+    "formula": "年提款 = 目标资金 × 提取率",
+    "example": {
+      "scenario": "目标资金500万，采用3.5%保守提取率。",
+      "calculation": "年提款 = 500万 × 0.035 = 17.5万",
+      "explanation": "低于4%的提取率可以为市场下跌留下更多缓冲。"
+    },
+    "limitations": [
+      "更低提取率意味着更高目标资产",
+      "固定提款忽略通胀影响",
+      "动态撤出需要定期复盘"
+    ]
+  },
+  "action_item": "比较你当前目标资产下的4%和3.5%提取额，判断哪种方案更适合你的风险偏好。",
+  "related_nodes": ["four-percent-rule", "fire-types", "compound-interest"],
+  "source": {
+    "primary": "退休提款原则",
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]
+  }
+}

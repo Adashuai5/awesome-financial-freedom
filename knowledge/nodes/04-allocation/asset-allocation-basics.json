@@ -1,0 +1,33 @@
+{
+  "id": "asset-allocation-basics",
+  "title": "资产配置基础",
+  "chapter": "04-allocation",
+  "tags": ["资产配置", "风险管理", "投资"],
+  "question_patterns": [
+    "资产配置是什么意思",
+    "怎么分配股票和债券",
+    "为什么要做资产配置",
+    "投资组合应该怎么分"
+  ],
+  "answer": {
+    "summary": "资产配置是把钱分到不同类型的资产里，以降低风险并提高长期稳定性。",
+    "core_concept": "不同资产在不同市场状况下表现不同，合理分配可以避免全部亏损，也能抓住增长机会。",
+    "formula": "投资组合风险 = 各类资产风险 × 权重的组合",
+    "example": {
+      "scenario": "小李把60%资产配置到股票，40%配置到债券。",
+      "calculation": "组合风险 ≈ 0.6×高波动 + 0.4×低波动",
+      "explanation": "股票提供增长，债券提供稳定，两者搭配让整体波动更可控。"
+    },
+    "limitations": [
+      "资产配置不是一次性决定，需要定期检查",
+      "市场环境变化会影响最优比例",
+      "不同人风险承受能力不同"
+    ]
+  },
+  "action_item": "记下你的当前资产类别比例，并与一个简单的配置模型（如60%股票、40%债券）做对比。",
+  "related_nodes": ["dual-wheel-allocation", "index-fund-why", "stock-bond-balance"],
+  "source": {
+    "primary": "资产配置基本原则",
+    "books": ["《聪明钱》", "《让钱去工作》"]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "auto-saving-system",
+  "title": "自动储蓄系统",
+  "chapter": "05-automation",
+  "tags": ["自动化", "储蓄", "习惯"],
+  "question_patterns": [
+    "如何自动存钱",
+    "自动储蓄系统是什么",
+    "怎么让钱自动流向投资",
+    "自动存款设置"
+  ],
+  "answer": {
+    "summary": "自动储蓄是把存款过程变成习惯，让钱先自动离开账户，再安排剩余消费。",
+    "core_concept": "设置自动转账和自动扣款，可以避免‘月底剩多少存多少’的陷阱。",
+    "formula": "每月储蓄 = 固定转账金额",
+    "example": {
+      "scenario": "每月收入1万元，设置每月1号自动转账2000元到投资账户。",
+      "calculation": "自动储蓄 = 2000元",
+      "explanation": "这样你不用靠意志力手动存钱，储蓄率自然稳定。"
+    },
+    "limitations": [
+      "需要先确保预算足够覆盖最低生活成本",
+      "不适合现金流极度紧张的月份",
+      "自动储蓄金额应定期复盘"
+    ]
+  },
+  "action_item": "在你的工资到账当天设置固定金额自动转入储蓄或投资账户。 ",
+  "related_nodes": ["savings-rate", "dollar-cost-averaging", "net-worth-calculation"],
+  "source": {
+    "primary": "理财自动化原则",
+    "books": ["《聪明钱》", "《让钱去工作》"]
+  }
+}

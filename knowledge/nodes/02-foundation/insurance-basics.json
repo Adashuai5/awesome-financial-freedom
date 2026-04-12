@@ -1,0 +1,33 @@
+{
+  "id": "insurance-basics",
+  "title": "保险基础",
+  "chapter": "02-foundation",
+  "tags": ["风险管理", "保障", "基础"],
+  "question_patterns": [
+    "保险有什么用",
+    "为什么要买保险",
+    "如何选择保险",
+    "保险和理财关系"
+  ],
+  "answer": {
+    "summary": "保险是为了把大额风险转移出去，让你不因意外开支而毁掉财务计划。",
+    "core_concept": "保险不是投资，而是风险控制工具，先保证基础再去追求增值。",
+    "formula": "保障缺口 = 可能损失 - 可用储蓄",
+    "example": {
+      "scenario": "小张突发住院，医疗费10万；他只有2万储蓄，但有5万住院保险。",
+      "calculation": "保障缺口 = 10万 - (2万+5万) = 3万",
+      "explanation": "保险将大部分风险转移，避免他动用全部储蓄或借高利贷。"
+    },
+    "limitations": [
+      "保险不能替代紧急基金",
+      "购买前要看清责任免除和等待期",
+      "不必要的高额保险会拖慢资产积累"
+    ]
+  },
+  "action_item": "检查你的家庭保障：健康险、意外险和财产险，确认是否覆盖你最担心的三项风险。",
+  "related_nodes": ["emergency-fund", "net-worth-calculation", "fire-types"],
+  "source": {
+    "primary": "保险与个人理财常识",
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]
+  }
+}
