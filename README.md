@@ -7,6 +7,9 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
+
+**Last updated: 2026-04-14**
 
 ## 🧭 Project Navigation
 
@@ -31,6 +34,8 @@ Instead of just a static list of links, this repo provides:
   - _"Review my portfolio: 70% S&P 500, 30% bonds."_
   - _"What's the 'Dual-Wheel Asset Allocation' method?"_
 - 🧮 **Embedded calculators** and formulas for transparent, step-by-step answers.
+- 📍 **Learning path guide** for stage-based progression and personalized financial goals.
+- ✅ **Actionable steps guide** for quick wins and risk-aware first moves, see [`docs/actionable-steps.md`](docs/actionable-steps.md).
 
 **Zero setup. Just chat.**
 
@@ -77,6 +82,14 @@ Clone this repo and explore the `/knowledge/nodes` directory. Each `.json` file 
 Use the structured data and calculators (`/tools`) to integrate financial freedom logic into your own apps.
 
 ## 📖 Knowledge Structure
+
+- 01-mindset/ — 心态与价值观
+- 02-foundation/ — 基础财务健康
+- 03-accumulation/ — 储蓄与收入增长
+- 04-allocation/ — 资产配置与投资
+- 05-automation/ — 自动化储蓄与投资
+- 06-freedom/ — FIRE 目标与提款策略
+- 07-learning-path/ — 路径规划与阶段性行动建议
 
 ## 🤝 Contributing
 

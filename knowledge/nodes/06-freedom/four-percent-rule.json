@@ -28,6 +28,11 @@
   "related_nodes": ["fire-types", "dual-wheel-allocation", "savings-rate"],
   "source": {
     "primary": "Trinity Study (1998)",
-    "books": ["《聪明钱》", "《白领1000万财务自由笔记》", "《让钱去工作》"]
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》", "《让钱去工作》"],
+    "references": [
+      "https://www.ssrn.com/index.cfm/en/ssrn-id/116183/ (Trinity Study)",
+      "https://earlyretirementnow.com/series/safe-withdrawal-rate-5/ (Big ERN SWR series)",
+      "https://investor.vanguard.com/investor-resources-education/market-outlook (Vanguard annual outlook)"
+    ]
   }
 }

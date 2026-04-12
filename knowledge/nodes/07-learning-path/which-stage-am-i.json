@@ -1,0 +1,34 @@
+{
+  "id": "which-stage-am-i",
+  "title": "我处于财务自由的哪个阶段？",
+  "chapter": "07-learning-path",
+  "tags": ["路径", "阶段", "自测", "learning path"],
+  "question_patterns": [
+    "我现在处于什么阶段",
+    "财务自由怎么开始",
+    "下一步该学什么",
+    "如何判断我的理财水平"
+  ],
+  "answer": {
+    "summary": "根据是否建立应急基金、是否开始投资、是否计算过FIRE目标，可以判断你处于初学者、中级或进阶阶段。",
+    "core_concept": "财务自由学习路径分为三阶段：初学者（0-6个月，建立地基）、中级（6-12个月，资产配置与目标量化）、进阶（1年以上，多元被动收入）。",
+    "formula": "",
+    "example": {
+      "scenario": "小李已有3个月应急基金，每月定投指数基金，但还没算过自己的FIRE目标本金。",
+      "calculation": "小李处于初学者向中级过渡阶段。下一步建议：计算年支出×25，明确目标本金。",
+      "explanation": "应急基金和定投是初学者的核心动作；计算目标本金是进入中级阶段的标志。"
+    },
+    "limitations": ["个人情况差异大（如负债、收入波动），需结合具体状况调整"]
+  },
+  "action_item": "对照 docs/learning-path.md 中的初学者阶段清单，勾选你已完成的项目。",
+  "related_nodes": [
+    "emergency-fund",
+    "four-percent-rule",
+    "savings-rate",
+    "index-fund-why"
+  ],
+  "source": {
+    "primary": "awesome-financial-freedom 项目学习路径设计",
+    "books": ["《白领1000万财务自由笔记》"]
+  }
+}

@@ -32,6 +32,9 @@
   ],
   "source": {
     "primary": "被动投资理念",
-    "books": ["《简单通往财富之路》", "《聪明钱》"]
+    "books": ["《简单通往财富之路》", "《聪明钱》"],
+    "references": [
+      "https://jlcollinsnh.com/stock-series/ (JL Collins Stock Series)"
+    ]
   }
 }

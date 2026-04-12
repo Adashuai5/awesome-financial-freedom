@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0",
-  "last_updated": "2026-04-12",
+  "version": "1.2.0",
+  "last_updated": "2026-04-14",
   "nodes": [
     {
       "id": "what-is-financial-freedom",
@@ -141,6 +141,34 @@
       "chapter": "06-freedom",
       "tags": ["地理套利", "成本节省", "自由"],
       "file": "knowledge/nodes/06-freedom/geo-arbitrage.json"
+    },
+    {
+      "id": "which-stage-am-i",
+      "title": "我处于财务自由的哪个阶段？",
+      "chapter": "07-learning-path",
+      "tags": ["路径", "阶段", "自测", "learning path"],
+      "file": "knowledge/nodes/07-learning-path/which-stage-am-i.json"
+    },
+    {
+      "id": "customize-path-for-debt",
+      "title": "有负债如何调整学习路径？",
+      "chapter": "07-learning-path",
+      "tags": ["债务", "路径调整", "debt", "customization"],
+      "file": "knowledge/nodes/07-learning-path/customize-path-for-debt.json"
+    },
+    {
+      "id": "next-step-recommendation",
+      "title": "根据当前阶段推荐下一步行动",
+      "chapter": "07-learning-path",
+      "tags": ["行动", "推荐", "next step", "coaching"],
+      "file": "knowledge/nodes/07-learning-path/next-step-recommendation.json"
+    },
+    {
+      "id": "actionable-first-steps",
+      "title": "实现财务自由的第一步是什么？",
+      "chapter": "07-learning-path",
+      "tags": ["行动", "入门", "first steps"],
+      "file": "knowledge/nodes/07-learning-path/actionable-first-steps.json"
     }
   ]
 }

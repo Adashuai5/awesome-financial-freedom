@@ -7,6 +7,9 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
+
+**最近更新：2026-04-14**
 
 ## 🧭 项目导航
 
@@ -31,6 +34,7 @@
   - _“帮我看看我的组合：70% 标普 500，30% 债券。”_
   - _“什么是‘双轮资产配置’方法？”_
 - 🧮 内置计算器和公式，提供透明、逐步的答案
+- ✅ **可立即执行的行动清单**，请查看 [`docs/actionable-steps.md`](docs/actionable-steps.md)
 
 **零配置，直接对话。**
 
@@ -77,6 +81,14 @@
 使用结构化数据和计算器（`/tools`）将财务自由逻辑集成到你自己的应用中。
 
 ## 📖 知识结构
+
+- 01-mindset/ — 心态与价值观
+- 02-foundation/ — 基础财务健康
+- 03-accumulation/ — 储蓄与收入增长
+- 04-allocation/ — 资产配置与投资
+- 05-automation/ — 自动化储蓄与投资
+- 06-freedom/ — FIRE 目标与提款策略
+- 07-learning-path/ — 路径规划与阶段性行动建议
 
 ## 🤝 贡献
 
