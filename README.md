@@ -19,6 +19,7 @@
 - **Agents**: [`agents/`](agents)
 - **Data**: [`data/`](data)
 - **Docs portal**: [`docs/README.md`](docs/README.md)
+- **Architecture**: [`docs/money-os-architecture.md`](docs/money-os-architecture.md)
 - **Getting started**: [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
 - **Book summaries**: [`playbooks/book-summaries`](playbooks/book-summaries)
 - **Knowledge nodes**: [`knowledge/nodes/`](knowledge/nodes)
@@ -63,7 +64,7 @@ Curated insights from:
 - JL Collins' _The Simple Path to Wealth_ ([Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926))
 - FIRE mathematics (4% rule, Trinity Study) ([Wikipedia](https://en.wikipedia.org/wiki/Trinity_study))
 - 阿秋's _让钱去工作_ (Dual-Wheel Asset Allocation) ([JD.com](https://item.jd.com/100240963394.html) or search for "让钱去工作 阿秋")
-- And more (see `/docs/book-summaries`)
+- And more (see `playbooks/book-summaries`)
 
 ## 🚀 How to Use (The "No-Brainer" Way)
 
@@ -90,6 +91,8 @@ Use these workflows to automate:
 - AI 内容生产与增长策略
 - 联盟营销 SEO 自动化
 - 指数基金定投模拟与教育计划
+
+> 维护文档时请运行 `npm run check:readmes`，以确保 `README.md` 和 `README.zh-CN.md` 保持一致。
 
 ### 4️⃣ Build Your Own Tool
 

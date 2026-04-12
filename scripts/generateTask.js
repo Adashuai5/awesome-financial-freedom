@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
+import fs from 'fs'
+
 /**
  * 生成代理任务文件 (Markdown + YAML frontmatter)
- * 当前为演示版本，后续可扩展为根据变更节点动态生成步骤。
+ * 支持可选输出路径：`node scripts/generateTask.js ./task.md`
  */
 
-const fs = require('fs')
-const path = require('path')
-
-// 静态演示任务
 const task = {
   id: `task-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-001`,
   title: '财务自由知识库更新任务',
@@ -18,20 +16,34 @@ const task = {
   ],
 }
 
-// 生成 Markdown 内容
-const yamlFrontmatter = `---
-id: "${task.id}"
-title: "${task.title}"
-steps:
-${task.steps.map((s) => `  - step: ${s.step}\n    description: "${s.description}"`).join('\n')}
----`
+function escapeYamlString(value) {
+  return `"${String(value).replace(/"/g, '\\"')}"`
+}
 
-const markdownContent = `${yamlFrontmatter}
+function buildYamlFrontmatter(task) {
+  const lines = [
+    '---',
+    `id: ${escapeYamlString(task.id)}`,
+    `title: ${escapeYamlString(task.title)}`,
+    'steps:',
+  ]
 
-# 任务说明
+  task.steps.forEach((s) => {
+    lines.push(`  - step: ${s.step}`)
+    lines.push(`    description: ${escapeYamlString(s.description)}`)
+  })
 
-请执行上述步骤并返回结果。
-`
+  lines.push('---')
+  return lines.join('\n')
+}
 
-// 输出到 stdout，供 CI 重定向到文件
-console.log(markdownContent)
+const yamlFrontmatter = buildYamlFrontmatter(task)
+const markdownContent = `${yamlFrontmatter}\n\n# 任务说明\n\n请执行上述步骤并返回结果。\n`
+const outputFile = process.argv[2]
+
+if (outputFile) {
+  fs.writeFileSync(outputFile, markdownContent, 'utf8')
+  console.log(`已生成任务文件：${outputFile}`)
+} else {
+  console.log(markdownContent)
+}

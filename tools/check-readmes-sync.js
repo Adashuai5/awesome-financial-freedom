@@ -6,9 +6,10 @@ import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const rootDir = path.resolve(__dirname, '..')
 
 const readFile = (filePath) =>
-  fs.readFileSync(path.resolve(__dirname, '..', filePath), 'utf8')
+  fs.readFileSync(path.join(rootDir, filePath), 'utf8')
 
 const headingMapping = {
   'Project Navigation': '项目导航',
@@ -67,7 +68,8 @@ function run() {
   if (errors.length) {
     console.error('README 同步检查失败：')
     errors.forEach((error) => console.error(`- ${error}`))
-    process.exit(1)
+    process.exitCode = 1
+    return
   }
 
   console.log('README.md 与 README.zh-CN.md 结构同步检查通过。')

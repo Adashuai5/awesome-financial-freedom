@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
 function parseSimpleYaml(content) {
   const lines = content.split(/\r?\n/)
@@ -9,7 +9,17 @@ function parseSimpleYaml(content) {
   const stack = [result]
   const indentStack = [0]
 
-  for (const rawLine of lines) {
+  function nextNonEmptyLine(startIndex) {
+    for (let i = startIndex + 1; i < lines.length; i++) {
+      const raw = lines[i].replace(/\t/g, '  ')
+      if (!raw.trim() || raw.trim().startsWith('#')) continue
+      return raw
+    }
+    return null
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i]
     const line = rawLine.replace(/\t/g, '  ')
     if (!line.trim() || line.trim().startsWith('#')) continue
 
@@ -41,9 +51,14 @@ function parseSimpleYaml(content) {
       }
     } else if (trimmed.endsWith(':')) {
       const key = trimmed.slice(0, -1).trim()
-      const obj = {}
-      parent[key] = obj
-      stack.push(obj)
+      const nextLine = nextNonEmptyLine(i)
+      const nextIndent = nextLine ? nextLine.match(/^ */)[0].length : null
+      const child =
+        nextLine && nextIndent > indent && nextLine.trim().startsWith('- ')
+          ? []
+          : {}
+      parent[key] = child
+      stack.push(child)
       indentStack.push(indent + 2)
     } else if (trimmed.includes(': ')) {
       const [key, value] = trimmed.split(': ').map((s) => s.trim())
@@ -125,14 +140,13 @@ function runWorkflow(filePath) {
   console.log(JSON.stringify(state.output, null, 2))
 }
 
-if (require.main === module) {
-  const workflowFile = process.argv[2]
-  if (!workflowFile) {
-    console.error(
-      '用法：node tools/run-workflow.js workflows/<workflow-file>.yaml',
-    )
-    process.exit(1)
-  }
-  const resolved = path.resolve(process.cwd(), workflowFile)
-  runWorkflow(resolved)
+const workflowFile = process.argv[2]
+if (!workflowFile) {
+  console.error(
+    '用法：node tools/run-workflow.js workflows/<workflow-file>.yaml',
+  )
+  process.exit(1)
 }
+
+const resolved = path.resolve(process.cwd(), workflowFile)
+runWorkflow(resolved)

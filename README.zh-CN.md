@@ -19,6 +19,7 @@
 - **Agents**：[`agents/`](agents)
 - **Data**：[`data/`](data)
 - **文档入口**：[`docs/README.md`](docs/README.md)
+- **系统架构**：[`docs/money-os-architecture.md`](docs/money-os-architecture.md)
 - **快速入门**：[`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
 - **书籍摘要**：[`playbooks/book-summaries`](playbooks/book-summaries)
 - **Skill 提示模板**：[`prompts/system-prompt.md`](prompts/system-prompt.md)
@@ -63,7 +64,7 @@
 - JL Collins 的《The Simple Path to Wealth》（[Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926)）
 - FIRE 数学（4% 规则、三一研究）（[Wikipedia](https://en.wikipedia.org/wiki/Trinity_study)）
 - 阿秋的《让钱去工作》（双轮资产配置）（[JD.com](https://item.jd.com/100240963394.html) 或搜索“让钱去工作 阿秋”）
-- 以及更多内容（参见 `/docs/book-summaries`）
+- 以及更多内容（参见 `playbooks/book-summaries`）
 
 ## 🚀 如何使用（最省力方式）
 
@@ -90,6 +91,8 @@
 - AI 内容生产与增长策略
 - 联盟营销 SEO 自动化
 - 指数基金定投模拟与教育计划
+
+> 维护文档时请运行 `npm run check:readmes`，以确保 `README.md` 和 `README.zh-CN.md` 保持一致。
 
 ### 4️⃣ 自建工具
 
