@@ -68,6 +68,16 @@ Curated insights from:
 
 ## 🚀 How to Use (The "No-Brainer" Way)
 
+### 0️⃣ Quick Commands
+
+Use these local commands to validate, test, and run workflows:
+
+- `npm run validate` — validate knowledge nodes and README sync
+- `npm run test` — run the existing calculator test suite
+- `npm run ci` — run validation, build skills, and tests
+- `npm run run:workflow workflows/<workflow-file>.yaml` — simulate a workflow
+- `npm run generate:task ./task.md` — generate a sample task markdown file
+
 ### 1️⃣ Talk to the AI (Easiest)
 
 - Add the **Awesome Financial Freedom Skill** to your Claude or ChatGPT.

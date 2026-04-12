@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'fs'
+import path from 'path'
 
 /**
  * 生成代理任务文件 (Markdown + YAML frontmatter)
@@ -42,8 +43,10 @@ const markdownContent = `${yamlFrontmatter}\n\n# 任务说明\n\n请执行上述
 const outputFile = process.argv[2]
 
 if (outputFile) {
-  fs.writeFileSync(outputFile, markdownContent, 'utf8')
-  console.log(`已生成任务文件：${outputFile}`)
+  const outputPath = path.resolve(process.cwd(), outputFile)
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true })
+  fs.writeFileSync(outputPath, markdownContent, 'utf8')
+  console.log(`已生成任务文件：${outputPath}`)
 } else {
   console.log(markdownContent)
 }

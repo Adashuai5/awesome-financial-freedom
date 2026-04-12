@@ -2,83 +2,7 @@
 
 import fs from 'fs'
 import path from 'path'
-
-function parseSimpleYaml(content) {
-  const lines = content.split(/\r?\n/)
-  const result = {}
-  const stack = [result]
-  const indentStack = [0]
-
-  function nextNonEmptyLine(startIndex) {
-    for (let i = startIndex + 1; i < lines.length; i++) {
-      const raw = lines[i].replace(/\t/g, '  ')
-      if (!raw.trim() || raw.trim().startsWith('#')) continue
-      return raw
-    }
-    return null
-  }
-
-  for (let i = 0; i < lines.length; i++) {
-    const rawLine = lines[i]
-    const line = rawLine.replace(/\t/g, '  ')
-    if (!line.trim() || line.trim().startsWith('#')) continue
-
-    const indent = line.match(/^ */)[0].length
-    const trimmed = line.trim()
-
-    while (indent < indentStack[indentStack.length - 1]) {
-      stack.pop()
-      indentStack.pop()
-    }
-
-    const parent = stack[stack.length - 1]
-
-    if (trimmed.startsWith('- ')) {
-      const item = trimmed.slice(2).trim()
-      if (!Array.isArray(parent)) {
-        throw new Error(
-          'Invalid YAML structure: list item without array parent',
-        )
-      }
-      if (item.includes(': ')) {
-        const [key, value] = item.split(': ').map((s) => s.trim())
-        const obj = { [key]: parseValue(value) }
-        parent.push(obj)
-        stack.push(obj)
-        indentStack.push(indent + 2)
-      } else {
-        parent.push(parseValue(item))
-      }
-    } else if (trimmed.endsWith(':')) {
-      const key = trimmed.slice(0, -1).trim()
-      const nextLine = nextNonEmptyLine(i)
-      const nextIndent = nextLine ? nextLine.match(/^ */)[0].length : null
-      const child =
-        nextLine && nextIndent > indent && nextLine.trim().startsWith('- ')
-          ? []
-          : {}
-      parent[key] = child
-      stack.push(child)
-      indentStack.push(indent + 2)
-    } else if (trimmed.includes(': ')) {
-      const [key, value] = trimmed.split(': ').map((s) => s.trim())
-      if (Array.isArray(parent)) {
-        parent.push({ [key]: parseValue(value) })
-      } else {
-        parent[key] = parseValue(value)
-      }
-    }
-  }
-
-  return result
-}
-
-function parseValue(value) {
-  if (value === 'true') return true
-  if (value === 'false') return false
-  if (!isNaN(Number(value))) return Number(value)
-  return value
-}
+import yaml from 'js-yaml'
 
 function simulateStep(step, state) {
   console.log(`\n执行步骤：${step.id} - ${step.name}`)
@@ -117,9 +41,18 @@ function simulateStep(step, state) {
 
 function runWorkflow(filePath) {
   const content = fs.readFileSync(filePath, 'utf8')
-  const workflow = parseSimpleYaml(content)
-  console.log(`\n加载工作流：${workflow.name}`)
-  console.log(`描述：${workflow.description}`)
+  const workflow = yaml.load(content)
+
+  if (typeof workflow !== 'object' || workflow === null) {
+    throw new Error('工作流文件未解析为对象，请检查 YAML 语法。')
+  }
+
+  if (!Array.isArray(workflow.steps)) {
+    throw new Error('工作流文件必须包含 steps 数组。')
+  }
+
+  console.log(`\n加载工作流：${workflow.name || path.basename(filePath)}`)
+  console.log(`描述：${workflow.description || '（无描述）'}`)
 
   const steps = workflow.steps || []
   const state = { output: {}, input: workflow.input || {} }

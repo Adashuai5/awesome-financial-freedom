@@ -6,14 +6,16 @@
   "scripts": {
     "validate:nodes": "node tools/validate-nodes.js",
     "validate": "npm run validate:nodes && npm run check:readmes",
+    "pretest": "npm run validate",
     "build:skills": "node tools/build-skills.js",
     "test": "npx ts-node tools/calculators/__tests__/run-tests.ts",
     "generate:task": "node scripts/generateTask.js",
     "run:workflow": "node tools/run-workflow.js",
     "check:readmes": "node tools/check-readmes-sync.js",
-    "ci": "npm run validate && npm run test"
+    "ci": "npm run validate && npm run build:skills && npm run test"
   },
   "devDependencies": {
+    "js-yaml": "^4.1.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.5.0"
   }

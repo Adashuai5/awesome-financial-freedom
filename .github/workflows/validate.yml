@@ -12,7 +12,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - run: npm install
-      - run: npm run validate
-      - run: npm test
-      - run: npm run build:skills
+      - run: npm ci
+      - run: npm run ci

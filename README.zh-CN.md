@@ -68,6 +68,16 @@
 
 ## 🚀 如何使用（最省力方式）
 
+### 0️⃣ 快速命令
+
+使用以下本地命令验证、测试并运行工作流：
+
+- `npm run validate` — 校验知识节点和 README 同步
+- `npm run test` — 运行现有计算器测试套件
+- `npm run ci` — 运行验证、构建技能并测试
+- `npm run run:workflow workflows/<workflow-file>.yaml` — 模拟执行工作流
+- `npm run generate:task ./task.md` — 生成示例任务 Markdown 文件
+
 ### 1️⃣ 与 AI 对话（最简单）
 
 - 将 **Awesome Financial Freedom Skill** 添加到你的 Claude 或 ChatGPT
