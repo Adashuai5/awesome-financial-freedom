@@ -1,13 +1,14 @@
 // Savings Rate Calculator
-// Calculates the percentage of income saved/invested
+// Calculates the percentage of income saved after expenses
 
-export function calculateSavingsRate(
+export function savingsRate(
   annualIncome: number,
-  annualSavings: number,
+  annualExpenses: number,
 ): number {
   if (annualIncome <= 0) return 0
-  return (annualSavings / annualIncome) * 100
+  const savings = annualIncome - annualExpenses
+  return savings <= 0 ? 0 : (savings / annualIncome) * 100
 }
 
 // Example usage:
-// calculateSavingsRate(60000, 24000) // Returns 40%
+// savingsRate(60000, 48000) // Returns 20%

@@ -1,11 +1,11 @@
 // Compound Interest Calculator
 // Calculates future value with compound interest
 
-export function calculateCompoundInterest(
+export function compoundInterest(
   principal: number,
   annualRate: number,
   years: number,
-  compoundingFrequency: number = 12,
+  compoundingFrequency: number = 1,
 ): number {
   const rate = annualRate / compoundingFrequency
   const periods = years * compoundingFrequency
@@ -14,4 +14,4 @@ export function calculateCompoundInterest(
 }
 
 // Example usage:
-// calculateCompoundInterest(10000, 0.07, 10) // Returns future value
+// compoundInterest(10000, 0.07, 10) // Returns future value

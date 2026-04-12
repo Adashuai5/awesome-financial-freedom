@@ -1,13 +1,13 @@
 {
-  "FIRE": "Financial Independence Retire Early - 财务独立提前退休，通过被动收入覆盖生活开支，实现不工作也能生活的状态",
-  "DCA": "Dollar Cost Averaging - 定投，定期定额投资，平滑市场波动",
-  "ETF": "Exchange-Traded Fund - 交易所交易基金，一篮子股票或债券的集合投资工具",
-  "4% Rule": "安全提取法则，从投资组合中每年提取不超过4%的资金，确保30年不耗尽",
-  "Net Worth": "净资产，总资产减去总负债",
-  "Savings Rate": "储蓄率，收入中用于储蓄和投资的比例",
-  "Asset Allocation": "资产配置，投资组合中不同资产类别的比例分配",
-  "Dual-Wheel Allocation": "双轮配置法，一种动态资产配置策略，结合安全资产和风险资产",
-  "Emergency Fund": "应急基金，3-6个月生活费的现金储备",
-  "Compound Interest": "复利，利息再投资产生的利息",
-  "Geo-Arbitrage": "地理套利，通过搬迁到低成本地区降低生活开支"
+  "FIRE": "Financial Independence Retire Early. 通过高储蓄率和投资，在传统退休年龄前实现财务自由。",
+  "DCA": "Dollar Cost Averaging。定期定额投资，平滑市场波动并避免择时风险。",
+  "ETF": "Exchange-Traded Fund。交易所交易基金，低成本跟踪一篮子资产的投资工具。",
+  "4% Rule": "安全提取法则，每年从退休资产中提取不超过4%，提高长期资金可持续性。",
+  "Net Worth": "净资产，所有资产减去所有负债的金额。",
+  "Savings Rate": "储蓄率，收入中用于储蓄和投资的比例。",
+  "Asset Allocation": "资产配置，将资金分配到不同资产类别以控制风险和追求回报。",
+  "Dual-Wheel Allocation": "双轮配置法，结合安全轮和风险轮，实现稳健与增长并行。",
+  "Emergency Fund": "应急基金，3-6个月生活费的现金储备，用于应对意外开支。",
+  "Compound Interest": "复利，利息产生利息，长期持有能显著放大财富。",
+  "Geo-Arbitrage": "地理套利，通过选择低成本地区提升同样收入的购买力。"
 }

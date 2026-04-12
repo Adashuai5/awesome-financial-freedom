@@ -1,30 +1,146 @@
 {
-  "01-mindset": [
-    "what-is-financial-freedom",
-    "money-as-tool",
-    "happiness-marginal-utility"
-  ],
-  "02-foundation": [
-    "net-worth-calculation",
-    "emergency-fund",
-    "insurance-basics"
-  ],
-  "03-accumulation": [
-    "savings-rate",
-    "income-growth-framework",
-    "side-hustle-starter"
-  ],
-  "04-allocation": [
-    "asset-allocation-basics",
-    "dual-wheel-allocation",
-    "index-fund-why",
-    "stock-bond-balance"
-  ],
-  "05-automation": ["auto-saving-system", "dollar-cost-averaging"],
-  "06-freedom": [
-    "fire-types",
-    "four-percent-rule",
-    "withdrawal-strategies",
-    "geo-arbitrage"
+  "version": "0.1.0",
+  "last_updated": "2026-04-12",
+  "nodes": [
+    {
+      "id": "what-is-financial-freedom",
+      "title": "什么是财务自由？",
+      "chapter": "01-mindset",
+      "tags": ["定义", "FIRE", "被动收入"],
+      "file": "knowledge/nodes/01-mindset/what-is-financial-freedom.json"
+    },
+    {
+      "id": "money-as-tool",
+      "title": "钱是工具，不是目的",
+      "chapter": "01-mindset",
+      "tags": ["心态", "价值观", "目标"],
+      "file": "knowledge/nodes/01-mindset/money-as-tool.json"
+    },
+    {
+      "id": "happiness-marginal-utility",
+      "title": "快乐的边际效用",
+      "chapter": "01-mindset",
+      "tags": ["心态", "幸福", "消费"],
+      "file": "knowledge/nodes/01-mindset/happiness-marginal-utility.json"
+    },
+    {
+      "id": "net-worth-calculation",
+      "title": "净资产计算",
+      "chapter": "02-foundation",
+      "tags": ["财务健康", "资产负债", "诊断"],
+      "file": "knowledge/nodes/02-foundation/net-worth-calculation.json"
+    },
+    {
+      "id": "emergency-fund",
+      "title": "应急基金",
+      "chapter": "02-foundation",
+      "tags": ["储蓄", "安全", "基础"],
+      "file": "knowledge/nodes/02-foundation/emergency-fund.json"
+    },
+    {
+      "id": "insurance-basics",
+      "title": "保险基础",
+      "chapter": "02-foundation",
+      "tags": ["风险管理", "保障", "基础"],
+      "file": "knowledge/nodes/02-foundation/insurance-basics.json"
+    },
+    {
+      "id": "savings-rate",
+      "title": "储蓄率",
+      "chapter": "03-accumulation",
+      "tags": ["储蓄", "行为", "积累"],
+      "file": "knowledge/nodes/03-accumulation/savings-rate.json"
+    },
+    {
+      "id": "income-growth-framework",
+      "title": "收入增长框架",
+      "chapter": "03-accumulation",
+      "tags": ["收入", "成长", "策略"],
+      "file": "knowledge/nodes/03-accumulation/income-growth-framework.json"
+    },
+    {
+      "id": "side-hustle-starter",
+      "title": "副业入门",
+      "chapter": "03-accumulation",
+      "tags": ["副业", "收入", "实践"],
+      "file": "knowledge/nodes/03-accumulation/side-hustle-starter.json"
+    },
+    {
+      "id": "asset-allocation-basics",
+      "title": "资产配置基础",
+      "chapter": "04-allocation",
+      "tags": ["资产配置", "风险管理", "投资"],
+      "file": "knowledge/nodes/04-allocation/asset-allocation-basics.json"
+    },
+    {
+      "id": "compound-interest",
+      "title": "复利的力量",
+      "chapter": "04-allocation",
+      "tags": ["复利", "增长", "长期"],
+      "file": "knowledge/nodes/04-allocation/compound-interest.json"
+    },
+    {
+      "id": "dual-wheel-allocation",
+      "title": "双轮配置法",
+      "chapter": "04-allocation",
+      "tags": ["资产配置", "双轮", "风险控制"],
+      "file": "knowledge/nodes/04-allocation/dual-wheel-allocation.json"
+    },
+    {
+      "id": "index-fund-why",
+      "title": "为什么选择指数基金",
+      "chapter": "04-allocation",
+      "tags": ["指数基金", "低成本", "长期投资"],
+      "file": "knowledge/nodes/04-allocation/index-fund-why.json"
+    },
+    {
+      "id": "stock-bond-balance",
+      "title": "股票与债券平衡",
+      "chapter": "04-allocation",
+      "tags": ["股票", "债券", "平衡"],
+      "file": "knowledge/nodes/04-allocation/stock-bond-balance.json"
+    },
+    {
+      "id": "auto-saving-system",
+      "title": "自动储蓄系统",
+      "chapter": "05-automation",
+      "tags": ["自动化", "储蓄", "习惯"],
+      "file": "knowledge/nodes/05-automation/auto-saving-system.json"
+    },
+    {
+      "id": "dollar-cost-averaging",
+      "title": "定期定额投资",
+      "chapter": "05-automation",
+      "tags": ["定投", "自动化", "投资"],
+      "file": "knowledge/nodes/05-automation/dollar-cost-averaging.json"
+    },
+    {
+      "id": "fire-types",
+      "title": "FIRE 类型",
+      "chapter": "06-freedom",
+      "tags": ["FIRE", "退休", "生活方式"],
+      "file": "knowledge/nodes/06-freedom/fire-types.json"
+    },
+    {
+      "id": "four-percent-rule",
+      "title": "4%法则",
+      "chapter": "06-freedom",
+      "tags": ["FIRE", "退休", "安全提取", "投资"],
+      "file": "knowledge/nodes/06-freedom/four-percent-rule.json"
+    },
+    {
+      "id": "withdrawal-strategies",
+      "title": "提款策略",
+      "chapter": "06-freedom",
+      "tags": ["提款", "退休", "现金流"],
+      "file": "knowledge/nodes/06-freedom/withdrawal-strategies.json"
+    },
+    {
+      "id": "geo-arbitrage",
+      "title": "地理套利",
+      "chapter": "06-freedom",
+      "tags": ["地理套利", "成本节省", "自由"],
+      "file": "knowledge/nodes/06-freedom/geo-arbitrage.json"
+    }
   ]
 }

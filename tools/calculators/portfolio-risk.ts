@@ -1,25 +1,41 @@
 // Portfolio Risk Calculator
-// Estimates portfolio volatility based on asset allocation
+// Estimates portfolio risk metrics from a return series
 
-export function calculatePortfolioRisk(
-  stockAllocation: number,
-  bondAllocation: number,
-  stockVolatility: number = 0.15,
-  bondVolatility: number = 0.05,
+export function maxDrawdown(returns: number[]): number {
+  if (returns.length === 0) return 0
+
+  let peak = 1
+  let trough = 1
+  let maxDrawdown = 0
+  let running = 1
+
+  for (const r of returns) {
+    running *= 1 + r
+    peak = Math.max(peak, running)
+    trough = Math.min(trough, running)
+    maxDrawdown = Math.max(maxDrawdown, peak - running)
+  }
+
+  return maxDrawdown
+}
+
+export function sharpeRatio(
+  returns: number[],
+  riskFreeRate: number = 0,
 ): number {
-  const totalAllocation = stockAllocation + bondAllocation
-  if (totalAllocation === 0) return 0
+  if (returns.length === 0) return 0
 
-  const normalizedStock = stockAllocation / totalAllocation
-  const normalizedBond = bondAllocation / totalAllocation
-
-  // Simplified variance calculation
+  const excessReturns = returns.map((r) => r - riskFreeRate)
+  const mean =
+    excessReturns.reduce((sum, value) => sum + value, 0) / returns.length
   const variance =
-    Math.pow(normalizedStock * stockVolatility, 2) +
-    Math.pow(normalizedBond * bondVolatility, 2)
+    excessReturns.reduce((sum, value) => sum + Math.pow(value - mean, 2), 0) /
+    returns.length
 
-  return Math.sqrt(variance)
+  const standardDeviation = Math.sqrt(variance)
+  return standardDeviation === 0 ? 0 : mean / standardDeviation
 }
 
 // Example usage:
-// calculatePortfolioRisk(0.6, 0.4) // Returns estimated volatility
+// maxDrawdown([0.1, -0.05, 0.2, -0.1])
+// sharpeRatio([0.1, 0.05, 0.02], 0.01)

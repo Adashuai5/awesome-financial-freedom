@@ -1,25 +1,25 @@
 // FIRE Timeline Calculator
 // Calculates years needed to reach financial independence
 
-export function calculateFireTimeline(
+export function fireTimeline(
   currentSavings: number,
   annualSavings: number,
   annualExpenses: number,
   expectedReturn: number = 0.07,
   safeWithdrawalRate: number = 0.04,
-): number {
+): { targetCorpus: number; yearsToFI: number } {
   const targetNestEgg = annualExpenses / safeWithdrawalRate
 
   if (currentSavings >= targetNestEgg) {
-    return 0 // Already FI
+    return { targetCorpus: targetNestEgg, yearsToFI: 0 }
   }
 
   const remaining = targetNestEgg - currentSavings
   const years =
     Math.log(remaining / annualSavings + 1) / Math.log(1 + expectedReturn)
 
-  return Math.ceil(years)
+  return { targetCorpus: targetNestEgg, yearsToFI: Math.ceil(years) }
 }
 
 // Example usage:
-// calculateFireTimeline(50000, 20000, 40000) // Returns years to FI
+// fireTimeline(50000, 20000, 40000) // Returns FI target and years to FI
