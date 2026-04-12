@@ -1,5 +1,7 @@
 # Awesome Financial Freedom 🕊️
 
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
 > An awesome list of structured knowledge about financial independence, packaged as an AI Skill for effortless conversational learning.
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
