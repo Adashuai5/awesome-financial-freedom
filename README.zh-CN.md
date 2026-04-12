@@ -13,9 +13,14 @@
 
 ## 🧭 项目导航
 
+- **Playbooks**：[`playbooks/`](playbooks)
+- **Workflows**：[`workflows/`](workflows)
+- **Prompts**：[`prompts/`](prompts)
+- **Agents**：[`agents/`](agents)
+- **Data**：[`data/`](data)
 - **文档入口**：[`docs/README.md`](docs/README.md)
-- **快速入门**：[`docs/tutorials/getting-started.md`](docs/tutorials/getting-started.md)
-- **书籍摘要**：[`docs/book-summaries`](docs/book-summaries)
+- **快速入门**：[`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
+- **书籍摘要**：[`playbooks/book-summaries`](playbooks/book-summaries)
 - **Skill 提示模板**：[`prompts/system-prompt.md`](prompts/system-prompt.md)
 - **知识节点**：[`knowledge/nodes/`](knowledge/nodes)
 - **Skills**：[`skills/`](skills)
@@ -76,7 +81,17 @@
 - `action_item`（具体的下一步行动）
 - `source` 引用
 
-### 3️⃣ 自建工具
+### 3️⃣ AI 可执行工作流
+
+本项目新增 `workflows/` 目录，包含可由代理直接执行的标准化工作流。每个工作流都配套 `prompts/` 中的模板，并可以通过 `tools/run-workflow.js` 模拟执行。
+
+使用这些工作流可以自动化：
+
+- AI 内容生产与增长策略
+- 联盟营销 SEO 自动化
+- 指数基金定投模拟与教育计划
+
+### 4️⃣ 自建工具
 
 使用结构化数据和计算器（`/tools`）将财务自由逻辑集成到你自己的应用中。
 

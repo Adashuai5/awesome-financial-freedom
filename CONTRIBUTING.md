@@ -55,6 +55,10 @@ All knowledge nodes must follow this structure:
 - **Actionability**: Every node must include a concrete action_item
 - **No Product Recommendations**: Do not recommend specific stocks, funds, or services
 
+## README 同步检查
+
+如果修改了 `README.md` 或 `README.zh-CN.md`，请运行 `npm run check:readmes` 以确保两份文档结构一致。
+
 ## Non-Financial Advice Reminder
 
 This project is for **educational purposes only**. Do not provide personalized investment advice.

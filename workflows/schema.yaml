@@ -1,0 +1,14 @@
+name: string
+description: string
+input:
+  parameters: object
+steps:
+  - id: string
+    name: string
+    type: prompt | calculator | api_call | condition
+    prompt_id: string
+    calculator_id: string
+    next: string | array
+    on_error: continue | abort | retry
+output: object
+kpi: array

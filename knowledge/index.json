@@ -1,6 +1,7 @@
 {
-  "version": "1.2.0",
-  "last_updated": "2026-04-14",
+  "version": "2.0.0",
+  "last_updated": "2026-04-12",
+  "notes": "Structure upgraded to Money OS with workflows, prompts, and agent specs.",
   "nodes": [
     {
       "id": "what-is-financial-freedom",

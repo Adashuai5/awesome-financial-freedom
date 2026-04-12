@@ -13,10 +13,14 @@
 
 ## 🧭 Project Navigation
 
+- **Playbooks**: [`playbooks/`](playbooks)
+- **Workflows**: [`workflows/`](workflows)
+- **Prompts**: [`prompts/`](prompts)
+- **Agents**: [`agents/`](agents)
+- **Data**: [`data/`](data)
 - **Docs portal**: [`docs/README.md`](docs/README.md)
-- **Getting started**: [`docs/tutorials/getting-started.md`](docs/tutorials/getting-started.md)
-- **Book summaries**: [`docs/book-summaries`](docs/book-summaries)
-- **Skill prompts**: [`prompts/system-prompt.md`](prompts/system-prompt.md)
+- **Getting started**: [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
+- **Book summaries**: [`playbooks/book-summaries`](playbooks/book-summaries)
 - **Knowledge nodes**: [`knowledge/nodes/`](knowledge/nodes)
 - **Skills**: [`skills/`](skills)
 - **Tools**: [`tools/`](tools)
@@ -77,7 +81,17 @@ Clone this repo and explore the `/knowledge/nodes` directory. Each `.json` file 
 - `action_item` (a concrete next step for you)
 - `source` citations
 
-### 3️⃣ Build Your Own Tool
+### 3️⃣ AI-Executable Workflows
+
+The new `workflows/` directory contains executable workflow definitions that agents can run directly. Each workflow is paired with prompt templates in `prompts/` and can be simulated using `tools/run-workflow.js`.
+
+Use these workflows to automate:
+
+- AI 内容生产与增长策略
+- 联盟营销 SEO 自动化
+- 指数基金定投模拟与教育计划
+
+### 4️⃣ Build Your Own Tool
 
 Use the structured data and calculators (`/tools`) to integrate financial freedom logic into your own apps.
 

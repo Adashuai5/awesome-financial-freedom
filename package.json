@@ -7,7 +7,8 @@
     "validate": "node tools/validate-nodes.js",
     "build:skills": "node tools/build-skills.js",
     "test": "npx ts-node tools/calculators/__tests__/run-tests.ts",
-    "generate:task": "node scripts/generateTask.js"
+    "generate:task": "node scripts/generateTask.js",
+    "check:readmes": "node tools/check-readmes-sync.js"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",
