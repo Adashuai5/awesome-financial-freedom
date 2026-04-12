@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "列出你当前收入的三条增长路径，并为每条路径设定下个月的具体行动。",
-  "related_nodes": ["savings-rate", "side-hustle-starter", "dual-wheel-allocation"],
+  "related_nodes": [
+    "savings-rate",
+    "side-hustle-starter",
+    "dual-wheel-allocation"
+  ],
   "source": {
     "primary": "个人财务成长框架",
     "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]

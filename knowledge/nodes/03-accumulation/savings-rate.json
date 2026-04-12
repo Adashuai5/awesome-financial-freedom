@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "计算你最近三个月的平均储蓄率，并设定一个可持续的目标，比如从30%提升到35%。",
-  "related_nodes": ["net-worth-calculation", "emergency-fund", "income-growth-framework"],
+  "related_nodes": [
+    "net-worth-calculation",
+    "emergency-fund",
+    "income-growth-framework"
+  ],
   "source": {
     "primary": "FIRE 早期退休原则",
     "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]

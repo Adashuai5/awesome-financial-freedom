@@ -20,10 +20,7 @@
     "index-fund-why",
     "stock-bond-balance"
   ],
-  "05-automation": [
-    "auto-saving-system",
-    "dollar-cost-averaging"
-  ],
+  "05-automation": ["auto-saving-system", "dollar-cost-averaging"],
   "06-freedom": [
     "fire-types",
     "four-percent-rule",

@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "记下你的当前资产类别比例，并与一个简单的配置模型（如60%股票、40%债券）做对比。",
-  "related_nodes": ["dual-wheel-allocation", "index-fund-why", "stock-bond-balance"],
+  "related_nodes": [
+    "dual-wheel-allocation",
+    "index-fund-why",
+    "stock-bond-balance"
+  ],
   "source": {
     "primary": "资产配置基本原则",
     "books": ["《聪明钱》", "《让钱去工作》"]

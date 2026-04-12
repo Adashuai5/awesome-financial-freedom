@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "记录本周的三笔支出，并评估每笔支出是否是真正带来持续价值的消费。",
-  "related_nodes": ["what-is-financial-freedom", "money-as-tool", "emergency-fund"],
+  "related_nodes": [
+    "what-is-financial-freedom",
+    "money-as-tool",
+    "emergency-fund"
+  ],
   "source": {
     "primary": "行为经济学与理财心态",
     "books": ["《白领1000万财务自由笔记》", "《聪明钱》"]

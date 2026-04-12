@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "根据你的年龄和目标，写出一个股票/债券目标比例，并记录为什么选择这个比例。",
-  "related_nodes": ["asset-allocation-basics", "dual-wheel-allocation", "rebalancing"],
+  "related_nodes": [
+    "asset-allocation-basics",
+    "dual-wheel-allocation",
+    "rebalancing"
+  ],
   "source": {
     "primary": "经典资产配置原则",
     "books": ["《聪明钱》", "《让钱去工作》"]

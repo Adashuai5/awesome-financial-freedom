@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "在你的工资到账当天设置固定金额自动转入储蓄或投资账户。 ",
-  "related_nodes": ["savings-rate", "dollar-cost-averaging", "net-worth-calculation"],
+  "related_nodes": [
+    "savings-rate",
+    "dollar-cost-averaging",
+    "net-worth-calculation"
+  ],
   "source": {
     "primary": "理财自动化原则",
     "books": ["《聪明钱》", "《让钱去工作》"]

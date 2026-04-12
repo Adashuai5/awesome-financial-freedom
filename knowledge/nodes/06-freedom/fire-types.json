@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "写下你理想的每年开支范围，判断你更接近Lean FIRE、Fat FIRE还是Barista FIRE。",
-  "related_nodes": ["four-percent-rule", "withdrawal-strategies", "net-worth-calculation"],
+  "related_nodes": [
+    "four-percent-rule",
+    "withdrawal-strategies",
+    "net-worth-calculation"
+  ],
   "source": {
     "primary": "FIRE 社区分类",
     "books": ["《白领1000万财务自由笔记》", "《聪明钱》"]

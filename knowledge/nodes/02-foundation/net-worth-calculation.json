@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "列出你当前所有资产和负债，算出净资产，并把它记录为本月财务健康基线。",
-  "related_nodes": ["emergency-fund", "savings-rate", "what-is-financial-freedom"],
+  "related_nodes": [
+    "emergency-fund",
+    "savings-rate",
+    "what-is-financial-freedom"
+  ],
   "source": {
     "primary": "财务规划基础原则",
     "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]

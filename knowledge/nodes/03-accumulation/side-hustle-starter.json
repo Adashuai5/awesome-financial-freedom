@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "写下你可以用10小时/周做的三项技能，选择其中一项做一个两周的小测试。 ",
-  "related_nodes": ["income-growth-framework", "savings-rate", "auto-saving-system"],
+  "related_nodes": [
+    "income-growth-framework",
+    "savings-rate",
+    "auto-saving-system"
+  ],
   "source": {
     "primary": "现代兼职与副业实践",
     "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]

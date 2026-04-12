@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "选择一个低费率指数基金，设定每月固定金额自动投资。 ",
-  "related_nodes": ["auto-saving-system", "index-fund-why", "compound-interest"],
+  "related_nodes": [
+    "auto-saving-system",
+    "index-fund-why",
+    "compound-interest"
+  ],
   "source": {
     "primary": "被动投资策略",
     "books": ["《聪明钱》", "《简单通往财富之路》"]

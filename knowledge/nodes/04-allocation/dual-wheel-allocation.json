@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "把你的资产按安全轮和风险轮分类，并判断当前比例是否符合你对稳健与增长的平衡。 ",
-  "related_nodes": ["asset-allocation-basics", "rebalancing", "four-percent-rule"],
+  "related_nodes": [
+    "asset-allocation-basics",
+    "rebalancing",
+    "four-percent-rule"
+  ],
   "source": {
     "primary": "《让钱去工作》双轮配置理念",
     "books": ["《让钱去工作》", "《聪明钱》"]

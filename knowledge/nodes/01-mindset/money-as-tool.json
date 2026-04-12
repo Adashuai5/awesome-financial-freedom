@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "写下你现在最想改善的三件事，思考每件事是否真的需要更多收入，还是需要更好的规划。",
-  "related_nodes": ["what-is-financial-freedom", "income-growth-framework", "savings-rate"],
+  "related_nodes": [
+    "what-is-financial-freedom",
+    "income-growth-framework",
+    "savings-rate"
+  ],
   "source": {
     "primary": "FIRE 社区价值观",
     "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]

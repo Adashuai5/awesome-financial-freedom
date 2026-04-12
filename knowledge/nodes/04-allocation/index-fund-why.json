@@ -25,7 +25,11 @@
     ]
   },
   "action_item": "查找一只年费率低于0.3%的国内或海外指数基金，了解它的跟踪标的和费率结构。",
-  "related_nodes": ["asset-allocation-basics", "compound-interest", "dollar-cost-averaging"],
+  "related_nodes": [
+    "asset-allocation-basics",
+    "compound-interest",
+    "dollar-cost-averaging"
+  ],
   "source": {
     "primary": "被动投资理念",
     "books": ["《简单通往财富之路》", "《聪明钱》"]
