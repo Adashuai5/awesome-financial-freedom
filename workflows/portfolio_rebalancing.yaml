@@ -1,0 +1,32 @@
+name: 投资组合再平衡自动化
+description: 评估资产配置偏离程度并生成再平衡策略。
+input:
+  parameters:
+    assets: object
+    threshold: number
+steps:
+  - id: assess_allocation
+    name: 资产配置评估
+    type: prompt
+    prompt_id: rebalancing_assessment
+    next: calculate_rebalance
+    on_error: retry
+  - id: calculate_rebalance
+    name: 计算再平衡方案
+    type: calculator
+    calculator_id: portfolio-rebalance-calculator
+    next: create_rebalance_plan
+    on_error: continue
+  - id: create_rebalance_plan
+    name: 生成再平衡计划
+    type: prompt
+    prompt_id: rebalancing_plan
+    next: output
+    on_error: abort
+output:
+  rebalance_plan: object
+  allocation_report: object
+kpi:
+  - deviation_percent
+  - trade_amount
+  - portfolio_risk

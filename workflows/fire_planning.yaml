@@ -1,0 +1,36 @@
+name: FIRE 规划自动化
+description: 评估用户财务自由路径并生成可执行 FIRE 计划。
+input:
+  parameters:
+    current_savings: number
+    annual_expenses: number
+    annual_savings: number
+    expected_return: number
+    safe_withdrawal_rate: number
+    assets: object
+steps:
+  - id: assess_fire
+    name: FIRE 评估
+    type: prompt
+    prompt_id: fire_assessment
+    next: calculate_goal
+    on_error: retry
+  - id: calculate_goal
+    name: 计算 FIRE 目标
+    type: calculator
+    calculator_id: fire-goal-calculator
+    next: review_plan
+    on_error: continue
+  - id: review_plan
+    name: 制定 FIRE 计划总结
+    type: prompt
+    prompt_id: fire_summary
+    next: output
+    on_error: abort
+output:
+  fire_goal: object
+  plan_summary: object
+kpi:
+  - years_to_fi
+  - target_assets
+  - savings_rate
