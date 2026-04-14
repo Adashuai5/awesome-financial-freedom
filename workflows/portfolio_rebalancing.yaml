@@ -26,6 +26,7 @@ steps:
 output:
   rebalance_plan: object
   allocation_report: object
+  trade_instructions: object
 kpi:
   - deviation_percent
   - trade_amount

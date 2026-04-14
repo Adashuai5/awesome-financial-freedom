@@ -1,14 +1,16 @@
 # FIRE 评估模板
 
-请根据以下输入评估用户当前实现财务自由的路径：
+请根据以下输入直接生成可执行的 FIRE 行动建议：
 
 - 当前资产：{{input.current_savings}}
 - 年支出：{{input.annual_expenses}}
 - 年储蓄：{{input.annual_savings}}
+- 预期年收益：{{input.expected_return}}
+- 安全提取率：{{input.safe_withdrawal_rate}}
 - 资产分布：{{input.assets}}
 
 要求：
 
-1. 说明当前财务自由目标是否可行。
-2. 提出 2 条提升储蓄率或收益率的建议。
-3. 标出最关键的下一步行动。
+1. 给出当前 FIRE 可行性结论。
+2. 列出 3 条最优先执行的行动。
+3. 给出 1 条可立即执行的储蓄或收入提升方案。

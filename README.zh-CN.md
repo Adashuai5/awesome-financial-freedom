@@ -3,6 +3,7 @@
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
 > 一个面向财务自由的结构化知识库，以 AI Skill 形式呈现，让对话式学习变得轻松省力。
+> 一个小白问 AI：月薪 5000，存 1000，多久能退休？AI 给你答案。
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -10,6 +11,8 @@
 [![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
 
 **最近更新：2026-04-14**
+
+![演示：AI 回答退休规划与再平衡](assets/hero-demo.svg)
 
 ## 🧭 项目导航
 
@@ -22,7 +25,6 @@
 - **系统架构**：[`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md)
 - **快速入门**：[`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
 - **书籍摘要**：[`playbooks/book-summaries`](playbooks/book-summaries)
-- **Skill 提示模板**：[`prompts/system-prompt.md`](prompts/system-prompt.md)
 - **知识节点**：[`knowledge/nodes/`](knowledge/nodes)
 - **Skills**：[`skills/`](skills)
 - **工具**：[`tools/`](tools)
@@ -42,13 +44,60 @@
 - 🧮 内置计算器和公式，提供透明、逐步的答案
 - ✅ **可立即执行的行动清单**，请查看 [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md)
 
-**零配置，直接对话。**
+**零配置，直接对话或本地运行工作流。**
 
-### 🎯 目标用户
+## 🚀 直接可用入口
 
-- 财务初学者（理财小白）
-- FIRE 探索者
-- 希望建立健康金钱观的普通人
+如果你希望快速启动并直接得到执行建议，请先运行下面两个核心工作流：
+
+- `npm run run:workflow workflows/fire_planning.yaml`
+- `npm run run:workflow workflows/portfolio_rebalancing.yaml`
+
+> 这是当前最直接的“快速验证”方式。本地命令会输出你要的结果，仓库中的截图演示了实际对话和计算输出。
+
+这两个入口会直接输出：
+
+- FIRE 目标资产和达成年限
+- 关键行动建议
+- 资产配置再平衡买卖方案
+
+## ✅ 现在能做什么
+
+### 1️⃣ 直接生成财富自由计划
+
+运行：
+
+```bash
+npm run run:workflow workflows/fire_planning.yaml
+```
+
+它会模拟执行 FIRE 规划工作流，并输出：
+
+- 目标资产
+- 预计达到 FIRE 的年限
+- 关键行动建议
+
+### 2️⃣ 直接生成再平衡方案
+
+运行：
+
+```bash
+npm run run:workflow workflows/portfolio_rebalancing.yaml
+```
+
+它会模拟执行再平衡工作流，输出：
+
+- 当前资产配置偏差
+- 买入/卖出建议
+- 交易阈值和风险说明
+
+## 🎯 目标用户
+
+- 想要直接拿到“财富自由方向”和“执行步骤”的人
+- 刚工作想存钱但不知道从哪开始的年轻人
+- 听说了 FIRE 但不知道具体怎么算的人
+- 想用 AI 帮自己理财的人
+- 需要把“理财策略”转成“实际行动”的人
 
 ## ✨ 为什么要做这个？
 

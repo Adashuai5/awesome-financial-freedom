@@ -171,6 +171,68 @@ function runPromptStep(step, state, workflow) {
     result.schedule = `每周发布 ${state.input.weekly_tweet_target || 5} 条推文，集中在周二和周四。`
   }
 
+  if (step.prompt_id === 'fire_assessment') {
+    const goal = calculateRetirementGoal(
+      toNumber(state.input.current_savings, 0),
+      toNumber(state.input.annual_expenses, 0),
+      toNumber(state.input.annual_savings, 0),
+      toNumber(state.input.expected_return, 0.07),
+      toNumber(state.input.safe_withdrawal_rate, 0.04),
+    )
+    result.analysis = `目标资产 ${goal.targetAssets}，预计 ${goal.yearsToFI} 年达到 FIRE。`
+    result.actionItems = [
+      `优先提高储蓄率，目标储蓄率至少达到 ${Math.round(goal.savingsRate * 100)}%。`,
+      '增加被动收入来源，例如指数基金红利或稳定租金收入。',
+      '保持资产配置稳定，避免短期市场波动影响长期目标。',
+    ]
+  }
+
+  if (step.prompt_id === 'fire_summary') {
+    const goal = calculateRetirementGoal(
+      toNumber(state.input.current_savings, 0),
+      toNumber(state.input.annual_expenses, 0),
+      toNumber(state.input.annual_savings, 0),
+      toNumber(state.input.expected_return, 0.07),
+      toNumber(state.input.safe_withdrawal_rate, 0.04),
+    )
+    result.planSummary = {
+      targetAssets: goal.targetAssets,
+      yearsToFI: goal.yearsToFI,
+      keyActions: [
+        '每月固定储蓄，确保至少达到当前收入的 20%-30%。',
+        '把可投资资产配置到低成本指数基金或被动收入工具。',
+        '每季度检查一次进度，必要时调整储蓄和风险配置。',
+      ],
+    }
+  }
+
+  if (step.prompt_id === 'rebalancing_assessment') {
+    const rebalance = rebalancePortfolio(
+      Array.isArray(state.input.assets) ? state.input.assets : [],
+      toNumber(state.input.threshold, 0.05),
+    )
+    result.recommendation = rebalance.needsRebalance
+      ? '当前组合偏离目标，建议执行再平衡。'
+      : '当前组合偏离较小，可暂缓再平衡。'
+    result.tradeSuggestions = rebalance.assets
+      .filter((item) => item.action !== 'hold')
+      .map((item) => `${item.name}: ${item.action} ${item.amount} 元`)
+  }
+
+  if (step.prompt_id === 'rebalancing_plan') {
+    const rebalance = rebalancePortfolio(
+      Array.isArray(state.input.assets) ? state.input.assets : [],
+      toNumber(state.input.threshold, 0.05),
+    )
+    result.tradePlan = rebalance.assets.map((item) => ({
+      name: item.name,
+      action: item.action,
+      amount: item.amount,
+      targetValue: item.targetValue,
+    }))
+    result.riskNote = '保持配置接近目标比例，避免频繁交易导致过度成本。'
+  }
+
   return result
 }
 

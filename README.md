@@ -3,6 +3,7 @@
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
 > An awesome list of structured knowledge about financial independence, packaged as an AI Skill for effortless conversational learning.
+> A beginner asks AI: I earn $5,000/month and save $1,000. When can I retire? AI gives the answer.
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -10,6 +11,8 @@
 [![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
 
 **Last updated: 2026-04-14**
+
+![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
 
 ## 🧭 Project Navigation
 
@@ -42,13 +45,60 @@ Instead of just a static list of links, this repo provides:
 - 📍 **Learning path guide** for stage-based progression and personalized financial goals.
 - ✅ **Actionable steps guide** for quick wins and risk-aware first moves, see [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md).
 
-**Zero setup. Just chat.**
+**Zero setup. Just chat or run workflows locally.**
 
-### 🎯 Target Audience
+## 🚀 直接可用入口
 
-- Financial beginners (理财小白)
-- FIRE explorers
-- Ordinary people seeking a healthy relationship with money
+如果你希望快速上手并直接得到执行建议，请先运行下面两个核心工作流：
+
+- `npm run run:workflow workflows/fire_planning.yaml`
+- `npm run run:workflow workflows/portfolio_rebalancing.yaml`
+
+> 这是当前最直接的“快速验证”方式。本地命令会输出你要的结果，仓库中的截图演示了实际对话和计算输出。
+
+这两个入口会直接输出：
+
+- FIRE 目标资产和达成年限
+- 关键行动建议
+- 资产配置再平衡买卖方案
+
+## ✅ 现在能做什么
+
+### 1️⃣ 直接生成财富自由计划
+
+运行：
+
+```bash
+npm run run:workflow workflows/fire_planning.yaml
+```
+
+它会模拟执行 FIRE 规划工作流，并输出：
+
+- 目标资产
+- 预计达到 FIRE 的年限
+- 关键行动建议
+
+### 2️⃣ 直接生成再平衡方案
+
+运行：
+
+```bash
+npm run run:workflow workflows/portfolio_rebalancing.yaml
+```
+
+它会模拟执行再平衡工作流，输出：
+
+- 当前资产配置偏差
+- 买入/卖出建议
+- 交易阈值和风险说明
+
+## 🎯 目标用户
+
+- 想要直接拿到“财富自由方向”和“执行步骤”的人
+- 刚工作想存钱但不知道从哪开始的年轻人
+- 听说了 FIRE 但不知道具体怎么算的人
+- 想用 AI 帮自己理财的人
+- 需要把“理财策略”转成“实际行动”的人
 
 ## ✨ Why This Exists
 

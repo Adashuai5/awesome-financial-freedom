@@ -30,6 +30,7 @@ steps:
 output:
   fire_goal: object
   plan_summary: object
+  action_items: object
 kpi:
   - years_to_fi
   - target_assets
