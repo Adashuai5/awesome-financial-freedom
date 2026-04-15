@@ -356,3 +356,11 @@ if (typeof module !== 'undefined' && module.exports) {
     FormManager,
   };
 }
+
+// ESM exports
+export {
+  FormValidator,
+  FormRenderer,
+  FormDataCollector,
+  FormManager,
+};
