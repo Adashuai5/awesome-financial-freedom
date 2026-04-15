@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> An awesome list of structured knowledge about financial independence, packaged as an AI Skill for effortless conversational learning.
+> An AI-native financial freedom execution system, not just a knowledge list.
 > A beginner asks AI: I earn $5,000/month and save $1,000. When can I retire? AI gives the answer.
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
@@ -45,66 +45,38 @@ Instead of just a static list of links, this repo provides:
 - 📍 **Learning path guide** for stage-based progression and personalized financial goals.
 - ✅ **Actionable steps guide** for quick wins and risk-aware first moves, see [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md).
 
-**Zero setup. Just chat or run workflows locally.**
+**No installation needed; the demo works in your browser.**
 
-## 🚀 直接可用入口
+This is a user-facing financial freedom planning tool. Enter your current savings, annual expenses, annual savings, and asset allocation, and the system will return:
 
-如果你希望快速上手并直接得到执行建议，请先运行下面两个核心工作流：
+- FIRE target
+- Estimated years to FIRE
+- Key action recommendations
+- Portfolio rebalancing guidance
 
-- `npm run run:workflow workflows/fire_planning.yaml`
-- `npm run run:workflow workflows/portfolio_rebalancing.yaml`
+## 🚀 Demo experience
 
-> 这是当前最直接的“快速验证”方式。本地命令会输出你要的结果，仓库中的截图演示了实际对话和计算输出。
+You can directly access the GitHub Pages demo:
 
-这两个入口会直接输出：
+- `https://adashuai5.github.io/awesome-financial-freedom/`
 
-- FIRE 目标资产和达成年限
-- 关键行动建议
-- 资产配置再平衡买卖方案
+Enter your numbers and see FIRE targets, estimated years, action recommendations, and portfolio rebalancing guidance.
 
-## ✅ 现在能做什么
+This is the browser-based experience for everyday users.
 
-### 1️⃣ 直接生成财富自由计划
+## 🎯 Target audience
 
-运行：
-
-```bash
-npm run run:workflow workflows/fire_planning.yaml
-```
-
-它会模拟执行 FIRE 规划工作流，并输出：
-
-- 目标资产
-- 预计达到 FIRE 的年限
-- 关键行动建议
-
-### 2️⃣ 直接生成再平衡方案
-
-运行：
-
-```bash
-npm run run:workflow workflows/portfolio_rebalancing.yaml
-```
-
-它会模拟执行再平衡工作流，输出：
-
-- 当前资产配置偏差
-- 买入/卖出建议
-- 交易阈值和风险说明
-
-## 🎯 目标用户
-
-- 想要直接拿到“财富自由方向”和“执行步骤”的人
-- 刚工作想存钱但不知道从哪开始的年轻人
-- 听说了 FIRE 但不知道具体怎么算的人
-- 想用 AI 帮自己理财的人
-- 需要把“理财策略”转成“实际行动”的人
+- People who want a direct path to financial freedom and actionable steps
+- Young professionals who want to save but do not know where to start
+- People who have heard of FIRE but do not know how it is calculated
+- People who want AI to help plan their finances
+- People who want to turn financial strategy into practical action
 
 ## ✨ Why This Exists
 
-The internet is full of personal finance blogs, paid courses, and scattered advice. But there is **no open-source, structured, AI-ready knowledge base** dedicated to financial freedom.
+The internet is full of personal finance blogs, paid courses, and scattered advice. But there is **no open-source, structured, AI-ready financial freedom execution system** dedicated to helping people turn plans into action.
 
-This project fills that gap by providing a **community-driven, transparent, and conversational** learning path. Its core innovation lies in combining the structured curation of awesome lists with AI Skill conversational capabilities, enabling "effortless" learning.
+This project fills that gap by providing a **community-driven, transparent, and executable AI planning system**. Its core innovation lies in combining structured workflows, prompt templates, and calculator logic into a usable execution engine.
 
 ## 📚 Knowledge Sources
 
@@ -113,60 +85,70 @@ Curated insights from:
 - Tony Robbins' _Money: Master the Game_ trilogy ([Amazon](https://www.amazon.com/Money-Master-Game-7-Simple/dp/1476757801))
 - JL Collins' _The Simple Path to Wealth_ ([Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926))
 - FIRE mathematics (4% rule, Trinity Study) ([Wikipedia](https://en.wikipedia.org/wiki/Trinity_study))
-- 阿秋's _让钱去工作_ (Dual-Wheel Asset Allocation) ([JD.com](https://item.jd.com/100240963394.html) or search for "让钱去工作 阿秋")
+- A Qiu's _Let Money Work_ (Dual-Wheel Asset Allocation)
 - And more (see `playbooks/book-summaries`)
 
 ## 🚀 How to Use (The "No-Brainer" Way)
 
-### 0️⃣ Quick Commands
+### 0️⃣ What you will get
 
-Use these local commands to validate, test, and run workflows:
+This project is meant to give you a real financial plan, not just a document:
 
-- `npm run validate` — validate knowledge nodes and README sync
-- `npm run test` — run the existing calculator test suite
-- `npm run ci` — run validation, build skills, and tests
-- `npm run run:workflow workflows/<workflow-file>.yaml` — simulate a workflow
-- `npm run generate:task ./task.md` — generate a sample task markdown file
+- A FIRE target and an estimated time to financial independence.
+- A concise action plan for savings, investing, and risk management.
+- Portfolio alignment guidance with buy/sell suggestions and risk notes.
 
-### 1️⃣ Talk to the AI (Easiest)
+These outputs are the actual value: a structured plan and clear next steps.
 
-- Add the **Awesome Financial Freedom Skill** to your Claude or ChatGPT.
-- Start asking questions. The AI will retrieve relevant knowledge nodes and perform calculations for you.
+### 1️⃣ What to prepare
 
-### 2️⃣ Browse the Knowledge Base
+These are the numbers you will enter in the demo page:
 
-Clone this repo and explore the `/knowledge/nodes` directory. Each `.json` file contains:
+- Current savings
+- Annual expenses
+- Annual savings
+- Expected return
+- Safe withdrawal rate
+- Asset mix (for example, 60% stocks, 40% bonds)
 
-- `question_patterns` (what the AI listens for)
-- `answer` with summary, formula, example, and limitations
-- `action_item` (a concrete next step for you)
-- `source` citations
+### 2️⃣ What you will see
 
-### 3️⃣ AI-Executable Workflows
+The system will produce a clear, readable plan summary:
 
-The new `workflows/` directory contains executable workflow definitions that agents can run directly. Each workflow is paired with prompt templates in `prompts/` and can be simulated using `tools/run-workflow.js`.
+- FIRE target
+- Estimated years to FIRE
+- Key action recommendations
+- Rebalancing suggestions and risk notes
 
-Use these workflows to automate:
+### 3️⃣ Demo experience
 
-- AI 内容生产与增长策略
-- 联盟营销 SEO 自动化
-- 指数基金定投模拟与教育计划
+You can directly access the GitHub Pages demo:
 
-> 维护文档时请运行 `npm run check:readmes`，以确保 `README.md` 和 `README.zh-CN.md` 保持一致。
+- `https://adashuai5.github.io/awesome-financial-freedom/`
 
-### 4️⃣ Build Your Own Tool
+Enter your numbers and see FIRE targets, estimated years, action recommendations, and portfolio rebalancing guidance.
 
-Use the structured data and calculators (`/tools`) to integrate financial freedom logic into your own apps.
+This is the browser-based experience for everyday users.
+
+### 4️⃣ When to explore more
+
+If you want to learn more about how the system works, you can explore:
+
+- planning logic
+- AI prompt guidance
+- calculator rules for the numbers
+
+These are best explored after you have seen one result.
 
 ## 📖 Knowledge Structure
 
-- 01-mindset/ — 心态与价值观
-- 02-foundation/ — 基础财务健康
-- 03-accumulation/ — 储蓄与收入增长
-- 04-allocation/ — 资产配置与投资
-- 05-automation/ — 自动化储蓄与投资
-- 06-freedom/ — FIRE 目标与提款策略
-- 07-learning-path/ — 路径规划与阶段性行动建议
+- 01-mindset/ — Mindset and values
+- 02-foundation/ — Core financial health
+- 03-accumulation/ — Savings and income growth
+- 04-allocation/ — Asset allocation and investing
+- 05-automation/ — Automated saving and investing
+- 06-freedom/ — FIRE goals and withdrawal strategy
+- 07-learning-path/ — Path planning and stage-based action guidance
 
 ## 🤝 Contributing
 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Awesome Financial Freedom Demo</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>财务自由执行系统 演示</h1>
+      <p class="lead">
+        选择一个工作流，输入你的财务数据，然后点击“生成计划”。本地运行，无需准备复杂命令。
+      </p>
+    </header>
+
+    <div class="panel">
+      <label>选择工作流</label>
+      <select id="workflowSelect">
+        <option value="fire_planning">FIRE 计划</option>
+        <option value="portfolio_rebalancing">组合再平衡</option>
+      </select>
+
+      <div id="fireFields" class="form-row">
+        <div>
+          <label>当前储蓄 (元)</label>
+          <input id="currentSavings" type="number" value="200000" />
+        </div>
+        <div>
+          <label>年收入 (元)</label>
+          <input id="annualIncome" type="number" value="180000" />
+        </div>
+        <div>
+          <label>年支出 (元)</label>
+          <input id="annualExpenses" type="number" value="108000" />
+        </div>
+        <div>
+          <label>年储蓄 (元)</label>
+          <input id="annualSavings" type="number" value="72000" />
+        </div>
+        <div>
+          <label>预期年收益率 (%)</label>
+          <input id="expectedReturn" type="number" step="0.1" value="7" />
+        </div>
+        <div>
+          <label>安全提现率 (%)</label>
+          <input id="safeWithdrawalRate" type="number" step="0.1" value="4" />
+        </div>
+      </div>
+
+      <div id="rebalanceFields" class="form-row hidden">
+        <div>
+          <label>股票当前价值 (元)</label>
+          <input id="stocksValue" type="number" value="700000" />
+        </div>
+        <div>
+          <label>债券当前价值 (元)</label>
+          <input id="bondsValue" type="number" value="300000" />
+        </div>
+        <div>
+          <label>股票目标比例 (%)</label>
+          <input id="stocksTarget" type="number" value="60" />
+        </div>
+        <div>
+          <label>债券目标比例 (%)</label>
+          <input id="bondsTarget" type="number" value="40" />
+        </div>
+        <div>
+          <label>再平衡阈值 (%)</label>
+          <input id="threshold" type="number" step="0.01" value="0.05" />
+        </div>
+      </div>
+
+      <button id="runButton">生成计划</button>
+
+      <div id="summary" class="output hidden"></div>
+      <div id="rawResult" class="output hidden"></div>
+    </div>
+
+    <div class="panel">
+      <h2>对话模型使用提示</h2>
+      <p>
+        你也可以直接把下面的内容复制到 ChatGPT / Claude / DeepSeek / 豆包：
+      </p>
+      <pre class="output">
+请根据下面的个人财务情况，帮我生成一份可执行的 FIRE 计划或组合再平衡建议。
+- 当前储蓄：200000 元
+- 年收入：180000 元
+- 年支出：108000 元
+- 年储蓄：72000 元
+- 预期年收益率：7%
+- 安全提现率：4%
+
+请给出：
+1. 目标资产
+2. 预计达到 FIRE 的年限
+3. 关键行动项
+4. 简洁的执行建议
+      </pre>
+    </div>
+  </div>
+
+  <script>
+    const workflowSelect = document.getElementById('workflowSelect')
+    const fireFields = document.getElementById('fireFields')
+    const rebalanceFields = document.getElementById('rebalanceFields')
+    const runButton = document.getElementById('runButton')
+    const summary = document.getElementById('summary')
+    const rawResult = document.getElementById('rawResult')
+
+    workflowSelect.addEventListener('change', () => {
+      const workflow = workflowSelect.value
+      fireFields.classList.toggle('hidden', workflow !== 'fire_planning')
+      rebalanceFields.classList.toggle('hidden', workflow !== 'portfolio_rebalancing')
+    })
+
+    runButton.addEventListener('click', async () => {
+      const workflow = workflowSelect.value
+      const input = {}
+
+      if (workflow === 'fire_planning') {
+        input.current_savings = Number(document.getElementById('currentSavings').value)
+        input.annual_income = Number(document.getElementById('annualIncome').value)
+        input.annual_expenses = Number(document.getElementById('annualExpenses').value)
+        input.annual_savings = Number(document.getElementById('annualSavings').value)
+        input.expected_return = Number(document.getElementById('expectedReturn').value) / 100
+        input.safe_withdrawal_rate = Number(document.getElementById('safeWithdrawalRate').value) / 100
+      } else {
+        input.assets = [
+          {
+            name: 'Stocks',
+            currentValue: Number(document.getElementById('stocksValue').value),
+            targetPercent: Number(document.getElementById('stocksTarget').value),
+          },
+          {
+            name: 'Bonds',
+            currentValue: Number(document.getElementById('bondsValue').value),
+            targetPercent: Number(document.getElementById('bondsTarget').value),
+          },
+        ]
+        input.threshold = Number(document.getElementById('threshold').value)
+      }
+
+      summary.textContent = '正在生成，请稍候...'
+      summary.classList.remove('hidden')
+      rawResult.classList.add('hidden')
+
+      try {
+        const response = await fetch('/api/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ workflow, input }),
+        })
+        const data = await response.json()
+        if (!response.ok) throw new Error(data.error || '请求失败')
+
+        const quick = data.summary.quick
+        const actions = data.summary.actions || []
+        const notes = data.summary.notes ? `\n说明：${data.summary.notes}` : ''
+        let extra = ''
+        if (workflow === 'fire_planning') {
+          const income = Number(document.getElementById('annualIncome').value)
+          const savings = Number(document.getElementById('annualSavings').value)
+          if (income > 0 && savings >= 0) {
+            const rate = Math.round((savings / income) * 100)
+            extra = `\n你的年储蓄率约为 ${rate}%。`
+          }
+        }
+        summary.textContent = `${quick}${extra}\n${actions.map((action) => '- ' + (action.name ? `${action.name}: ${action.action} ${action.amount} 元` : action)).join('\n')}${notes}`
+        rawResult.textContent = JSON.stringify(data.result, null, 2)
+        rawResult.classList.remove('hidden')
+      } catch (error) {
+        summary.textContent = `错误：${error.message}`
+      }
+    })
+  </script>
+</body>
+
+</html>

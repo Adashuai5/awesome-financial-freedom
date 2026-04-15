@@ -11,6 +11,7 @@
     "test": "node --loader ts-node/esm tools/calculators/__tests__/run-tests.ts",
     "generate:task": "node scripts/generateTask.js",
     "run:workflow": "node tools/run-workflow.js",
+    "demo": "node demo/server.js",
     "check:readmes": "node tools/check-readmes-sync.js",
     "ci": "npm run validate && npm run build:skills && npm run test"
   },

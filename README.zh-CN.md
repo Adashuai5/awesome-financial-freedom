@@ -2,8 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> 一个面向财务自由的结构化知识库，以 AI Skill 形式呈现，让对话式学习变得轻松省力。
-> 一个小白问 AI：月薪 5000，存 1000，多久能退休？AI 给你答案。
+> 一个面向财务自由的结构化执行系统，以 AI Skill 形式呈现，让对话式学习更简单。
+> 一个小白问 AI：月薪 5000，存 1000，多久能退休？AI 给出计划。
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -32,146 +32,103 @@
 
 ## 🤔 这是什么？
 
-**Awesome Financial Freedom** 是一个开源、AI 原生的财务自由知识库。它把 awesome list 的结构化策划与 AI Skill 的对话能力结合起来，实现“轻松”学习。
+**Awesome Financial Freedom** 是一个开源、AI 原生的财务自由执行系统。它把 awesome list 的结构化策划与 AI Skill 的对话能力结合起来，提供更直接的学习与规划体验。
 
-这个仓库不仅仅是静态链接列表，它还提供：
+仓库的核心内容包括：
 
-- 📚 包含心态、储蓄、投资和 FIRE 原则的**结构化 JSON 知识节点**
-- 🤖 支持 Claude 和 ChatGPT 的**即用型 AI Skills**，你可以问：
-  - _“我每月收入 5000 美元，存 1000 美元。我什么时候可以退休？”_
-  - _“帮我看看我的组合：70% 标普 500，30% 债券。”_
-  - _“什么是‘双轮资产配置’方法？”_
-- 🧮 内置计算器和公式，提供透明、逐步的答案
-- ✅ **可立即执行的行动清单**，请查看 [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md)
+- 📚 结构化 JSON 知识节点，覆盖心态、储蓄、投资与 FIRE 原则
+- 🤖 即用型 AI Skills，支持 Claude 和 ChatGPT
+- 🧮 内置计算器与公式，提供透明且可理解的计算结果
+- ✅ 可执行的行动建议与再平衡方案
 
-**零配置，直接对话或本地运行工作流。**
+你可以直接在浏览器中输入数据，得到：
 
-## 🚀 直接可用入口
-
-如果你希望快速启动并直接得到执行建议，请先运行下面两个核心工作流：
-
-- `npm run run:workflow workflows/fire_planning.yaml`
-- `npm run run:workflow workflows/portfolio_rebalancing.yaml`
-
-> 这是当前最直接的“快速验证”方式。本地命令会输出你要的结果，仓库中的截图演示了实际对话和计算输出。
-
-这两个入口会直接输出：
-
-- FIRE 目标资产和达成年限
-- 关键行动建议
-- 资产配置再平衡买卖方案
-
-## ✅ 现在能做什么
-
-### 1️⃣ 直接生成财富自由计划
-
-运行：
-
-```bash
-npm run run:workflow workflows/fire_planning.yaml
-```
-
-它会模拟执行 FIRE 规划工作流，并输出：
-
-- 目标资产
+- FIRE 目标资产
 - 预计达到 FIRE 的年限
 - 关键行动建议
+- 组合再平衡建议
 
-### 2️⃣ 直接生成再平衡方案
+## 🚀 直接体验
 
-运行：
+可以直接访问 GitHub Pages 演示：
 
-```bash
-npm run run:workflow workflows/portfolio_rebalancing.yaml
-```
+- `https://adashuai5.github.io/awesome-financial-freedom/`
 
-它会模拟执行再平衡工作流，输出：
+无须安装，普通用户可通过浏览器查看演示结果。
 
-- 当前资产配置偏差
-- 买入/卖出建议
-- 交易阈值和风险说明
+## ✅ 核心功能
+
+- `workflows/fire_planning.yaml`：生成 FIRE 目标、预计年限与执行建议
+- `workflows/portfolio_rebalancing.yaml`：评估资产组合偏离情况，并给出买入/卖出建议
+- `playbooks/guides/actionable-steps.md`：给出可直接落地的理财行动清单
 
 ## 🎯 目标用户
 
-- 想要直接拿到“财富自由方向”和“执行步骤”的人
-- 刚工作想存钱但不知道从哪开始的年轻人
-- 听说了 FIRE 但不知道具体怎么算的人
-- 想用 AI 帮自己理财的人
-- 需要把“理财策略”转成“实际行动”的人
+- 需要“直接可用”的财务自由方向与步骤的人
+- 刚工作、想存钱但不知如何开始的年轻人
+- 听说 FIRE 但不知道具体怎么算的人
+- 想用 AI 帮自己规划理财的人
+- 希望把理财策略转化为实际行动的人
 
 ## ✨ 为什么要做这个？
 
-网络上充斥着个人理财博客、付费课程和零散建议，但缺少一个专注于财务自由、开源、结构化、适配 AI 的知识库。
+网络上有很多散乱的理财建议，但缺少一个专注于财务自由、开源、结构化、适配 AI 的执行系统。
 
-本项目通过提供**社区驱动、透明、可对话的学习路径**来填补这一空白。项目的核心创新在于把 awesome list 结构化策划和 AI Skill 对话能力结合起来，实现“轻松”学习。
+本项目通过社区驱动、透明可执行的方式，将结构化工作流、提示模板与计算器逻辑组合成可用的规划引擎。
 
 ## 📚 知识来源
-
-精选自：
 
 - Tony Robbins 的《Money: Master the Game》三部曲（[Amazon](https://www.amazon.com/Money-Master-Game-7-Simple/dp/1476757801)）
 - JL Collins 的《The Simple Path to Wealth》（[Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926)）
 - FIRE 数学（4% 规则、三一研究）（[Wikipedia](https://en.wikipedia.org/wiki/Trinity_study)）
-- 阿秋的《让钱去工作》（双轮资产配置）（[JD.com](https://item.jd.com/100240963394.html) 或搜索“让钱去工作 阿秋”）
-- 以及更多内容（参见 `playbooks/book-summaries`）
+- 阿秋的《让钱去工作》（双轮资产配置）
+- 更多内容见 [`playbooks/book-summaries`](playbooks/book-summaries)
 
-## 🚀 如何使用（最省力方式）
+## 🔧 如何使用
 
-### 0️⃣ 快速命令
+### 1️⃣ 准备数据
 
-使用以下本地命令验证、测试并运行工作流：
+在演示页面中填写：
 
-- `npm run validate` — 校验知识节点和 README 同步
-- `npm run test` — 运行现有计算器测试套件
-- `npm run ci` — 运行验证、构建技能并测试
-- `npm run run:workflow workflows/<workflow-file>.yaml` — 模拟执行工作流
-- `npm run generate:task ./task.md` — 生成示例任务 Markdown 文件
+- 当前资产
+- 年支出
+- 年储蓄
+- 预期年收益
+- 安全提取率
+- 资产配置比例（如 60% 股票，40% 债券）
 
-### 1️⃣ 与 AI 对话（最简单）
+### 2️⃣ 查看结果
 
-- 将 **Awesome Financial Freedom Skill** 添加到你的 Claude 或 ChatGPT
-- 开始提问，AI 会检索相关知识节点并为你执行计算
+系统会生成：
 
-### 2️⃣ 浏览知识库
+- FIRE 目标资产
+- 预计达到 FIRE 的年限
+- 关键行动建议
+- 组合再平衡建议与风险说明
 
-克隆仓库并查看 `/knowledge/nodes` 目录。每个 `.json` 文件包含：
+### 3️⃣ 深入探索
 
-- `question_patterns`（AI 会监听的提问方式）
-- `answer`，包括 summary、formula、example、limitations
-- `action_item`（具体的下一步行动）
-- `source` 引用
+想了解系统内部逻辑时，可继续查看：
 
-### 3️⃣ AI 可执行工作流
-
-本项目新增 `workflows/` 目录，包含可由代理直接执行的标准化工作流。每个工作流都配套 `prompts/` 中的模板，并可以通过 `tools/run-workflow.js` 模拟执行。
-
-使用这些工作流可以自动化：
-
-- AI 内容生产与增长策略
-- 联盟营销 SEO 自动化
-- 指数基金定投模拟与教育计划
-
-> 维护文档时请运行 `npm run check:readmes`，以确保 `README.md` 和 `README.zh-CN.md` 保持一致。
-
-### 4️⃣ 自建工具
-
-使用结构化数据和计算器（`/tools`）将财务自由逻辑集成到你自己的应用中。
+- 规划逻辑
+- AI 提示生成方式
+- 数字计算方法
 
 ## 📖 知识结构
 
-- 01-mindset/ — 心态与价值观
-- 02-foundation/ — 基础财务健康
-- 03-accumulation/ — 储蓄与收入增长
-- 04-allocation/ — 资产配置与投资
-- 05-automation/ — 自动化储蓄与投资
-- 06-freedom/ — FIRE 目标与提款策略
-- 07-learning-path/ — 路径规划与阶段性行动建议
+- `01-mindset/` — 心态与价值观
+- `02-foundation/` — 基础财务健康
+- `03-accumulation/` — 储蓄与收入增长
+- `04-allocation/` — 资产配置与投资
+- `05-automation/` — 自动化储蓄与投资
+- `06-freedom/` — FIRE 目标与提款策略
+- `07-learning-path/` — 路径规划与阶段性行动建议
 
 ## 🤝 贡献
 
-欢迎贡献！请查看我们的 [Contributing Guide](CONTRIBUTING.md) 获取参与项目的详细说明。
+欢迎贡献！请阅读 [Contributing Guide](CONTRIBUTING.md) 了解参与方式。
 
 ## 📄 许可
 
-- **知识内容**：采用 Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) 许可，详见 [LICENSE](LICENSE)
-- **代码与工具**：采用 MIT 许可，详见 [LICENSE-CODE.md](LICENSE-CODE.md)
+- **知识内容**：Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)，详见 [LICENSE](LICENSE)
+- **代码与工具**：MIT 许可，详见 [LICENSE-CODE.md](LICENSE-CODE.md)
