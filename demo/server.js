@@ -7,6 +7,12 @@ import { executeWorkflow } from '../tools/workflow-runner.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const PORT = process.env.PORT || 4000
+const MIME_TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+}
 
 function serveFile(res, filePath, contentType) {
   fs.readFile(filePath, (err, data) => {
@@ -72,20 +78,18 @@ function formatSummary(workflow, output) {
 }
 
 const server = http.createServer(async (req, res) => {
-  if (req.method === 'GET' && (req.url === '/' || req.url === '/index.html')) {
-    return serveFile(
-      res,
-      path.join(__dirname, 'index.html'),
-      'text/html; charset=utf-8',
-    )
-  }
-
-  if (req.method === 'GET' && req.url === '/style.css') {
-    return serveFile(
-      res,
-      path.join(__dirname, 'style.css'),
-      'text/css; charset=utf-8',
-    )
+  if (req.method === 'GET') {
+    const requestPath = req.url === '/' ? '/index.html' : req.url || '/index.html'
+    const normalizedPath = path
+      .normalize(requestPath)
+      .replace(/^(\.\.[/\\])+/, '')
+      .replace(/^[/\\]+/, '')
+    const filePath = path.join(__dirname, normalizedPath)
+    if (filePath.startsWith(__dirname) && fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      const ext = path.extname(filePath)
+      const contentType = MIME_TYPES[ext] || 'application/octet-stream'
+      return serveFile(res, filePath, contentType)
+    }
   }
 
   if (req.method === 'POST' && req.url === '/api/run') {

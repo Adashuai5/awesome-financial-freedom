@@ -7,6 +7,8 @@
     "validate:nodes": "node tools/validate-nodes.js",
     "validate": "npm run validate:nodes && npm run check:readmes",
     "pretest": "npm run validate",
+    "predeploy": "node scripts/build-demo.js",
+    "build:demo": "node scripts/build-demo.js",
     "build:skills": "node tools/build-skills.js",
     "test": "node --loader ts-node/esm tools/calculators/__tests__/run-tests.ts",
     "generate:task": "node scripts/generateTask.js",

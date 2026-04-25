@@ -12,16 +12,15 @@ const readFile = (filePath) =>
   fs.readFileSync(path.join(rootDir, filePath), 'utf8')
 
 const headingMapping = {
-  '🧭 Project Navigation': '🧭 项目导航',
-  '🤔 What is this?': '🤔 这是什么？',
-  '🚀 Demo experience': '🚀 直接体验',
-  '🎯 Target audience': '🎯 目标用户',
-  '✨ Why This Exists': '✨ 为什么要做这个？',
-  '📚 Knowledge Sources': '📚 知识来源',
-  '🚀 How to Use (The "No-Brainer" Way)': '🔧 如何使用（最简单的办法）',
-  '📖 Knowledge Structure': '📖 知识结构',
-  '🤝 Contributing': '🤝 贡献',
-  '📄 License': '📄 许可',
+ '🧭 Quick Navigation': '🧭 快速导航',
+ '🤔 What is this?': '🤔 这是什么？',
+ '🎯 Target audience': '🎯 目标用户',
+ '✨ Why This Exists': '✨ 为什么要做这个？',
+ '📚 Knowledge Sources': '📚 知识来源',
+ '🚀 How to Use': '🔧 如何使用',
+ '📖 Knowledge Structure': '📖 知识结构',
+ '🤝 Contributing': '🤝 贡献',
+ '📄 License': '📄 许可',
 }
 
 function extractHeadings(content) {

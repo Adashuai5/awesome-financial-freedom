@@ -10,24 +10,19 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
 
-**Last updated: 2026-04-25**
+**Last updated**: see [`git log --reverse --format="%ad" | head -1`](https://github.com/ada/awesome-financial-freedom/commits?author=ada) for the earliest commit date
 
 ![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
 
-## 🧭 Project Navigation
+## 🧭 Quick Navigation
 
-- **Playbooks**: [`playbooks/`](playbooks)
-- **Workflows**: [`workflows/`](workflows)
-- **Prompts**: [`prompts/`](prompts)
-- **Agents**: [`agents/`](agents)
-- **Playbook guides**: [`playbooks/guides/README.md`](playbooks/guides/README.md)
-- **Architecture**: [`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md)
-- **Getting started**: [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
-- **Book summaries**: [`playbooks/book-summaries`](playbooks/book-summaries)
+- **Demo**: [`https://adashuai5.github.io/awesome-financial-freedom/demo/`](https://adashuai5.github.io/awesome-financial-freedom/demo/) (live, no install)
+- **Playbooks** (guides + tutorials): [`playbooks/guides/`](playbooks/guides)
 - **Knowledge nodes**: [`knowledge/nodes/`](knowledge/nodes)
-- **Skills**: [`skills/`](skills)
-- **Tools**: [`tools/`](tools)
-- **Contributing**: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- **Workflows**: [`workflows/`](workflows)
+- **Prompts & Agents**: [`prompts/`](prompts) · [`agents/`](agents)
+- **Skills & Tools**: [`skills/`](skills) · [`tools/`](tools)
+- **Book summaries**: [`playbooks/book-summaries/`](playbooks/book-summaries)
 
 ## 🤔 What is this?
 
@@ -43,8 +38,6 @@ Instead of just a static list of links, this repo provides:
 - 🧮 **Embedded calculators** and formulas for transparent, step-by-step answers.
 - 📍 **Learning path guide** for stage-based progression and personalized financial goals.
 - ✅ **Actionable steps guide** for quick wins and risk-aware first moves, see [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md).
-
-**No installation needed; the demo works in your browser.**
 
 This is a user-facing financial freedom planning tool. Enter your current savings, annual income, annual expenses, annual savings, expected return, safe withdrawal rate, and asset allocation, and the system will return:
 
@@ -77,78 +70,51 @@ Curated insights from:
 - A Qiu's _Let Money Work_ (Dual-Wheel Asset Allocation)
 - Additional sources in [`playbooks/book-summaries/`](playbooks/book-summaries/)
 
-## 🚀 How to Use (The "No-Brainer" Way)
+## 🚀 How to Use
 
-### 0️⃣ What you will get
+### 1️⃣ Try the demo (no install needed)
 
-This project is meant to give you a real financial plan, not just a document:
+Open **`https://adashuai5.github.io/awesome-financial-freedom/demo/`** and enter your numbers. You'll get:
 
-- A FIRE target and an estimated time to financial independence.
-- A concise action plan for savings, investing, and risk management.
-- Portfolio alignment guidance with buy/sell suggestions and risk notes.
-
-These outputs are the actual value: a structured plan and clear next steps.
-
-### 1️⃣ What to prepare
-
-These are the numbers you will enter in the demo page:
-
-- Current savings
-- Annual income
-- Annual expenses
-- Annual savings
-- Expected return
-- Safe withdrawal rate
-- Asset mix (for example, 60% stocks, 40% bonds)
-
-### 2️⃣ What you will see
-
-The system maps each input to a concrete output:
-
-| Your input | System output |
-|---|---|
-| Current savings + Annual income + Annual expenses + Annual savings | **FIRE target** & **Estimated years to FIRE** |
-| Expected return, Safe withdrawal rate | FIRE calculation parameters (compound growth, withdrawal math) |
-| Asset mix (e.g. 60% stocks / 40% bonds) | **Rebalancing suggestions** and risk notes |
-
-The result is a clear, readable plan summary:
-- FIRE target
-- Estimated years to FIRE
+- **FIRE target** and estimated years to financial independence
 - Key action recommendations
-- Rebalancing suggestions and risk notes
+- Portfolio rebalancing guidance
 
-### 3️⃣ Try it now
+### 2️⃣ Prepare your numbers
 
-Open the live demo and enter your numbers:
+Before opening the demo, gather: current savings, annual income, annual expenses, expected return, safe withdrawal rate, and asset mix (e.g. 60% stocks / 40% bonds).
 
-**`https://adashuai5.github.io/awesome-financial-freedom/`**
+### 3️⃣ Explore deeper
 
-See FIRE targets, estimated years, action recommendations, and portfolio rebalancing guidance — no install needed.
+Once you have a result, dive into the system:
 
-### 4️⃣ When to explore more
-
-If you want to learn more about how the system works, you can explore:
-
-- [Getting started guide](playbooks/tutorials/getting-started.md) — run the calculator and AI assistant locally
-- [Architecture overview](playbooks/guides/money-os-architecture.md) — system design and data flow
-- [CLI workflow runner](tools/run-workflow.js) — `node tools/run-workflow.js workflows/fire_planning.yaml` (requires Node.js ≥18)
-- Individual [workflow files](workflows/) — YAML definitions for FIRE planning, rebalancing, DCA, etc.
-
-These are best explored after you have seen one result.
+| If you want to… | Go to |
+|----------------|-------|
+| Run locally + AI assistant | [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md) |
+| Understand the system design | [`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md) |
+| Execute via CLI | `node tools/run-workflow.js workflows/fire_planning.yaml` (Node.js ≥18) |
+| Browse all workflows | [`workflows/`](workflows) |
 
 ## 📖 Knowledge Structure
 
-- 01-mindset/ — Mindset and values
-- 02-foundation/ — Core financial health
-- 03-accumulation/ — Savings and income growth
-- 04-allocation/ — Asset allocation and investing
-- 05-automation/ — Automated saving and investing
-- 06-freedom/ — FIRE goals and withdrawal strategy
-- 07-learning-path/ — Path planning and stage-based action guidance
+Seven progressive stages from mindset to financial independence:
+
+| Stage | Directory | What you'll learn |
+|-------|-----------|-------------------|
+| 01 — Mindset | [`knowledge/nodes/01-mindset/`](knowledge/nodes/01-mindset) | What financial freedom really means; money as a tool, not a goal |
+| 02 — Foundation | [`knowledge/nodes/02-foundation/`](knowledge/nodes/02-foundation) | Emergency funds, insurance, eliminating high-interest debt |
+| 03 — Accumulation | [`knowledge/nodes/03-accumulation/`](knowledge/nodes/03-accumulation) | Increase savings rate; side income; compound growth basics |
+| 04 — Allocation | [`knowledge/nodes/04-allocation/`](knowledge/nodes/04-allocation) | Asset allocation, Diversification, index funds, rebalancing |
+| 05 — Automation | [`knowledge/nodes/05-automation/`](knowledge/nodes/05-automation) | Automate savings and investments so discipline becomes automatic |
+| 06 — Freedom | [`knowledge/nodes/06-freedom/`](knowledge/nodes/06-freedom) | FIRE math, safe withdrawal rate, coast FIRE, barista FIRE |
+| 07 — Learning Path | [`knowledge/nodes/07-learning-path/`](knowledge/nodes/07-learning-path) | Stage-based roadmap; which node to read next |
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to contribute to this project.
+Contributions welcome! Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) for:
+- How to report issues or suggest new knowledge nodes
+- Pull request workflow and coding style
+- How to add prompts, workflows, or playbook content
 
 ## 📄 License
 

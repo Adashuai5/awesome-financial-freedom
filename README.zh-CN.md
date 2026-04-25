@@ -10,24 +10,19 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
 
-**Last updated: 2026-04-25**
+**Last updated**: see [`git log --reverse --format="%ad" | head -1`](https://github.com/ada/awesome-financial-freedom/commits?author=ada) for the earliest commit date
 
 ![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
 
-## 🧭 项目导航
+## 🧭 快速导航
 
-- **Playbooks**: [`playbooks/`](playbooks)
-- **Workflows**: [`workflows/`](workflows)
-- **Prompts**: [`prompts/`](prompts)
-- **Agents**: [`agents/`](agents)
-- **Playbook 指南**: [`playbooks/guides/README.md`](playbooks/guides/README.md)
-- **架构说明**: [`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md)
-- **入门指南**: [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
-- **书籍摘要**: [`playbooks/book-summaries`](playbooks/book-summaries)
+- **演示**: [`https://adashuai5.github.io/awesome-financial-freedom/demo/`](https://adashuai5.github.io/awesome-financial-freedom/demo/) (在线，无需安装)
+- **Playbooks**（指南 + 教程）: [`playbooks/guides/`](playbooks/guides)
 - **知识节点**: [`knowledge/nodes/`](knowledge/nodes)
-- **Skills**: [`skills/`](skills)
-- **Tools**: [`tools/`](tools)
-- **贡献指南**: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- **工作流**: [`workflows/`](workflows)
+- **Prompts & Agents**: [`prompts/`](prompts) · [`agents/`](agents)
+- **Skills & Tools**: [`skills/`](skills) · [`tools/`](tools)
+- **书籍摘要**: [`playbooks/book-summaries/`](playbooks/book-summaries)
 
 ## 🤔 这是什么？
 
@@ -44,9 +39,7 @@
 - 📍 **学习路径指南**：分阶段推进、个性化目标设定。
 - ✅ **可执行行动指南**：快速见效、风险意识的第一步，见 [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md)。
 
-**无需安装，直接在浏览器体验。**
-
-输入你的当前存款、年收入、年支出、年储蓄和资产配置，系统返回：
+这是一个面向用户的财务自由规划工具。输入你的当前存款、年收入、年支出、预期回报率、安全提取率和资产配置，系统返回：
 
 - FIRE 目标金额
 - 预计达成年限
@@ -77,78 +70,51 @@
 - 邱岩《让钱去工作》（双轮配置）
 - 更多来源见 [`playbooks/book-summaries/`](playbooks/book-summaries/)
 
-## 🔧 如何使用（最简单的办法）
+## 🔧 如何使用
 
-### 0️⃣ 你会得到什么
+### 1️⃣ 立即体验（无需安装）
 
-这个项目给你一份真实的财务计划，不只是一份文档：
+打开 **`https://adashuai5.github.io/awesome-financial-freedom/demo/`** 并输入你的数字，你会获得：
 
-- FIRE 目标和预计财务独立年限
-- 关于储蓄、投资和风险管理的精简行动方案
-- 含买卖建议和风险说明的组合对齐指导
-
-这些输出是项目的实际价值所在：一套结构化计划和清晰的下一步。
-
-### 1️⃣ 准备什么
-
-你需要准备以下数字（填入演示页面）：
-
-- 当前存款
-- 年收入
-- 年支出
-- 年储蓄
-- 预期回报率
-- 安全提取率
-- 资产配置（如 60% 股票、40% 债券）
-
-### 2️⃣ 你会看到什么
-
-系统将每个输入映射到对应输出：
-
-| 你的输入 | 系统输出 |
-|---|---|
-| 当前存款 + 年收入 + 年支出 + 年储蓄 | **FIRE 目标金额** 和 **预计达成年限** |
-| 预期回报率、安全提取率 | FIRE 计算参数（复利增长、提取数学） |
-| 资产配置（如 60% 股票 / 40% 债券） | **再平衡建议** 和风险说明 |
-
-结果是一份清晰可读的计划摘要：
-- FIRE 目标金额
-- 预计 FIRE 年限
+- **FIRE 目标金额** 和预计达成年限
 - 关键行动建议
-- 再平衡建议和风险说明
+- 组合再平衡指导
 
-### 3️⃣ 立即体验
+### 2️⃣ 准备你的数字
 
-打开在线演示并输入你的数字：
+打开演示前，收集：当前存款、年收入、年支出、预期回报率、安全提取率、资产配置（如 60% 股票 / 40% 债券）。
 
-**`https://adashuai5.github.io/awesome-financial-freedom/`**
+### 3️⃣ 深入探索
 
-查看 FIRE 目标、预计年限、行动建议和组合再平衡指导——无需安装。
+拿到一次结果后，可深入了解系统：
 
-### 4️⃣ 何时深入探索
-
-如果你想了解更多系统原理，可以探索：
-
-- [入门指南](playbooks/tutorials/getting-started.md) — 本地运行计算器和 AI 助手
-- [架构说明](playbooks/guides/money-os-architecture.md) — 系统设计与数据流
-- [CLI 工作流运行器](tools/run-workflow.js) — `node tools/run-workflow.js workflows/fire_planning.yaml`（需 Node.js ≥18）
-- 各 [workflow 文件](workflows/) — FIRE 规划、再平衡、定投等的 YAML 定义
-
-建议在看到一次结果之后，再深入这些内容。
+| 如果你想… | 去哪里 |
+|----------|--------|
+| 本地运行 + AI 助手 | [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md) |
+| 了解系统设计 | [`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md) |
+| 通过 CLI 执行 | `node tools/run-workflow.js workflows/fire_planning.yaml`（需 Node.js ≥18） |
+| 浏览全部工作流 | [`workflows/`](workflows) |
 
 ## 📖 知识结构
 
-- 01-mindset/ — 心态与价值观
-- 02-foundation/ — 核心财务健康
-- 03-accumulation/ — 储蓄与收入增长
-- 04-allocation/ — 资产配置与投资
-- 05-automation/ — 自动储蓄与投资
-- 06-freedom/ — FIRE 目标与提取策略
-- 07-learning-path/ — 路径规划与分阶段行动指导
+七个从心态到财务自由的递进阶段：
+
+| 阶段 | 目录 | 你将学到 |
+|------|------|---------|
+| 01 — 心态 | [`knowledge/nodes/01-mindset/`](knowledge/nodes/01-mindset) | 财务自由真正意味着什么；钱是工具而非目标 |
+| 02 — 基础 | [`knowledge/nodes/02-foundation/`](knowledge/nodes/02-foundation) | 应急基金、保险、消除高息债务 |
+| 03 — 积累 | [`knowledge/nodes/03-accumulation/`](knowledge/nodes/03-accumulation) | 提高储蓄率；副业收入；复利基础 |
+| 04 — 配置 | [`knowledge/nodes/04-allocation/`](knowledge/nodes/04-allocation) | 资产配置、多元化、指数基金、再平衡 |
+| 05 — 自动化 | [`knowledge/nodes/05-automation/`](knowledge/nodes/05-automation) | 自动储蓄和投资，让纪律成为自动习惯 |
+| 06 — 自由 | [`knowledge/nodes/06-freedom/`](knowledge/nodes/06-freedom) | FIRE 数学、安全提取率、Coast FIRE、Barista FIRE |
+| 07 — 学习路径 | [`knowledge/nodes/07-learning-path/`](knowledge/nodes/07-learning-path) | 阶段路线图；下一步该读哪个节点 |
 
 ## 🤝 贡献
 
-欢迎贡献！请参阅 [贡献指南](CONTRIBUTING.md) 了解更多。
+欢迎贡献！请阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md) 了解：
+- 如何报告问题或建议新知识节点
+- Pull Request 工作流和编码风格
+- 如何添加 Prompts、工作流或 Playbook 内容
 
 ## 📄 许可
 
