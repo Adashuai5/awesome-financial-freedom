@@ -1,0 +1,40 @@
+{
+  "id": "index-fund-why",
+  "title": "为什么选择指数基金",
+  "chapter": "04-allocation",
+  "tags": ["指数基金", "低成本", "长期投资"],
+  "question_patterns": [
+    "为什么要买指数基金",
+    "指数基金好还是主动基金好",
+    "指数基金有什么优势",
+    "如何选择基金"
+  ],
+  "answer": {
+    "summary": "指数基金成本低、分散广、长期稳定，是普通人最简单的投资方式之一。",
+    "core_concept": "与其靠少数赢家，不如复制市场。指数基金跟踪整个市场，避免选股和择时错误。",
+    "formula": "投资回报 = 市场收益 - 费用",
+    "example": {
+      "scenario": "小李投资一只年费率0.2%的指数基金，市场年收益7%。",
+      "calculation": "净收益≈7% - 0.2% = 6.8%",
+      "explanation": "低费用让长期收益损失更少，最终差距巨大。"
+    },
+    "limitations": [
+      "指数基金仍会随市场下跌",
+      "不适合追求快速暴富的人",
+      "选择时要注意费率和跟踪误差"
+    ]
+  },
+  "action_item": "查找一只年费率低于0.3%的国内或海外指数基金，了解它的跟踪标的和费率结构。",
+  "related_nodes": [
+    "asset-allocation-basics",
+    "compound-interest",
+    "dollar-cost-averaging"
+  ],
+  "source": {
+    "primary": "被动投资理念",
+    "books": ["《简单通往财富之路》", "《聪明钱》"],
+    "references": [
+      "https://jlcollinsnh.com/stock-series/ (JL Collins Stock Series)"
+    ]
+  }
+}

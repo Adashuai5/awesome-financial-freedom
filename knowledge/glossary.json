@@ -1,0 +1,105 @@
+{
+  "glossary": [
+    {
+      "term": "FIRE",
+      "full_form": "Financial Independence, Retire Early",
+      "definition": "财务独立、提前退休。通过积累足够资产，使被动收入能够覆盖全部生活开支，从而不再需要为钱而工作。",
+      "related_nodes": ["what-is-financial-freedom", "fire-types", "four-percent-rule"]
+    },
+    {
+      "term": "Passive Income (被动收入)",
+      "definition": "不需要你用时间直接换取的收入，如投资股息、房租、版权费、自动化生意分红等。与主动收入（工资）相对。",
+      "related_nodes": ["what-is-financial-freedom"]
+    },
+    {
+      "term": "Net Worth (净资产)",
+      "definition": "总资产减去总负债的差额。公式：净资产 = 资产 - 负债。是衡量个人财务健康的核心指标。",
+      "related_nodes": ["net-worth-calculation"]
+    },
+    {
+      "term": "Emergency Fund (应急基金)",
+      "definition": "专门用于应对突发情况（失业、疾病、意外）的现金储备。通常建议存储3-6个月的生活费用。",
+      "related_nodes": ["emergency-fund"]
+    },
+    {
+      "term": "Savings Rate (储蓄率)",
+      "definition": "收入中用于储蓄的比例。公式：储蓄率 =（收入 - 支出）/ 收入。提高储蓄率是积累财富最有效的方式之一。",
+      "related_nodes": ["savings-rate"]
+    },
+    {
+      "term": "4% Rule (4%法则)",
+      "definition": "FIRE运动的核心规则：当你积累了年度支出25倍的资产后，可以以4%的年提取率维持生活，即告财务自由。",
+      "related_nodes": ["four-percent-rule"]
+    },
+    {
+      "term": "Safe Withdrawal Rate (安全提现率)",
+      "definition": "退休后每年从资产中提取资金的比例。4%是最广泛使用的安全提现率，来源于Trinity Study。",
+      "related_nodes": ["four-percent-rule", "withdrawal-strategies"]
+    },
+    {
+      "term": "Compound Interest (复利)",
+      "definition": "利滚利效应。收益再投资产生更多收益。爱因斯坦称之为'世界第八奇迹'。复利的力量与时间和收益率正相关。",
+      "related_nodes": ["compound-interest"]
+    },
+    {
+      "term": "Dollar Cost Averaging (定期定额投资)",
+      "definition": "在固定时间投入固定金额购买资产，无论价格高低。优点是降低择时风险、培养投资纪律。",
+      "related_nodes": ["dollar-cost-averaging"]
+    },
+    {
+      "term": "Rebalancing (资产再平衡)",
+      "definition": "定期调整资产配置回到目标比例的操作。由于各类资产涨跌不同，再平衡可以控制风险并实现'高卖低买'。",
+      "related_nodes": ["rebalancing"]
+    },
+    {
+      "term": "Index Fund (指数基金)",
+      "definition": "跟踪特定市场指数（如沪深300、S&P 500）的基金。优点是低成本、分散风险、长期上涨。巴菲特推荐给普通投资者的工具。",
+      "related_nodes": ["index-fund-why"]
+    },
+    {
+      "term": "Dual-Wheel Allocation (双轮配置法)",
+      "definition": "一种动态资产配置策略：安全轮（债券、存款）保障基本生活，风险轮（股票、基金）追求增长。市场变化时在两轮间转移资金。",
+      "related_nodes": ["dual-wheel-allocation"]
+    },
+    {
+      "term": "Geo-Arbitrage (地理套利)",
+      "definition": "利用不同地区生活成本差异增加购买力的策略。例如在高收入地区赚钱，在低成本地区生活，加速FIRE进程。",
+      "related_nodes": ["geo-arbitrage"]
+    },
+    {
+      "term": "Marginal Utility (边际效用)",
+      "definition": "每增加一单位消费所带来的额外幸福感。边际效用递减：收入增加到一定程度后，每多赚的钱带来的快乐会减少。",
+      "related_nodes": ["happiness-marginal-utility"]
+    },
+    {
+      "term": "FI (Financial Independence)",
+      "definition": "财务独立。被动收入能够覆盖生活开支，但不一定退休。强调的是选择自由，而非字面意义上的停止工作。",
+      "related_nodes": ["what-is-financial-freedom", "fire-types"]
+    },
+    {
+      "term": "Coast FIRE",
+      "definition": "已积累足够本金（通过复利可在退休年龄前增长到目标资产），之后不再需要额外储蓄，仅靠投资增长即可实现FIRE。",
+      "related_nodes": ["fire-types"]
+    },
+    {
+      "term": "Barista FIRE / Lean FIRE / Fat FIRE",
+      "definition": "FIRE的不同形态：Barista FIRE是部分工作加部分被动收入；Lean FIRE是极简生活低消费；Fat FIRE是高消费高积累。",
+      "related_nodes": ["fire-types"]
+    },
+    {
+      "term": "Annualized Return (年化收益率)",
+      "definition": "投资一年的平均回报率，需考虑复利效应。例如：10年前投入1万元，现在值2.6万元，年化收益率约10%。",
+      "related_nodes": ["compound-interest"]
+    },
+    {
+      "term": "Rule of 72 (72法则)",
+      "definition": "估算资产翻倍时间的简便方法：72 除以年收益率等于翻倍所需年数。例如年收益6%，约12年翻倍。",
+      "related_nodes": ["compound-interest"]
+    },
+    {
+      "term": "Asset Allocation (资产配置)",
+      "definition": "将投资资金分配到不同类型资产（股票、债券、现金等）的过程。目标是分散风险并实现预期的风险收益比。",
+      "related_nodes": ["asset-allocation-basics"]
+    }
+  ]
+}

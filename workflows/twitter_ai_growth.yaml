@@ -1,0 +1,33 @@
+name: AI 账号增长（Twitter）
+description: 基于 AI 的 Twitter 内容规划与增长自动化流程。
+input:
+  parameters:
+    niche: string
+    audience_goal: string
+    weekly_tweet_target: number
+steps:
+  - id: generate_topics
+    name: 生成推文主题列表
+    type: prompt
+    prompt_id: twitter_ideas
+    next: analyze_engagement
+    on_error: retry
+  - id: analyze_engagement
+    name: 分析当前互动策略
+    type: calculator
+    calculator_id: twitter-engagement-model
+    next: create_schedule
+    on_error: continue
+  - id: create_schedule
+    name: 制定内容发布日程
+    type: prompt
+    prompt_id: twitter_schedule
+    next: output
+    on_error: abort
+output:
+  tweets_schedule: object
+  growth_plan: object
+kpi:
+  - follower_growth
+  - engagement_rate
+  - post_frequency

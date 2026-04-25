@@ -1,0 +1,54 @@
+name: OpenClaw Workflow Executor
+version: 1.0
+description: >
+  定义 OpenClaw 如何解释并执行 Money OS 中的工作流。
+
+input_format:
+  type: object
+  properties:
+    workflow_file:
+      type: string
+      description: 工作流 YAML 文件路径
+    parameters:
+      type: object
+      description: 传入工作流的参数
+  required:
+    - workflow_file
+
+tools:
+  - name: prompt_runner
+    type: ai_prompt
+    description: 用于执行 prompt 类型步骤，加载 prompts/ 目录中的模板
+  - name: calculator_runner
+    type: local_calculator
+    description: 执行本地 calculator 步骤，调用 tools/calculators/
+  - name: api_caller
+    type: http
+    description: 可选的外部 API 调用工具
+
+error_handling:
+  default: abort
+  rules:
+    - step_type: prompt
+      on_error: retry
+    - step_type: calculator
+      on_error: continue
+    - step_type: api_call
+      on_error: retry
+    - step_type: condition
+      on_error: abort
+
+logging:
+  format: json
+  fields:
+    - timestamp
+    - workflow
+    - step_id
+    - status
+    - output_summary
+    - error
+
+execution:
+  workflow_source: workflows/
+  prompt_templates: prompts/
+  agent_config: agents/openclaw.yaml

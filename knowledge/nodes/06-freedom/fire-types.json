@@ -1,0 +1,37 @@
+{
+  "id": "fire-types",
+  "title": "FIRE 类型",
+  "chapter": "06-freedom",
+  "tags": ["FIRE", "退休", "生活方式"],
+  "question_patterns": [
+    "FIRE有几种类型",
+    "什么是Lean FIRE",
+    "慢速FIRE和普通FIRE区别",
+    "如何选择FIRE路径"
+  ],
+  "answer": {
+    "summary": "FIRE有多种类型，从节俭型到灵活型，关键是选择适合你的生活成本和风险承受力的方式。",
+    "core_concept": "常见类型包括Lean FIRE、Fat FIRE、Barista FIRE、Coast FIRE等，它们的核心差别在于目标支出水平和是否继续兼职。",
+    "formula": "目标资金 = 年支出 ÷ 安全提取率",
+    "example": {
+      "scenario": "小李希望每年花20万元，选择4%法则。",
+      "calculation": "目标资金 = 20万 ÷ 0.04 = 500万",
+      "explanation": "这是她的Fat FIRE目标，如果选择Lean FIRE，则可用更低支出和更少资金。"
+    },
+    "limitations": [
+      "FIRE类型只是思路，不是硬性标准",
+      "生活成本和兴趣会影响实际选择",
+      "早退休不等于永远不工作"
+    ]
+  },
+  "action_item": "写下你理想的每年开支范围，判断你更接近Lean FIRE、Fat FIRE还是Barista FIRE。",
+  "related_nodes": [
+    "four-percent-rule",
+    "withdrawal-strategies",
+    "net-worth-calculation"
+  ],
+  "source": {
+    "primary": "FIRE 社区分类",
+    "books": ["《白领1000万财务自由笔记》", "《聪明钱》"]
+  }
+}

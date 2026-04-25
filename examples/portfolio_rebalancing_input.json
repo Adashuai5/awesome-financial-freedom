@@ -1,0 +1,7 @@
+{
+  "assets": [
+    { "name": "Stocks", "currentValue": 70000, "targetPercent": 60 },
+    { "name": "Bonds", "currentValue": 30000, "targetPercent": 40 }
+  ],
+  "threshold": 0.05
+}

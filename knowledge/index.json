@@ -1,0 +1,196 @@
+{
+  "version": "2.2.0",
+  "last_updated": "2026-04-25",
+  "notes": "Structure upgraded to Money OS with workflows, prompts, and agent specs. Added investment-psychology, rebalancing, fire-calculator-guide nodes.",
+  "nodes": [
+    {
+      "id": "what-is-financial-freedom",
+      "title": "什么是财务自由？",
+      "chapter": "01-mindset",
+      "tags": ["定义", "FIRE", "被动收入"],
+      "file": "knowledge/nodes/01-mindset/what-is-financial-freedom.json"
+    },
+    {
+      "id": "money-as-tool",
+      "title": "钱是工具，不是目的",
+      "chapter": "01-mindset",
+      "tags": ["心态", "价值观", "目标"],
+      "file": "knowledge/nodes/01-mindset/money-as-tool.json"
+    },
+    {
+      "id": "happiness-marginal-utility",
+      "title": "快乐的边际效用",
+      "chapter": "01-mindset",
+      "tags": ["心态", "幸福", "消费"],
+      "file": "knowledge/nodes/01-mindset/happiness-marginal-utility.json"
+    },
+    {
+      "id": "net-worth-calculation",
+      "title": "净资产计算",
+      "chapter": "02-foundation",
+      "tags": ["财务健康", "资产负债", "诊断"],
+      "file": "knowledge/nodes/02-foundation/net-worth-calculation.json"
+    },
+    {
+      "id": "emergency-fund",
+      "title": "应急基金",
+      "chapter": "02-foundation",
+      "tags": ["储蓄", "安全", "基础"],
+      "file": "knowledge/nodes/02-foundation/emergency-fund.json"
+    },
+    {
+      "id": "insurance-basics",
+      "title": "保险基础",
+      "chapter": "02-foundation",
+      "tags": ["风险管理", "保障", "基础"],
+      "file": "knowledge/nodes/02-foundation/insurance-basics.json"
+    },
+    {
+      "id": "savings-rate",
+      "title": "储蓄率",
+      "chapter": "03-accumulation",
+      "tags": ["储蓄", "行为", "积累"],
+      "file": "knowledge/nodes/03-accumulation/savings-rate.json"
+    },
+    {
+      "id": "income-growth-framework",
+      "title": "收入增长框架",
+      "chapter": "03-accumulation",
+      "tags": ["收入", "成长", "策略"],
+      "file": "knowledge/nodes/03-accumulation/income-growth-framework.json"
+    },
+    {
+      "id": "side-hustle-starter",
+      "title": "副业入门",
+      "chapter": "03-accumulation",
+      "tags": ["副业", "收入", "实践"],
+      "file": "knowledge/nodes/03-accumulation/side-hustle-starter.json"
+    },
+    {
+      "id": "asset-allocation-basics",
+      "title": "资产配置基础",
+      "chapter": "04-allocation",
+      "tags": ["资产配置", "风险管理", "投资"],
+      "file": "knowledge/nodes/04-allocation/asset-allocation-basics.json"
+    },
+    {
+      "id": "compound-interest",
+      "title": "复利的力量",
+      "chapter": "04-allocation",
+      "tags": ["复利", "增长", "长期"],
+      "file": "knowledge/nodes/04-allocation/compound-interest.json"
+    },
+    {
+      "id": "dual-wheel-allocation",
+      "title": "双轮配置法",
+      "chapter": "04-allocation",
+      "tags": ["资产配置", "双轮", "风险控制"],
+      "file": "knowledge/nodes/04-allocation/dual-wheel-allocation.json"
+    },
+    {
+      "id": "index-fund-why",
+      "title": "为什么选择指数基金",
+      "chapter": "04-allocation",
+      "tags": ["指数基金", "低成本", "长期投资"],
+      "file": "knowledge/nodes/04-allocation/index-fund-why.json"
+    },
+    {
+      "id": "investment-psychology",
+      "title": "投资心理学",
+      "chapter": "04-allocation",
+      "tags": ["心理", "行为金融", "决策"],
+      "file": "knowledge/nodes/04-allocation/investment-psychology.json"
+    },
+    {
+      "id": "rebalancing",
+      "title": "资产再平衡",
+      "chapter": "04-allocation",
+      "tags": ["再平衡", "风险控制", "纪律"],
+      "file": "knowledge/nodes/04-allocation/rebalancing.json"
+    },
+    {
+      "id": "stock-bond-balance",
+      "title": "股票与债券平衡",
+      "chapter": "04-allocation",
+      "tags": ["股票", "债券", "平衡"],
+      "file": "knowledge/nodes/04-allocation/stock-bond-balance.json"
+    },
+    {
+      "id": "auto-saving-system",
+      "title": "自动储蓄系统",
+      "chapter": "05-automation",
+      "tags": ["自动化", "储蓄", "习惯"],
+      "file": "knowledge/nodes/05-automation/auto-saving-system.json"
+    },
+    {
+      "id": "dollar-cost-averaging",
+      "title": "定期定额投资",
+      "chapter": "05-automation",
+      "tags": ["定投", "自动化", "投资"],
+      "file": "knowledge/nodes/05-automation/dollar-cost-averaging.json"
+    },
+    {
+      "id": "fire-types",
+      "title": "FIRE 类型",
+      "chapter": "06-freedom",
+      "tags": ["FIRE", "退休", "生活方式"],
+      "file": "knowledge/nodes/06-freedom/fire-types.json"
+    },
+    {
+      "id": "four-percent-rule",
+      "title": "4%法则",
+      "chapter": "06-freedom",
+      "tags": ["FIRE", "退休", "安全提取", "投资"],
+      "file": "knowledge/nodes/06-freedom/four-percent-rule.json"
+    },
+    {
+      "id": "fire-calculator-guide",
+      "title": "FIRE 计算器使用指南",
+      "chapter": "06-freedom",
+      "tags": ["FIRE", "计算器", "工具"],
+      "file": "knowledge/nodes/06-freedom/fire-calculator-guide.json"
+    },
+    {
+      "id": "withdrawal-strategies",
+      "title": "提款策略",
+      "chapter": "06-freedom",
+      "tags": ["提款", "退休", "现金流"],
+      "file": "knowledge/nodes/06-freedom/withdrawal-strategies.json"
+    },
+    {
+      "id": "geo-arbitrage",
+      "title": "地理套利",
+      "chapter": "06-freedom",
+      "tags": ["地理套利", "成本节省", "自由"],
+      "file": "knowledge/nodes/06-freedom/geo-arbitrage.json"
+    },
+    {
+      "id": "which-stage-am-i",
+      "title": "我处于财务自由的哪个阶段？",
+      "chapter": "07-learning-path",
+      "tags": ["路径", "阶段", "自测", "learning path"],
+      "file": "knowledge/nodes/07-learning-path/which-stage-am-i.json"
+    },
+    {
+      "id": "customize-path-for-debt",
+      "title": "有负债如何调整学习路径？",
+      "chapter": "07-learning-path",
+      "tags": ["债务", "路径调整", "debt", "customization"],
+      "file": "knowledge/nodes/07-learning-path/customize-path-for-debt.json"
+    },
+    {
+      "id": "next-step-recommendation",
+      "title": "根据当前阶段推荐下一步行动",
+      "chapter": "07-learning-path",
+      "tags": ["行动", "推荐", "next step", "coaching"],
+      "file": "knowledge/nodes/07-learning-path/next-step-recommendation.json"
+    },
+    {
+      "id": "actionable-first-steps",
+      "title": "实现财务自由的第一步是什么？",
+      "chapter": "07-learning-path",
+      "tags": ["行动", "入门", "first steps"],
+      "file": "knowledge/nodes/07-learning-path/actionable-first-steps.json"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "actionable-first-steps",
+  "title": "实现财务自由的第一步是什么？",
+  "chapter": "07-learning-path",
+  "tags": ["行动", "入门", "first steps"],
+  "question_patterns": ["从哪里开始", "第一步做什么", "如何开始财务自由"],
+  "answer": {
+    "summary": "从记账和建立应急基金开始。这两步是所有投资和FIRE规划的地基。",
+    "core_concept": "财务自由的第一步不是投资，而是了解你的现金流和建立安全网。",
+    "formula": null,
+    "example": {
+      "scenario": "小张月薪1万，不知如何开始。",
+      "calculation": "第一步：用记账App记录一个月收支。第二步：将3个月生活费存入货币基金。第三步：阅读《简单致富》前两章。",
+      "explanation": "这三步完成后，你将清楚自己的储蓄率，并拥有应对意外的缓冲资金。"
+    },
+    "limitations": ["个人情况不同，若已有高息债务，应优先还债"]
+  },
+  "action_item": "打开手机应用商店，下载一个记账App（如随手记、MoneyWiz），开始记录今天的每一笔支出。",
+  "related_nodes": ["emergency-fund", "savings-rate", "which-stage-am-i"],
+  "source": {
+    "primary": "awesome-financial-freedom 项目行动指南",
+    "books": ["《简单致富》"]
+  }
+}

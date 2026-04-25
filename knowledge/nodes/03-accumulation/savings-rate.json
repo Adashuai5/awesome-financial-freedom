@@ -1,0 +1,37 @@
+{
+  "id": "savings-rate",
+  "title": "储蓄率",
+  "chapter": "03-accumulation",
+  "tags": ["储蓄", "行为", "积累"],
+  "question_patterns": [
+    "储蓄率怎么计算",
+    "每月应该存多少",
+    "财务自由要多少储蓄率",
+    "储蓄率和退休速度"
+  ],
+  "answer": {
+    "summary": "储蓄率是你收入中用于储蓄和投资的比例，是决定你积累速度的关键数字。",
+    "core_concept": "高储蓄率意味着你能更快把收入的一部分变为未来自由的本金。",
+    "formula": "储蓄率 = 储蓄 ÷ 收入 × 100%",
+    "example": {
+      "scenario": "小李每月收入1万元，扣除税后支出7000元。",
+      "calculation": "储蓄 = 10000 - 7000 = 3000；储蓄率 = 3000 ÷ 10000 × 100% = 30%",
+      "explanation": "他将30%的收入转为未来资产，说明他正在为财务自由加速。"
+    },
+    "limitations": [
+      "储蓄率高不代表投资回报高",
+      "过度压缩生活可能影响可持续性",
+      "收入增长也会改变最佳储蓄策略"
+    ]
+  },
+  "action_item": "计算你最近三个月的平均储蓄率，并设定一个可持续的目标，比如从30%提升到35%。",
+  "related_nodes": [
+    "net-worth-calculation",
+    "emergency-fund",
+    "income-growth-framework"
+  ],
+  "source": {
+    "primary": "FIRE 早期退休原则",
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]
+  }
+}

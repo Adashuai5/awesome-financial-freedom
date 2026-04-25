@@ -1,0 +1,14 @@
+name: Hermes Workflow Executor
+
+description: |
+  占位符 Agent 定义，用于将来支持 Hermes 代理执行 Money OS 工作流。
+
+agent_config:
+  type: hermes
+  endpoint: https://example.com/hermes/api
+  auth: Bearer <token>
+
+capabilities:
+  - execute_workflow
+  - fetch_tools
+  - report_status

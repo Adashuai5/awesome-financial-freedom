@@ -1,0 +1,33 @@
+{
+  "id": "compound-interest",
+  "title": "复利的力量",
+  "chapter": "04-allocation",
+  "tags": ["复利", "增长", "长期"],
+  "question_patterns": [
+    "复利是什么",
+    "复利怎么算",
+    "为什么要尽早投资",
+    "复利和利滚利"
+  ],
+  "answer": {
+    "summary": "复利是利息产生利息，时间越长，资产增长越显著。",
+    "core_concept": "复利把时间变成你的朋友，长期持有比短期频繁交易更容易实现财富增长。",
+    "formula": "未来值 = 本金 × (1 + 年收益率)^年数",
+    "example": {
+      "scenario": "小李投资10万元，预期年收益6%，持有20年。",
+      "calculation": "未来值 = 100000 × (1.06)^20 ≈ 320000",
+      "explanation": "20年后本金增长到约32万元，显示出时间与复利共同放大的效果。"
+    },
+    "limitations": [
+      "复利要求长期坚持，不适合短线投机",
+      "收益率可能不稳定",
+      "通胀会侵蚀实际购买力"
+    ]
+  },
+  "action_item": "选择一个你愿意长期持有的低成本资产，设定至少5年以上的持有计划。 ",
+  "related_nodes": ["index-fund-why", "savings-rate", "fire-types"],
+  "source": {
+    "primary": "复利原则",
+    "books": ["《聪明钱》", "《白领1000万财务自由笔记》"]
+  }
+}

@@ -1,0 +1,34 @@
+name: 指数基金定投自动化
+description: 教育性模拟定投流程，帮助用户设计长期 DCA 投资方案。
+input:
+  parameters:
+    investment_amount: number
+    frequency: string
+    target_index: string
+    duration_months: number
+steps:
+  - id: assess_risk
+    name: 风险承受力评估
+    type: prompt
+    prompt_id: dca_risk_assessment
+    next: allocate_plan
+    on_error: retry
+  - id: allocate_plan
+    name: 生成定投计划
+    type: calculator
+    calculator_id: dca-plan-calculator
+    next: review_summary
+    on_error: continue
+  - id: review_summary
+    name: 生成计划总结
+    type: prompt
+    prompt_id: dca_summary
+    next: output
+    on_error: abort
+output:
+  investment_plan: object
+  risk_profile: object
+kpi:
+  - projected_return
+  - contribution_consistency
+  - portfolio_diversification

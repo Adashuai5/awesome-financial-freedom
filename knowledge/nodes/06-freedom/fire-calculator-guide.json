@@ -1,0 +1,43 @@
+{
+  "id": "fire-calculator-guide",
+  "title": "FIRE 计算器使用指南",
+  "chapter": "06-freedom",
+  "tags": ["FIRE", "计算器", "退休规划", "工具"],
+  "question_patterns": [
+    "如何计算FIRE目标",
+    "FIRE计算器怎么用",
+    "需要多少钱才能退休",
+    "多久能达到财务自由"
+  ],
+  "answer": {
+    "summary": "FIRE计算器帮助你估算达到财务自由所需的时间和资金，核心因素包括当前资产、年储蓄、预期收益率和目标支出。",
+    "core_concept": "财务自由的核心公式是：目标资产 = 年支出 ÷ 安全提取率（通常为4%）。计算达成年限需要考虑复利增长和定期投入。",
+    "formula": "目标资产 = 年支出 ÷ 4%\n达成年限 ≈ log((目标资产 - 当前资产) ÷ 年储蓄 + 1) ÷ log(1 + 预期收益率)",
+    "example": {
+      "scenario": "小李月收入1.5万，月支出9000元，现有存款20万，预期年收益7%。",
+      "calculation": "年储蓄 = (1.5万-9000)×12 = 7.2万\n年支出 = 9000×12 = 10.8万\n目标资产 = 10.8万 ÷ 0.04 = 270万\n经过复利计算，约17年达成目标",
+      "explanation": "通过保持40%储蓄率和7%年化收益，小李可以在17年后实现财务自由。"
+    },
+    "limitations": [
+      "收益率为预期值，实际可能波动",
+      "未考虑通胀和收入增长",
+      "未考虑税务影响",
+      "生活支出可能随时间变化"
+    ]
+  },
+  "action_item": "使用 tools/calculators/fire-timeline.ts 或在线FIRE计算器，输入你的实际数据，得到个性化的财务自由时间表。",
+  "related_nodes": [
+    "four-percent-rule",
+    "savings-rate",
+    "compound-interest",
+    "fire-types"
+  ],
+  "source": {
+    "primary": "FIRE 计算原则",
+    "books": ["《白领1000万财务自由笔记》", "《聪明钱》"],
+    "references": [
+      "https://www.firecalc.com/",
+      "https://networthify.com/calculator/earlyretirement"
+    ]
+  }
+}

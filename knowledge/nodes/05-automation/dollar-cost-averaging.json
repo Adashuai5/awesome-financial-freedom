@@ -1,0 +1,37 @@
+{
+  "id": "dollar-cost-averaging",
+  "title": "定期定额投资",
+  "chapter": "05-automation",
+  "tags": ["定投", "自动化", "投资"],
+  "question_patterns": [
+    "什么是定投",
+    "定期定额投资好不好",
+    "如何开始定投",
+    "DCA是什么意思"
+  ],
+  "answer": {
+    "summary": "定期定额投资是每隔一段时间投入固定金额，平滑成本并减少择时压力。",
+    "core_concept": "无论涨跌都坚持投入，长期下来用平均成本替代市场时机判断。",
+    "formula": "平均成本 = 投入总额 ÷ 持有份额",
+    "example": {
+      "scenario": "小王每月投资1000元到指数基金，连续三个月分别买入在10元、8元、12元。",
+      "calculation": "平均成本 = 3000 ÷ (100 + 125 + 83.33) ≈ 9.68元",
+      "explanation": "他的实际买入成本低于最高价，说明定投可以避免一次性买入时机错误。"
+    },
+    "limitations": [
+      "定投不能保证赚钱，只是降低时机风险",
+      "适合长期投资，不适合短期博弈",
+      "需要坚持，不要因市场波动频繁调整"
+    ]
+  },
+  "action_item": "选择一个低费率指数基金，设定每月固定金额自动投资。 ",
+  "related_nodes": [
+    "auto-saving-system",
+    "index-fund-why",
+    "compound-interest"
+  ],
+  "source": {
+    "primary": "被动投资策略",
+    "books": ["《聪明钱》", "《简单通往财富之路》"]
+  }
+}

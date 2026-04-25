@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIRE 财务自由评估 - Awesome Financial Freedom</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .fire-form {
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-title {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .form-description {
+      color: #666;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+      border: none;
+      border-top: 2px solid #f0f0f0;
+      padding-top: 20px;
+    }
+
+    .form-section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      padding: 0;
+    }
+
+    .section-fields {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field-label {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .required {
+      color: #e74c3c;
+      margin-left: 4px;
+    }
+
+    .tooltip-icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: #3498db;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 18px;
+      font-size: 12px;
+      cursor: help;
+      margin-left: 6px;
+      font-weight: bold;
+    }
+
+    .input-group {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix,
+    .input-suffix {
+      position: absolute;
+      color: #999;
+      font-weight: 500;
+      padding: 0 10px;
+    }
+
+    .input-prefix {
+      left: 0;
+    }
+
+    .input-suffix {
+      right: 0;
+    }
+
+    .currency-input {
+      padding-left: 30px !important;
+    }
+
+    .percentage-input {
+      padding-right: 30px !important;
+    }
+
+    .form-control {
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      background-color: #f8f9ff;
+    }
+
+    .form-control::placeholder {
+      color: #bbb;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #f0f0f0;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .error-alert {
+      background: #fee;
+      border-left: 4px solid #e74c3c;
+      color: #c0392b;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .error-alert h3 {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .error-alert ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .error-alert li {
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .error-alert li:before {
+      content: '✗ ';
+      margin-right: 6px;
+    }
+
+    .success-message {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      color: #155724;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      .form-title {
+        font-size: 22px;
+      }
+
+      .section-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="form-container"></div>
+  </div>
+
+  <!-- Load form components -->
+  <script src="form-components.js"></script>
+  <script src="form-schema.json"></script>
+
+  <script>
+    // Initialize form when DOM is ready
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Load form schema
+        const response = await fetch('form-schema.json');
+        const schema = await response.json();
+
+        // Create form manager
+        const manager = new FormManager(
+          schema.fire_assessment_form,
+          schema.validation_rules,
+          schema.field_types
+        );
+
+        // Initialize form with event handler
+        manager.initialize(
+          'form-container',
+          'fire_assessment',
+          async (formData) => {
+            console.log('Form submitted with data:', formData);
+
+            // In production, send to LLM API endpoint
+            try {
+              const response = await fetch('/api/fire-assessment', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+              });
+
+              if (response.ok) {
+                const result = await response.json();
+                displayResult(result);
+              } else {
+                showError('API request failed');
+              }
+            } catch (error) {
+              console.log('API call requires backend setup. Using mock response.');
+              // For demo, show mock result
+              displayMockResult(formData);
+            }
+          }
+        );
+      } catch (error) {
+        console.error('Failed to initialize form:', error);
+      }
+    });
+
+    function displayResult (result) {
+      const resultHTML = `
+        <div class="success-message">
+          <h3>✓ FIRE 评估完成</h3>
+          <p>已将您的财务数据发送到 AI 顾问进行评估。</p>
+        </div>
+      `;
+      // Process and display result
+      console.log('Result from API:', result);
+    }
+
+    function displayMockResult (formData) {
+      alert(`表单数据已收集：\n${JSON.stringify(formData, null, 2)}\n\n在实际环境中，这些数据会被发送到 LLM API 进行分析。`);
+    }
+
+    function showError (message) {
+      alert(`错误: ${message}`);
+    }
+  </script>
+</body>
+
+</html>

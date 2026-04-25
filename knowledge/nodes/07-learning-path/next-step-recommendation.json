@@ -1,0 +1,32 @@
+{
+  "id": "next-step-recommendation",
+  "title": "根据当前阶段推荐下一步行动",
+  "chapter": "07-learning-path",
+  "tags": ["行动", "推荐", "next step", "coaching"],
+  "question_patterns": [
+    "下一步我该做什么",
+    "学完这个之后学什么",
+    "财务自由路线图"
+  ],
+  "answer": {
+    "summary": "你的下一步行动取决于当前阶段。请告诉我你是否已建立应急基金、是否开始投资、是否计算过FIRE目标。",
+    "core_concept": "这是一个交互式节点，AI将根据用户的回答动态推荐学习内容和行动。通用路径见 playbooks/guides/learning-path.md。",
+    "formula": "",
+    "example": {
+      "scenario": "用户回答：已建立3个月应急基金，但尚未开始定投，也没有计算FIRE目标。",
+      "calculation": "推荐用户先完成应急基金补齐、开始定投指数基金，并计算年支出×25的目标本金。",
+      "explanation": "这种推荐基于用户当前阶段，无需一刀切，而是从基础开始逐步提升。"
+    },
+    "limitations": ["需要用户提供当前财务状态才能精准推荐"]
+  },
+  "action_item": "回答三个问题：1. 你有几个月应急基金？2. 你是否每月定投？3. 你算过FIRE目标本金吗？然后AI将给你定制化建议。",
+  "related_nodes": [
+    "which-stage-am-i",
+    "customize-path-for-debt",
+    "emergency-fund"
+  ],
+  "source": {
+    "primary": "awesome-financial-freedom 项目学习路径设计",
+    "books": []
+  }
+}

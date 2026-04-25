@@ -1,0 +1,46 @@
+{
+  "id": "investment-psychology",
+  "title": "投资心理与纪律",
+  "chapter": "01-mindset",
+  "tags": ["心态", "投资心理", "纪律", "行为金融"],
+  "question_patterns": [
+    "投资如何保持冷静",
+    "市场下跌怎么办",
+    "投资心态怎么培养",
+    "为什么总是追涨杀跌"
+  ],
+  "answer": {
+    "summary": "成功的投资不仅需要知识，更需要正确的心理素质和纪律。理解并克服常见的心理偏差，是长期投资成功的关键。",
+    "core_concept": "投资者常犯的心理错误包括：损失厌恶、过度自信、从众心理、确认偏差和近因效应。建立系统化的投资流程可以减少情绪干扰。",
+    "formula": "投资成功 = 正确策略 + 心理纪律 × 时间",
+    "example": {
+      "scenario": "市场大跌20%，投资者小王恐慌抛售，而小李坚持定投计划。",
+      "calculation": "小王：亏损20%离场，实际损失\n小李：继续定投，以更低价格买入更多份额",
+      "explanation": "一年后市场恢复，小李的组合因低位加仓而盈利，小王则错过了反弹。心理纪律决定了投资成败。"
+    },
+    "limitations": [
+      "心理偏差根深蒂固，难以完全消除",
+      "极端市场情况下最难保持纪律",
+      "个人情况不同，需要个性化策略"
+    ],
+    "key_principles": [
+      "制定书面投资计划并严格执行",
+      "设置自动定投，减少人为决策",
+      "远离市场噪音，减少查看账户频率",
+      "记住：时间是朋友，波动是机会"
+    ]
+  },
+  "action_item": "写下你的投资原则清单，当市场剧烈波动时，拿出来提醒自己。设置每月定投提醒，让投资自动化。",
+  "related_nodes": [
+    "money-as-tool",
+    "dollar-cost-averaging",
+    "compound-interest"
+  ],
+  "source": {
+    "primary": "行为金融学",
+    "books": ["《聪明钱》", "《投资最重要的事》", "Thinking, Fast and Slow"],
+    "references": [
+      "https://www.investopedia.com/articles/personal-finance/042415/how-psychology-affects-your-investing.asp"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "current_savings": 100000,
+  "annual_expenses": 60000,
+  "annual_savings": 12000,
+  "expected_return": 0.07,
+  "safe_withdrawal_rate": 0.04,
+  "assets": [
+    { "name": "Stocks", "currentValue": 60000, "targetPercent": 60 },
+    { "name": "Bonds", "currentValue": 40000, "targetPercent": 40 }
+  ]
+}
