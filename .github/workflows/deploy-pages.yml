@@ -7,16 +7,16 @@ on:
 
 jobs:
  deploy:
- runs-on: ubuntu-latest
- permissions:
- contents: write
- steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Deploy docs to GitHub Pages
+      - name: Deploy repository to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./
           publish_branch: gh-pages
