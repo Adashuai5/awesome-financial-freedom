@@ -31,7 +31,7 @@
 
 ## 🤔 What is this?
 
-**Awesome Financial Freedom** is an open-source, AI-native knowledge base for financial freedom. It combines the structured curation of awesome lists with AI Skill conversational capabilities, enabling "effortless" learning.
+**Awesome Financial Freedom** is an open-source, AI-native knowledge base for financial freedom. It combines the structured curation of awesome lists with AI Skill conversational capabilities, enabling *effortless* learning.
 
 Instead of just a static list of links, this repo provides:
 
@@ -52,16 +52,6 @@ This is a user-facing financial freedom planning tool. Enter your current saving
 - Estimated years to FIRE
 - Key action recommendations
 - Portfolio rebalancing guidance
-
-## 🚀 Demo experience
-
-You can directly access the GitHub Pages demo:
-
-- `https://adashuai5.github.io/awesome-financial-freedom/`
-
-Enter your numbers and see FIRE targets, estimated years, action recommendations, and portfolio rebalancing guidance.
-
-This is the browser-based experience for everyday users.
 
 ## 🎯 Target audience
 
@@ -85,7 +75,7 @@ Curated insights from:
 - JL Collins' _The Simple Path to Wealth_ ([Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926))
 - FIRE mathematics (4% rule, Trinity Study) ([Wikipedia](https://en.wikipedia.org/wiki/Trinity_study))
 - A Qiu's _Let Money Work_ (Dual-Wheel Asset Allocation)
-- And more (see `playbooks/book-summaries`)
+- Additional sources in [`playbooks/book-summaries/`](playbooks/book-summaries/)
 
 ## 🚀 How to Use (The "No-Brainer" Way)
 
@@ -104,6 +94,7 @@ These outputs are the actual value: a structured plan and clear next steps.
 These are the numbers you will enter in the demo page:
 
 - Current savings
+- Annual income
 - Annual expenses
 - Annual savings
 - Expected return
@@ -112,22 +103,27 @@ These are the numbers you will enter in the demo page:
 
 ### 2️⃣ What you will see
 
-The system will produce a clear, readable plan summary:
+The system maps each input to a concrete output:
 
+| Your input | System output |
+|---|---|
+| Current savings + Annual income + Annual expenses + Annual savings | **FIRE target** & **Estimated years to FIRE** |
+| Expected return, Safe withdrawal rate | FIRE calculation parameters (compound growth, withdrawal math) |
+| Asset mix (e.g. 60% stocks / 40% bonds) | **Rebalancing suggestions** and risk notes |
+
+The result is a clear, readable plan summary:
 - FIRE target
 - Estimated years to FIRE
 - Key action recommendations
 - Rebalancing suggestions and risk notes
 
-### 3️⃣ Demo experience
+### 3️⃣ Try it now
 
-You can directly access the GitHub Pages demo:
+Open the live demo and enter your numbers:
 
-- `https://adashuai5.github.io/awesome-financial-freedom/`
+**`https://adashuai5.github.io/awesome-financial-freedom/`**
 
-Enter your numbers and see FIRE targets, estimated years, action recommendations, and portfolio rebalancing guidance.
-
-This is the browser-based experience for everyday users.
+See FIRE targets, estimated years, action recommendations, and portfolio rebalancing guidance — no install needed.
 
 ### 4️⃣ When to explore more
 
@@ -135,7 +131,7 @@ If you want to learn more about how the system works, you can explore:
 
 - [Getting started guide](playbooks/tutorials/getting-started.md) — run the calculator and AI assistant locally
 - [Architecture overview](playbooks/guides/money-os-architecture.md) — system design and data flow
-- [CLI workflow runner](tools/run-workflow.js) — `node tools/run-workflow.js workflows/fire_planning.yaml`
+- [CLI workflow runner](tools/run-workflow.js) — `node tools/run-workflow.js workflows/fire_planning.yaml` (requires Node.js ≥18)
 - Individual [workflow files](workflows/) — YAML definitions for FIRE planning, rebalancing, DCA, etc.
 
 These are best explored after you have seen one result.

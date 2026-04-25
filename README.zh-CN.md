@@ -10,7 +10,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
 
-**Last updated: 2026-04-14**
+**Last updated: 2026-04-25**
 
 ![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
 
@@ -20,7 +20,6 @@
 - **Workflows**: [`workflows/`](workflows)
 - **Prompts**: [`prompts/`](prompts)
 - **Agents**: [`agents/`](agents)
-- **Data**: [`data/`](data)
 - **Playbook 指南**: [`playbooks/guides/README.md`](playbooks/guides/README.md)
 - **架构说明**: [`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md)
 - **入门指南**: [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
@@ -32,7 +31,7 @@
 
 ## 🤔 这是什么？
 
-**Awesome Financial Freedom** 是一个开源、AI 原生的财务自由知识库。它将 awesome 列表的结构化策划与 AI Skill 对话能力结合，实现"零门槛"学习。
+**Awesome Financial Freedom** 是一个开源、AI 原生的财务自由知识库。它将 awesome 列表的结构化策划与 AI Skill 对话能力结合，实现 *零门槛* 学习。
 
 这个项目不只是静态链接列表，它提供：
 
@@ -53,16 +52,6 @@
 - 预计达成年限
 - 关键行动建议
 - 组合再平衡指导
-
-## 🚀 直接体验
-
-直接访问 GitHub Pages 演示：
-
-- `https://adashuai5.github.io/awesome-financial-freedom/`
-
-输入你的数字，即可看到 FIRE 目标、预计年限、行动建议和组合再平衡指导。
-
-这是面向普通用户的浏览器体验版。
 
 ## 🎯 目标用户
 
@@ -86,7 +75,7 @@
 - JL·柯林斯《简单到足以让孩子管钱》（[Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926)）
 - FIRE 数学（4% 法则、Trinity Study）（[Wikipedia](https://en.wikipedia.org/wiki/Trinity_study)）
 - 邱岩《让钱去工作》（双轮配置）
-- 更多见 `playbooks/book-summaries`
+- 更多来源见 [`playbooks/book-summaries/`](playbooks/book-summaries/)
 
 ## 🔧 如何使用（最简单的办法）
 
@@ -98,13 +87,14 @@
 - 关于储蓄、投资和风险管理的精简行动方案
 - 含买卖建议和风险说明的组合对齐指导
 
-这些输出是项目的实际价值所在：一套结构化计划和清晰的的下一步。
+这些输出是项目的实际价值所在：一套结构化计划和清晰的下一步。
 
 ### 1️⃣ 准备什么
 
 你需要准备以下数字（填入演示页面）：
 
 - 当前存款
+- 年收入
 - 年支出
 - 年储蓄
 - 预期回报率
@@ -113,28 +103,36 @@
 
 ### 2️⃣ 你会看到什么
 
-系统会产生一份清晰可读的计划摘要：
+系统将每个输入映射到对应输出：
 
-- FIRE 目标
+| 你的输入 | 系统输出 |
+|---|---|
+| 当前存款 + 年收入 + 年支出 + 年储蓄 | **FIRE 目标金额** 和 **预计达成年限** |
+| 预期回报率、安全提取率 | FIRE 计算参数（复利增长、提取数学） |
+| 资产配置（如 60% 股票 / 40% 债券） | **再平衡建议** 和风险说明 |
+
+结果是一份清晰可读的计划摘要：
+- FIRE 目标金额
 - 预计 FIRE 年限
 - 关键行动建议
 - 再平衡建议和风险说明
 
-### 3️⃣ 直接体验
+### 3️⃣ 立即体验
 
-直接访问 GitHub Pages 演示：
+打开在线演示并输入你的数字：
 
-- `https://adashuai5.github.io/awesome-financial-freedom/`
+**`https://adashuai5.github.io/awesome-financial-freedom/`**
 
-输入你的数字，看到 FIRE 目标、预计年限、行动建议和组合再平衡指导。
+查看 FIRE 目标、预计年限、行动建议和组合再平衡指导——无需安装。
 
 ### 4️⃣ 何时深入探索
 
 如果你想了解更多系统原理，可以探索：
 
-- 规划逻辑
-- AI Prompt 引导
-- 计算器规则
+- [入门指南](playbooks/tutorials/getting-started.md) — 本地运行计算器和 AI 助手
+- [架构说明](playbooks/guides/money-os-architecture.md) — 系统设计与数据流
+- [CLI 工作流运行器](tools/run-workflow.js) — `node tools/run-workflow.js workflows/fire_planning.yaml`（需 Node.js ≥18）
+- 各 [workflow 文件](workflows/) — FIRE 规划、再平衡、定投等的 YAML 定义
 
 建议在看到一次结果之后，再深入这些内容。
 
