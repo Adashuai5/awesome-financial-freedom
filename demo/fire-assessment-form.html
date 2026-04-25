@@ -248,6 +248,55 @@
       margin-bottom: 20px;
     }
 
+    .result-panel {
+      margin-top: 24px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #f8fafc;
+    }
+
+    .result-panel h2 {
+      margin-bottom: 12px;
+      font-size: 20px;
+      color: #111827;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .kpi-item {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .kpi-label {
+      color: #6b7280;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .result-actions-list {
+      margin: 10px 0 0 18px;
+      color: #1f2937;
+    }
+
+    .result-actions-list li {
+      margin-bottom: 6px;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 20px;
@@ -276,13 +325,102 @@
 <body>
   <div class="container">
     <div id="form-container"></div>
+    <div id="result-panel" class="result-panel" style="display:none;"></div>
   </div>
 
   <!-- Load form components -->
   <script src="form-components.js"></script>
-  <script src="form-schema.json"></script>
 
   <script>
+    function formatMoney(value) {
+      return `${Math.round(value).toLocaleString('zh-CN')} 元`;
+    }
+
+    function getEmergencyMonths(status) {
+      if (status === 'with_dependents') return 12;
+      if (status === 'married') return 9;
+      return 6;
+    }
+
+    function getRiskLabel(riskTolerance) {
+      if (riskTolerance === 'high') return '高风险偏好';
+      if (riskTolerance === 'low') return '低风险偏好';
+      return '中风险偏好';
+    }
+
+    function buildAssessment(data) {
+      const netAssets = data.total_assets - data.total_liabilities;
+      const monthlyExpenses = data.annual_fixed_expenses / 12;
+      const emergencyMonths = getEmergencyMonths(data.family_status);
+      const emergencyFundTarget = monthlyExpenses * emergencyMonths;
+      const annualPassiveIncome = data.monthly_passive_income * 12;
+      const fireTarget = Math.max(0, (data.annual_fixed_expenses - annualPassiveIncome) / 0.04);
+      const investableAssets = Math.max(0, netAssets - data.primary_residence_value);
+      const annualGrowth = investableAssets * data.expected_return_rate + data.annual_savings;
+      const gap = Math.max(0, fireTarget - investableAssets);
+      const yearsToFI = annualGrowth > 0 ? Math.ceil(gap / annualGrowth) : null;
+
+      const actions = [];
+      if (data.annual_savings < data.annual_fixed_expenses * 0.2) {
+        actions.push('优先把年储蓄率提升到 20% 以上（降支出或提收入）。');
+      }
+      if (emergencyFundTarget > 0 && data.total_assets < emergencyFundTarget) {
+        actions.push(`先补足应急金到 ${formatMoney(emergencyFundTarget)}，再加大权益投资。`);
+      }
+      if (data.monthly_mortgage_payment > data.annual_fixed_expenses / 12 * 0.4) {
+        actions.push('房贷占比偏高，优先做再融资评估或提前还款测算。');
+      }
+      if (!actions.length) {
+        actions.push('当前结构健康，按季度复盘资产、储蓄率与目标年限。');
+      }
+
+      return {
+        netAssets,
+        emergencyFundTarget,
+        fireTarget,
+        investableAssets,
+        yearsToFI,
+        annualGrowth,
+        actions,
+      };
+    }
+
+    function renderAssessment(data, assessment) {
+      const panel = document.getElementById('result-panel');
+      const yearsText = assessment.yearsToFI === null ? '暂无法估算' : `${assessment.yearsToFI} 年`;
+      const riskLabel = getRiskLabel(data.risk_tolerance);
+      panel.innerHTML = `
+        <h2>FIRE 评估结果</h2>
+        <div class="kpi-grid">
+          <div class="kpi-item">
+            <div class="kpi-label">净资产</div>
+            <div class="kpi-value">${formatMoney(assessment.netAssets)}</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">可投资资产</div>
+            <div class="kpi-value">${formatMoney(assessment.investableAssets)}</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">FIRE 目标资产</div>
+            <div class="kpi-value">${formatMoney(assessment.fireTarget)}</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">预计达成年限</div>
+            <div class="kpi-value">${yearsText}</div>
+          </div>
+        </div>
+        <p><strong>应急金建议：</strong>${formatMoney(assessment.emergencyFundTarget)}（按 ${getEmergencyMonths(data.family_status)} 个月支出）</p>
+        <p><strong>风险偏好：</strong>${riskLabel}，当前预期年化 ${(data.expected_return_rate * 100).toFixed(1)}%</p>
+        <p><strong>年复利推进额（估算）：</strong>${formatMoney(assessment.annualGrowth)}</p>
+        <h3 style="margin-top:14px;">下一步行动建议</h3>
+        <ol class="result-actions-list">
+          ${assessment.actions.map((item) => `<li>${item}</li>`).join('')}
+        </ol>
+      `;
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     // Initialize form when DOM is ready
     document.addEventListener('DOMContentLoaded', async () => {
       try {
@@ -302,53 +440,20 @@
           'form-container',
           'fire_assessment',
           async (formData) => {
-            console.log('Form submitted with data:', formData);
-
-            // In production, send to LLM API endpoint
-            try {
-              const response = await fetch('/api/fire-assessment', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-              });
-
-              if (response.ok) {
-                const result = await response.json();
-                displayResult(result);
-              } else {
-                showError('API request failed');
-              }
-            } catch (error) {
-              console.log('API call requires backend setup. Using mock response.');
-              // For demo, show mock result
-              displayMockResult(formData);
-            }
+            const assessment = buildAssessment(formData);
+            renderAssessment(formData, assessment);
           }
         );
       } catch (error) {
         console.error('Failed to initialize form:', error);
+        showError('表单加载失败，请稍后重试');
       }
     });
 
-    function displayResult (result) {
-      const resultHTML = `
-        <div class="success-message">
-          <h3>✓ FIRE 评估完成</h3>
-          <p>已将您的财务数据发送到 AI 顾问进行评估。</p>
-        </div>
-      `;
-      // Process and display result
-      console.log('Result from API:', result);
-    }
-
-    function displayMockResult (formData) {
-      alert(`表单数据已收集：\n${JSON.stringify(formData, null, 2)}\n\n在实际环境中，这些数据会被发送到 LLM API 进行分析。`);
-    }
-
     function showError (message) {
-      alert(`错误: ${message}`);
+      const panel = document.getElementById('result-panel');
+      panel.innerHTML = `<div class="error-alert"><h3>错误</h3><ul><li>${message}</li></ul></div>`;
+      panel.style.display = 'block';
     }
   </script>
 </body>
