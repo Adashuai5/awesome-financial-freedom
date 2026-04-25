@@ -10,7 +10,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
 
-**Last updated: 2026-04-14**
+**Last updated: 2026-04-25**
 
 ![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
 
@@ -20,7 +20,6 @@
 - **Workflows**: [`workflows/`](workflows)
 - **Prompts**: [`prompts/`](prompts)
 - **Agents**: [`agents/`](agents)
-- **Data**: [`data/`](data)
 - **Playbook guides**: [`playbooks/guides/README.md`](playbooks/guides/README.md)
 - **Architecture**: [`playbooks/guides/money-os-architecture.md`](playbooks/guides/money-os-architecture.md)
 - **Getting started**: [`playbooks/tutorials/getting-started.md`](playbooks/tutorials/getting-started.md)
@@ -134,9 +133,10 @@ This is the browser-based experience for everyday users.
 
 If you want to learn more about how the system works, you can explore:
 
-- planning logic
-- AI prompt guidance
-- calculator rules for the numbers
+- [Getting started guide](playbooks/tutorials/getting-started.md) — run the calculator and AI assistant locally
+- [Architecture overview](playbooks/guides/money-os-architecture.md) — system design and data flow
+- [CLI workflow runner](tools/run-workflow.js) — `node tools/run-workflow.js workflows/fire_planning.yaml`
+- Individual [workflow files](workflows/) — YAML definitions for FIRE planning, rebalancing, DCA, etc.
 
 These are best explored after you have seen one result.
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,6 +37,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -270,6 +272,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div id="form-container"></div>
@@ -329,7 +332,7 @@
       }
     });
 
-    function displayResult(result) {
+    function displayResult (result) {
       const resultHTML = `
         <div class="success-message">
           <h3>✓ FIRE 评估完成</h3>
@@ -340,13 +343,14 @@
       console.log('Result from API:', result);
     }
 
-    function displayMockResult(formData) {
+    function displayMockResult (formData) {
       alert(`表单数据已收集：\n${JSON.stringify(formData, null, 2)}\n\n在实际环境中，这些数据会被发送到 LLM API 进行分析。`);
     }
 
-    function showError(message) {
+    function showError (message) {
       alert(`错误: ${message}`);
     }
   </script>
 </body>
+
 </html>

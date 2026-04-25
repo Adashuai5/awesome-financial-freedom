@@ -155,7 +155,10 @@
             "options": [
               { "value": "single", "label": "单身（6个月应急金）" },
               { "value": "married", "label": "已婚无子女（9个月应急金）" },
-              { "value": "with_dependents", "label": "有子女/需赡养（12个月应急金）" }
+              {
+                "value": "with_dependents",
+                "label": "有子女/需赡养（12个月应急金）"
+              }
             ]
           },
           {

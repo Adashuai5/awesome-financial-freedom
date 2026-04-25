@@ -8,41 +8,41 @@
  */
 class FormValidator {
   constructor(validationRules) {
-    this.rules = validationRules;
+    this.rules = validationRules
   }
 
   validate(formName, formData) {
-    const rules = this.rules[formName] || [];
-    const errors = [];
+    const rules = this.rules[formName] || []
+    const errors = []
 
     rules.forEach(({ rule, message }) => {
       if (!this.evaluateRule(rule, formData)) {
-        errors.push(message);
+        errors.push(message)
       }
-    });
+    })
 
     return {
       valid: errors.length === 0,
       errors: errors,
-    };
+    }
   }
 
   evaluateRule(rule, data) {
     // Simple rule evaluator - in production use a proper expression evaluator
     // Example rules: "total_assets >= total_liabilities", "annual_savings >= 0"
-    
+
     try {
       // Replace field references with values
-      let expression = rule;
+      let expression = rule
       Object.entries(data).forEach(([key, value]) => {
-        expression = expression.replace(new RegExp(`\\b${key}\\b`, 'g'), value);
-      });
+        expression = expression.replace(new RegExp(`\\b${key}\\b`, 'g'), value)
+      })
 
       // Evaluate the expression
-      return eval(expression);
+      return eval(expression)
     } catch (error) {
-      console.error(`Rule evaluation error: ${error.message}`);
-      return false;
+      console.error(`Rule evaluation error: ${error.message}`)
+      return false
     }
   }
 }
@@ -52,32 +52,32 @@ class FormValidator {
  */
 class FormRenderer {
   constructor(formSchema, fieldTypes) {
-    this.schema = formSchema;
-    this.fieldTypes = fieldTypes;
+    this.schema = formSchema
+    this.fieldTypes = fieldTypes
   }
 
   render(containerId) {
-    const container = document.getElementById(containerId);
+    const container = document.getElementById(containerId)
     if (!container) {
-      throw new Error(`Container with id "${containerId}" not found`);
+      throw new Error(`Container with id "${containerId}" not found`)
     }
 
-    const formHTML = this.generateFormHTML();
-    container.innerHTML = formHTML;
+    const formHTML = this.generateFormHTML()
+    container.innerHTML = formHTML
   }
 
   generateFormHTML() {
-    const { title, description, sections } = this.schema;
+    const { title, description, sections } = this.schema
 
     let html = `
       <div class="fire-form">
         <h1 class="form-title">${title}</h1>
         <p class="form-description">${description}</p>
-    `;
+    `
 
     sections.forEach((section) => {
-      html += this.renderSection(section);
-    });
+      html += this.renderSection(section)
+    })
 
     html += `
         <div class="form-actions">
@@ -85,9 +85,9 @@ class FormRenderer {
           <button class="btn-secondary" type="reset">重置表单</button>
         </div>
       </div>
-    `;
+    `
 
-    return html;
+    return html
   }
 
   renderSection(section) {
@@ -95,23 +95,23 @@ class FormRenderer {
       <fieldset class="form-section">
         <legend class="section-title">${section.title}</legend>
         <div class="section-fields">
-    `;
+    `
 
     section.fields.forEach((field) => {
-      html += this.renderField(field);
-    });
+      html += this.renderField(field)
+    })
 
     html += `
         </div>
       </fieldset>
-    `;
+    `
 
-    return html;
+    return html
   }
 
   renderField(field) {
-    const { id, label, type, required, tooltip, placeholder, options } = field;
-    const requiredMark = required ? '<span class="required">*</span>' : '';
+    const { id, label, type, required, tooltip, placeholder, options } = field
+    const requiredMark = required ? '<span class="required">*</span>' : ''
 
     let html = `
       <div class="form-group">
@@ -119,41 +119,41 @@ class FormRenderer {
           ${label}
           ${requiredMark}
         </label>
-    `;
+    `
 
     if (tooltip) {
-      html += `<span class="tooltip-icon" title="${tooltip}">?</span>`;
+      html += `<span class="tooltip-icon" title="${tooltip}">?</span>`
     }
 
     switch (type) {
       case 'currency':
-        html += this.renderCurrencyField(field);
-        break;
+        html += this.renderCurrencyField(field)
+        break
       case 'percentage':
-        html += this.renderPercentageField(field);
-        break;
+        html += this.renderPercentageField(field)
+        break
       case 'number':
-        html += this.renderNumberField(field);
-        break;
+        html += this.renderNumberField(field)
+        break
       case 'text':
-        html += this.renderTextField(field);
-        break;
+        html += this.renderTextField(field)
+        break
       case 'select':
-        html += this.renderSelectField(field);
-        break;
+        html += this.renderSelectField(field)
+        break
       default:
-        html += this.renderTextField(field);
+        html += this.renderTextField(field)
     }
 
     html += `
       </div>
-    `;
+    `
 
-    return html;
+    return html
   }
 
   renderCurrencyField(field) {
-    const { id, placeholder, required } = field;
+    const { id, placeholder, required } = field
     return `
       <div class="input-group">
         <span class="input-prefix">¥</span>
@@ -168,11 +168,11 @@ class FormRenderer {
           class="form-control currency-input"
         />
       </div>
-    `;
+    `
   }
 
   renderPercentageField(field) {
-    const { id, placeholder, required, validation } = field;
+    const { id, placeholder, required, validation } = field
     return `
       <div class="input-group">
         <input
@@ -188,11 +188,11 @@ class FormRenderer {
         />
         <span class="input-suffix">%</span>
       </div>
-    `;
+    `
   }
 
   renderNumberField(field) {
-    const { id, placeholder, required, validation } = field;
+    const { id, placeholder, required, validation } = field
     return `
       <input
         type="number"
@@ -204,11 +204,11 @@ class FormRenderer {
         max="${validation?.max || ''}"
         class="form-control"
       />
-    `;
+    `
   }
 
   renderTextField(field) {
-    const { id, placeholder, required } = field;
+    const { id, placeholder, required } = field
     return `
       <input
         type="text"
@@ -218,11 +218,11 @@ class FormRenderer {
         ${required ? 'required' : ''}
         class="form-control"
       />
-    `;
+    `
   }
 
   renderSelectField(field) {
-    const { id, required, options } = field;
+    const { id, required, options } = field
     let html = `
       <select
         id="${id}"
@@ -231,15 +231,15 @@ class FormRenderer {
         class="form-control"
       >
         <option value="">-- 请选择 --</option>
-    `;
+    `
 
     options.forEach(({ value, label }) => {
-      html += `<option value="${value}">${label}</option>`;
-    });
+      html += `<option value="${value}">${label}</option>`
+    })
 
-    html += `</select>`;
+    html += `</select>`
 
-    return html;
+    return html
   }
 }
 
@@ -248,26 +248,26 @@ class FormRenderer {
  */
 class FormDataCollector {
   static collect(formId) {
-    const form = document.getElementById(formId);
+    const form = document.getElementById(formId)
     if (!form) {
-      throw new Error(`Form with id "${formId}" not found`);
+      throw new Error(`Form with id "${formId}" not found`)
     }
 
-    const formData = new FormData(form);
-    const data = {};
+    const formData = new FormData(form)
+    const data = {}
 
     formData.forEach((value, key) => {
       // Convert to appropriate type
       if (value === '' || value === null) {
-        data[key] = null;
+        data[key] = null
       } else if (!isNaN(value) && value !== '') {
-        data[key] = parseFloat(value);
+        data[key] = parseFloat(value)
       } else {
-        data[key] = value;
+        data[key] = value
       }
-    });
+    })
 
-    return data;
+    return data
   }
 
   static format(rawData) {
@@ -288,7 +288,7 @@ class FormDataCollector {
       risk_tolerance: rawData.risk_tolerance,
       expected_return_rate: (rawData.expected_return_rate || 7) / 100,
       current_allocation: rawData.current_allocation || '',
-    };
+    }
   }
 }
 
@@ -297,52 +297,52 @@ class FormDataCollector {
  */
 class FormManager {
   constructor(formSchema, validationRules, fieldTypes) {
-    this.renderer = new FormRenderer(formSchema, fieldTypes);
-    this.validator = new FormValidator(validationRules);
-    this.formSchema = formSchema;
+    this.renderer = new FormRenderer(formSchema, fieldTypes)
+    this.validator = new FormValidator(validationRules)
+    this.formSchema = formSchema
   }
 
   initialize(containerId, formName, onSubmit) {
-    this.renderer.render(containerId);
-    this.attachEventListeners(formName, onSubmit);
+    this.renderer.render(containerId)
+    this.attachEventListeners(formName, onSubmit)
   }
 
   attachEventListeners(formName, onSubmit) {
-    const form = document.querySelector('.fire-form');
-    if (!form) return;
+    const form = document.querySelector('.fire-form')
+    if (!form) return
 
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
+      e.preventDefault()
 
-      const rawData = FormDataCollector.collect('fire-form');
-      const validation = this.validator.validate(formName, rawData);
+      const rawData = FormDataCollector.collect('fire-form')
+      const validation = this.validator.validate(formName, rawData)
 
       if (!validation.valid) {
-        this.showErrors(validation.errors);
-        return;
+        this.showErrors(validation.errors)
+        return
       }
 
-      const formattedData = FormDataCollector.format(rawData);
+      const formattedData = FormDataCollector.format(rawData)
       if (onSubmit) {
-        onSubmit(formattedData);
+        onSubmit(formattedData)
       }
-    });
+    })
   }
 
   showErrors(errors) {
-    const errorContainer = document.createElement('div');
-    errorContainer.className = 'error-alert';
+    const errorContainer = document.createElement('div')
+    errorContainer.className = 'error-alert'
     errorContainer.innerHTML = `
       <h3>表单验证失败：</h3>
       <ul>
         ${errors.map((error) => `<li>${error}</li>`).join('')}
       </ul>
-    `;
+    `
 
-    const form = document.querySelector('.fire-form');
+    const form = document.querySelector('.fire-form')
     if (form) {
-      form.insertBefore(errorContainer, form.firstChild);
-      setTimeout(() => errorContainer.remove(), 5000);
+      form.insertBefore(errorContainer, form.firstChild)
+      setTimeout(() => errorContainer.remove(), 5000)
     }
   }
 }
@@ -354,13 +354,8 @@ if (typeof module !== 'undefined' && module.exports) {
     FormRenderer,
     FormDataCollector,
     FormManager,
-  };
+  }
 }
 
 // ESM exports
-export {
-  FormValidator,
-  FormRenderer,
-  FormDataCollector,
-  FormManager,
-};
+export { FormValidator, FormRenderer, FormDataCollector, FormManager }

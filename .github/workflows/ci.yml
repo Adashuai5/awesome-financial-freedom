@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate knowledge nodes
+        run: npm run validate:nodes
+
+      - name: Check README sync
+        run: npm run check:readmes
+
+      - name: Build skills
+        run: npm run build:skills
+
+      - name: Check workflow-runner syntax
+        run: node --check tools/workflow-runner.js
+
+      - name: Test FIRE calculation
+        run: |
+          node -e "
+            import {calculateRetirementGoal} from './tools/workflow-runner.js';
+            const r = calculateRetirementGoal(200000, 108000, 72000, 0.07, 0.04);
+            if (r.yearsToFI !== 17) throw new Error('FIRE calc broken, got ' + r.yearsToFI + ' expected 17');
+            if (r.targetAssets !== 2700000) throw new Error('targetAssets wrong, got ' + r.targetAssets);
+            console.log('FIRE calc: OK (17 years, 2.7M target)');
+          "
+
+      - name: Test rebalancing
+        run: |
+          node -e "
+            import {rebalancePortfolio} from './tools/workflow-runner.js';
+            const assets = [
+              {name: 'Stocks', currentValue: 700000, targetPercent: 60},
+              {name: 'Bonds', currentValue: 300000, targetPercent: 40},
+            ];
+            const r = rebalancePortfolio(assets, 0.05);
+            if (!r.needsRebalance) throw new Error('rebalance should need rebalancing');
+            console.log('Rebalance calc: OK');
+          "
+
+  test-calculators:
+    name: Test Calculators
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run calculator tests
+        run: npm test
+        env:
+          CI: true

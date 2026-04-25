@@ -20,14 +20,13 @@
     },
     "limitations": [
       "此定义仅关注现金流，未计算资产增值",
-      "个人对'体面生活'的标准不同",
+      "个人对体面生活的标准不同",
       "通货膨胀会逐步提高支出门槛"
     ]
   },
   "action_item": "打开手机备忘录，写下你过去3个月的平均月支出。这是你迈向财务自由需要知道的第一个数字。",
   "related_nodes": [
     "four-percent-rule",
-    "passive-income-types",
     "net-worth-calculation"
   ],
   "source": {

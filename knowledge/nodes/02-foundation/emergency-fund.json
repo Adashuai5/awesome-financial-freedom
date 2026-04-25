@@ -27,8 +27,7 @@
   "action_item": "计算你的月支出，乘以3，存入高息账户，开始积累应急基金。",
   "related_nodes": [
     "savings-rate",
-    "net-worth-calculation",
-    "passive-income-types"
+    "net-worth-calculation"
   ],
   "source": {
     "primary": "财务规划基础原则",

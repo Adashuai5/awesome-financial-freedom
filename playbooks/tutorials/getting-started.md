@@ -1,73 +1,90 @@
-# Awesome Financial Freedom 入门指南
+# 财务自由入门指南
 
-## 欢迎来到财务自由之旅！
+## 你会得到什么
 
-这个指南将帮助你快速上手 Awesome Financial Freedom 项目。
+ Awesome Financial Freedom 是一个本地 AI 财务规划助手。它通过可执行的工作流，把理财概念转化为具体的数字和行动计划——不是空洞的"你要努力赚钱"，而是算出来"你现在有多少、还需要多少、怎么走"。
 
-## 第一步：了解项目结构
+## 第一步：运行本地 Web 计算器（5分钟）
 
-```
-awesome-financial-freedom/
-├── knowledge/          # 核心知识库
-├── skills/            # AI技能配置
-├── tools/             # 计算器工具
-└── playbooks/          # 手册与指南
+```bash
+cd ~/ada/awesome-financial-freedom
+node demo/server.js
+# 浏览器打开 http://localhost:4000
 ```
 
-## 第二步：与AI对话
+这会启动 FIRE 规划计算器。填入你的：
+- 当前存款
+- 年收入 / 年支出
+- 预期投资回报率
 
-### 使用 Claude
+点击"计算"，得到你的 FIRE 时间线——具体多少年、目标资产需要多少、每月要存多少。
 
-1. 访问 [Claude.ai](https://claude.ai)
-2. 导入 `skills/claude-skill.md`
-3. 开始提问！
+## 第二步：了解你的知识节点
 
-### 使用 ChatGPT
+从第一个节点开始读：
 
-1. 访问 [ChatGPT](https://chat.openai.com)
-2. 创建自定义GPT
-3. 上传 `skills/chatgpt-gpt.md` 的配置
+```
+knowledge/nodes/01-mindset/what-is-financial-freedom.json
+```
 
-## 第三步：探索知识节点
+每个节点结构相同：
 
-每个知识节点包含：
+| 字段 | 内容 |
+|------|------|
+| `answer.summary` | 一句话定义 |
+| `answer.core_concept` | 核心概念解释 |
+| `answer.formula` | 核心公式 |
+| `answer.example` | 真实场景计算 |
+| `action_item` | 读完要做的第一件事 |
 
-- 📖 概念解释
-- 🧮 计算公式
-- 💡 实际例子
-- ⚠️ 重要限制
-- 🎯 行动建议
+知识库共 27 个节点，按 7 个章节组织，从心态到具体路径再到高级策略。
 
-从 `01-mindset/what-is-financial-freedom.json` 开始阅读。
+完整索引：
+```
+knowledge/index.json
+```
 
-## 第四步：使用计算器
+## 第三步：用 AI 对话（推荐）
 
-在 `tools/calculators/` 中找到：
+把 `skills/claude-skill.md` 的内容作为 system prompt 粘贴到 Claude，然后问：
 
-- FIRE 时间线计算器
-- 储蓄率计算器
-- 复利计算器
-- 投资组合风险评估
+> "我今年 30 岁，存款 20 万，年收入 18 万，年支出 10 万，帮我算 FIRE 计划"
 
-## 第五步：贡献你的知识
+系统会结合知识库节点，输出包含具体数字和可执行步骤的规划。
 
-看到有用的内容？欢迎贡献：
+也可以直接和这个项目对话：
+```bash
+# 使用 workflow-runner 走 CLI
+node tools/workflow-runner.js fire_planning --savings 200000 --income 180000 --expenses 100000
+```
 
-1. Fork 这个仓库
-2. 添加新的知识节点
-3. 提交 Pull Request
+## 第四步：阅读实战手册
+
+如果你更喜欢文字指南，而不是和 AI 对话：
+
+| 手册 | 适合人群 |
+|------|---------|
+| `playbooks/guides/actionable-steps.md` | 完全零基础 |
+| `playbooks/guides/learning-path.md` | 想系统学习FIRE |
+| `playbooks/tutorials/fire-assessment-form.html` | 想做完整的FIRE评估 |
+
+## 第五步：了解系统架构（可选）
+
+`playbooks/guides/money-os-architecture.md` 描述了这个项目的设计思路——如何把分散的理财知识变成可执行的工作流。如果你熟悉 YAML，可以直接写自己的 workflow。
 
 ## 常见问题
 
-**Q: 我是理财小白，可以用吗？**
-A: 绝对可以！项目设计的就是为了帮助像你这样的人。
+**Q: 需要多少钱开始？**
+A: 理论上 0 元就可以，但建议你先有 3 个月应急基金再开始认真规划。
 
-**Q: 需要付费吗？**
-A: 完全免费开源。
+**Q: 我的投资数据会不会上传？**
+A: 不会。所有计算都在本地执行，不经过任何服务器。
 
-**Q: 如何验证信息的准确性？**
-A: 每个节点都标注了来源书籍和研究。
+**Q: 计算结果准确吗？**
+A: 模型依赖你输入的数字和预设的回报率假设（默认 7% 股市历史平均）。实际结果会波动，不构成投资建议。
 
 ## 下一步
 
-现在就开始你的财务自由之旅吧！有什么问题随时问AI助手。
+1. 跑通计算器，填入你真实的数字
+2. 读 `what-is-financial-freedom` 和 `savings-rate` 两个节点（约 10 分钟）
+3. 用 AI 问一个和你当前财务状况相关的问题

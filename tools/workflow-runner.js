@@ -310,7 +310,43 @@ export function calculateRetirementGoal(
   safeWithdrawalRate,
 ) {
   const targetAssets = Math.round(annualExpenses / safeWithdrawalRate)
-  const yearsToFI = Math.round((targetAssets - currentSavings) / annualSavings)
+  // 复利公式: FV = PV*(1+r)^n + PMT*((1+r)^n-1)/r
+  // 解n: n = ln((FV*r + PMT) / (PV*r + PMT)) / ln(1+r)
+  const r = expectedReturn
+  const pv = currentSavings
+  const pmt = annualSavings
+  const fv = targetAssets
+  const denominator = pv * r + pmt
+  if (denominator <= 0 || r <= 0) {
+    // 保守降级：线性估算
+    const yearsToFI = Math.round((fv - pv) / pmt)
+    const savingsRate = annualSavings / (annualExpenses + annualSavings)
+    return {
+      currentSavings,
+      annualExpenses,
+      annualSavings,
+      expectedReturn,
+      safeWithdrawalRate,
+      targetAssets,
+      yearsToFI,
+      savingsRate,
+      note: '降级为线性计算（输入参数异常）',
+    }
+  }
+  const numerator = fv * r + pmt
+  if (numerator <= 0 || denominator <= 0) {
+    const yearsToFI = Math.round((fv - pv) / pmt)
+    const savingsRate = annualSavings / (annualExpenses + annualSavings)
+    return {
+      currentSavings, annualExpenses, annualSavings,
+      expectedReturn, safeWithdrawalRate, targetAssets,
+      yearsToFI, savingsRate,
+      note: '降级为线性计算',
+    }
+  }
+  const yearsToFI = Math.ceil(
+    Math.log(numerator / denominator) / Math.log(1 + r),
+  )
   const savingsRate = annualSavings / (annualExpenses + annualSavings)
   return {
     currentSavings,

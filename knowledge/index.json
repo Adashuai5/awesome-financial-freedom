@@ -1,7 +1,7 @@
 {
-  "version": "2.0.0",
-  "last_updated": "2026-04-12",
-  "notes": "Structure upgraded to Money OS with workflows, prompts, and agent specs.",
+  "version": "2.2.0",
+  "last_updated": "2026-04-25",
+  "notes": "Structure upgraded to Money OS with workflows, prompts, and agent specs. Added investment-psychology, rebalancing, fire-calculator-guide nodes.",
   "nodes": [
     {
       "id": "what-is-financial-freedom",
@@ -95,6 +95,20 @@
       "file": "knowledge/nodes/04-allocation/index-fund-why.json"
     },
     {
+      "id": "investment-psychology",
+      "title": "投资心理学",
+      "chapter": "04-allocation",
+      "tags": ["心理", "行为金融", "决策"],
+      "file": "knowledge/nodes/04-allocation/investment-psychology.json"
+    },
+    {
+      "id": "rebalancing",
+      "title": "资产再平衡",
+      "chapter": "04-allocation",
+      "tags": ["再平衡", "风险控制", "纪律"],
+      "file": "knowledge/nodes/04-allocation/rebalancing.json"
+    },
+    {
       "id": "stock-bond-balance",
       "title": "股票与债券平衡",
       "chapter": "04-allocation",
@@ -128,6 +142,13 @@
       "chapter": "06-freedom",
       "tags": ["FIRE", "退休", "安全提取", "投资"],
       "file": "knowledge/nodes/06-freedom/four-percent-rule.json"
+    },
+    {
+      "id": "fire-calculator-guide",
+      "title": "FIRE 计算器使用指南",
+      "chapter": "06-freedom",
+      "tags": ["FIRE", "计算器", "工具"],
+      "file": "knowledge/nodes/06-freedom/fire-calculator-guide.json"
     },
     {
       "id": "withdrawal-strategies",

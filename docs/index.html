@@ -2,95 +2,355 @@
 <html lang="zh-CN">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Awesome Financial Freedom</title>
-  <link rel="stylesheet" href="style.css" />
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Awesome Financial Freedom - 财务自由执行系统</title>
+ <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1>Awesome Financial Freedom</h1>
-      <p class="lead">
-        这是一个开源财务自由执行系统的静态演示。无需服务端，直接在浏览器里试算 FIRE 计划与资产再平衡。
-      </p>
-    </header>
+ <div class="container">
+ <header>
+ <h1>Awesome Financial Freedom</h1>
+ <p class="lead">
+ 开源的、AI 原生的财务自由执行系统。输入你的财务数据，生成可执行的 FIRE 计划与资产配置建议。无需登录，直接在浏览器运行。
+ </p>
+ </header>
 
-    <div class="panel">
-      <label>选择工作流</label>
-      <select id="workflowSelect">
-        <option value="fire_planning">FIRE 计划</option>
-        <option value="portfolio_rebalancing">组合再平衡</option>
-      </select>
+ <div class="panel">
+ <label>选择工作流</label>
+ <select id="workflowSelect">
+ <option value="fire_planning">FIRE 计划</option>
+ <option value="portfolio_rebalancing">组合再平衡</option>
+ </select>
 
-      <div id="fireFields" class="form-row">
-        <div>
-          <label>当前储蓄 (元)</label>
-          <input id="currentSavings" type="number" value="200000" />
-        </div>
-        <div>
-          <label>年收入 (元)</label>
-          <input id="annualIncome" type="number" value="180000" />
-        </div>
-        <div>
-          <label>年支出 (元)</label>
-          <input id="annualExpenses" type="number" value="108000" />
-        </div>
-        <div>
-          <label>年储蓄 (元)</label>
-          <input id="annualSavings" type="number" value="72000" />
-        </div>
-        <div>
-          <label>预期年收益率 (%)</label>
-          <input id="expectedReturn" type="number" step="0.1" value="7" placeholder="7" />
-        </div>
-        <div>
-          <label>安全提现率 (%)</label>
-          <input id="safeWithdrawalRate" type="number" step="0.1" value="4" placeholder="4" />
-        </div>
-      </div>
+ <div id="fireFields" class="form-row">
+ <div>
+ <label>当前储蓄 (元)</label>
+ <input id="currentSavings" type="number" value="200000" placeholder="200000" />
+ </div>
+ <div>
+ <label>年收入 (元)</label>
+ <input id="annualIncome" type="number" value="180000" placeholder="180000" />
+ </div>
+ <div>
+ <label>年支出 (元)</label>
+ <input id="annualExpenses" type="number" value="108000" placeholder="108000" />
+ </div>
+ <div>
+ <label>年储蓄 (元)</label>
+ <input id="annualSavings" type="number" value="72000" placeholder="72000" />
+ </div>
+ <div>
+ <label>预期年收益率 (%)</label>
+ <input id="expectedReturn" type="number" step="0.1" value="7" placeholder="7" />
+ </div>
+ <div>
+ <label>安全提现率 (%)</label>
+ <input id="safeWithdrawalRate" type="number" step="0.1" value="4" placeholder="4" />
+ </div>
+ </div>
 
-      <div id="rebalanceFields" class="form-row hidden">
-        <div>
-          <label>股票当前价值 (元)</label>
-          <input id="stocksValue" type="number" value="700000" />
-        </div>
-        <div>
-          <label>债券当前价值 (元)</label>
-          <input id="bondsValue" type="number" value="300000" />
-        </div>
-        <div>
-          <label>股票目标比例 (%)</label>
-          <input id="stocksTarget" type="number" value="60" />
-        </div>
-        <div>
-          <label>债券目标比例 (%)</label>
-          <input id="bondsTarget" type="number" value="40" />
-        </div>
-        <div>
-          <label>再平衡阈值 (%)</label>
-          <input id="threshold" type="number" step="0.01" value="0.05" />
-        </div>
-      </div>
+ <div id="rebalanceFields" class="form-row hidden">
+ <div>
+ <label>股票当前价值 (元)</label>
+ <input id="stocksValue" type="number" value="700000" placeholder="700000" />
+ </div>
+ <div>
+ <label>债券当前价值 (元)</label>
+ <input id="bondsValue" type="number" value="300000" placeholder="300000" />
+ </div>
+ <div>
+ <label>股票目标比例 (%)</label>
+ <input id="stocksTarget" type="number" value="60" placeholder="60" />
+ </div>
+ <div>
+ <label>债券目标比例 (%)</label>
+ <input id="bondsTarget" type="number" value="40" placeholder="40" />
+ </div>
+ <div>
+ <label>再平衡阈值 (%)</label>
+ <input id="threshold" type="number" step="0.01" value="5" placeholder="5" />
+ </div>
+ </div>
 
-      <button id="runButton">生成计划</button>
+ <button id="runButton">生成计划</button>
+ <button id="copyAiButton" class="btn-secondary">复制给 AI 助手</button>
 
-      <div id="summary" class="summary-card hidden"></div>
-    </div>
+ <div id="summary" class="summary-card hidden"></div>
+ <div id="rawResult" class="raw-result hidden"></div>
+ </div>
 
-    <div class="panel">
-      <h2>GitHub Pages 访问</h2>
-      <p>
-        将本仓库推到 GitHub 后，启用 Pages 并选择 <code>gh-pages</code> 分支或 <code>/docs</code> 文件夹。
-        之后用户就可直接访问类似：
-      </p>
-      <p><strong>https://&lt;你的用户名&gt;.github.io/awesome-financial-freedom/</strong></p>
-      <p>本演示同时适合本地调试和静态站点发布。</p>
-    </div>
-  </div>
+ <div class="panel">
+ <h2>高级 FIRE 评估表单</h2>
+ <p>
+ 想获取更全面的个性化评估？包括应急金、房贷、家庭状况等维度。
+ </p>
+ <a href="fire-assessment-form.html" class="btn-link">打开完整评估表单 →</a>
+ </div>
 
-  <script src="app.js"></script>
+ <div class="panel">
+ <h2>GitHub Pages 部署</h2>
+ <p>
+ 将本仓库推到 GitHub 后，启用 Pages 并选择 <code>/docs</code> 文件夹作为来源。
+ 之后用户可直接访问：
+ </p>
+ <p><strong>https://&lt;你的用户名&gt;.github.io/awesome-financial-freedom/</strong></p>
+ <p>支持本地调试（<code>npm run demo</code>）和静态站点发布两种模式。</p>
+ </div>
+ </div>
+
+ 
+ <script>
+ // ===== Unified App: works with or without server =====
+
+ const workflowSelect = document.getElementById('workflowSelect')
+ const fireFields = document.getElementById('fireFields')
+ const rebalanceFields = document.getElementById('rebalanceFields')
+ const runButton = document.getElementById('runButton')
+ const copyAiButton = document.getElementById('copyAiButton')
+ const summary = document.getElementById('summary')
+ const rawResult = document.getElementById('rawResult')
+
+ workflowSelect.addEventListener('change', () => {
+ const workflow = workflowSelect.value
+ fireFields.classList.toggle('hidden', workflow !== 'fire_planning')
+ rebalanceFields.classList.toggle('hidden', workflow !== 'portfolio_rebalancing')
+ })
+
+ function normalizeNumber(value) {
+ const number = Number(value)
+ return Number.isFinite(number) ? number : null
+ }
+
+ // ----- Fire Planning calculation -----
+ function runFirePlanning(input) {
+ const currentSavings = normalizeNumber(input.currentSavings)
+ const annualIncome = normalizeNumber(input.annualIncome)
+ const annualExpenses = normalizeNumber(input.annualExpenses)
+ let annualSavings = normalizeNumber(input.annualSavings)
+ let expectedReturn = normalizeNumber(input.expectedReturn)
+ let safeWithdrawalRate = normalizeNumber(input.safeWithdrawalRate)
+
+ if (safeWithdrawalRate !== null && safeWithdrawalRate > 1) {
+ safeWithdrawalRate = safeWithdrawalRate / 100
+ }
+ if (expectedReturn !== null && expectedReturn > 1) {
+ expectedReturn = expectedReturn / 100
+ }
+
+ const invalidFields = []
+ if (annualIncome === null || annualIncome <= 0) {
+ invalidFields.push('年收入')
+ }
+ if (annualExpenses === null || annualExpenses <= 0) {
+ invalidFields.push('年支出')
+ }
+ if (annualSavings === null || annualSavings < 0) {
+ invalidFields.push('年储蓄')
+ }
+ if (safeWithdrawalRate === null || safeWithdrawalRate <= 0) {
+ invalidFields.push('安全提现率')
+ }
+ if (invalidFields.length > 0) {
+ return {
+ summary: `请填写正确的 ${invalidFields.join('、')}。安全提现率应填写百分比，例如 4 表示 4%。`,
+ actions: [],
+ notes: '',
+ raw: { input },
+ }
+ }
+
+ const savingsRate =
+ annualIncome > 0 ? Math.round((annualSavings / annualIncome) * 100) : null
+ const targetAssets = Math.round(annualExpenses / safeWithdrawalRate)
+ const yearsToFI = Math.max(
+ 0,
+ Math.round((targetAssets - currentSavings) / annualSavings),
+ )
+ const message = `预计需要 ${yearsToFI} 年达到 FIRE。`
+ const rateNote =
+ savingsRate !== null ? `你的年储蓄率约为 ${savingsRate}%。` : ''
+
+ return {
+ summary: `目标资产 ${targetAssets.toLocaleString()} 元，${message}`,
+ actions: [
+ `把目标资产设置为 ${targetAssets.toLocaleString()} 元。`,
+ '保持稳定储蓄，将每月储蓄作为长期习惯。',
+ '把投资配置到低成本指数基金、被动收入工具或稳健资产。',
+ '每季度回顾进度，并根据实际情况调整储蓄和风险配置。',
+ ],
+ notes: rateNote,
+ raw: {
+ currentSavings,
+ annualIncome,
+ annualExpenses,
+ annualSavings,
+ expectedReturn,
+ safeWithdrawalRate,
+ savingsRate,
+ targetAssets,
+ yearsToFI,
+ },
+ }
+ }
+
+ // ----- Portfolio Rebalancing calculation -----
+ function runPortfolioRebalancing(input) {
+ const totalValue = input.assets.reduce(
+ (sum, asset) => sum + asset.currentValue,
+ 0,
+ )
+ const assets = input.assets.map((asset) => {
+ const targetValue = Math.round((asset.targetPercent / 100) * totalValue)
+ const diff = targetValue - asset.currentValue
+ const action = Math.abs(diff) < 1 ? 'hold' : diff > 0 ? 'buy' : 'sell'
+ return { ...asset, targetValue, diff, action, amount: Math.abs(diff) }
+ })
+ const needsRebalance = assets.some(
+ (asset) =>
+ Math.abs(asset.diff / (asset.targetValue || 1)) > input.threshold / 100,
+ )
+ const tradePlan = assets.filter((asset) => asset.action !== 'hold')
+ const summaryText = needsRebalance
+ ? `建议执行 ${tradePlan.length} 项再平衡操作。`
+ : '当前组合接近目标比例，无需立即再平衡。'
+
+ return {
+ summary: summaryText,
+ actions: tradePlan.map(
+ (asset) =>
+ `${asset.name}: ${asset.action} ${asset.amount.toLocaleString()} 元`,
+ ),
+ notes: '建议保持目标配置，避免频繁交易导致过度成本。',
+ raw: { totalValue, assets, needsRebalance },
+ }
+ }
+
+ // ----- Display result -----
+ function showResult(result) {
+ const actions = Array.isArray(result.actions) ? result.actions : []
+ const actionList = actions.length
+ ? `<ul>${actions.map((item) => `<li>${item}</li>`).join('')}</ul>`
+ : ''
+ const note = result.notes ? `<span class="badge">${result.notes}</span>` : ''
+ const warning =
+ actions.length === 0 && result.summary.includes('请填写正确')
+ ? `<div class="warning">${result.summary}</div>`
+ : ''
+
+ summary.innerHTML = `
+ <h3>计划结果</h3>
+ <p>${result.summary}</p>
+ ${actionList}
+ ${note}
+ ${warning}
+ `
+ summary.classList.remove('hidden')
+ rawResult.textContent = JSON.stringify(result.raw, null, 2)
+ rawResult.classList.remove('hidden')
+ }
+
+ // ----- Run button -----
+ runButton.addEventListener('click', () => {
+ const workflow = workflowSelect.value
+
+ if (workflow === 'fire_planning') {
+ const input = {
+ currentSavings: Number(document.getElementById('currentSavings').value),
+ annualIncome: Number(document.getElementById('annualIncome').value),
+ annualExpenses: Number(document.getElementById('annualExpenses').value),
+ annualSavings: Number(document.getElementById('annualSavings').value),
+ expectedReturn: Number(document.getElementById('expectedReturn').value),
+ safeWithdrawalRate: Number(
+ document.getElementById('safeWithdrawalRate').value,
+ ),
+ }
+ showResult(runFirePlanning(input))
+ return
+ }
+
+ const input = {
+ assets: [
+ {
+ name: 'Stocks',
+ currentValue: Number(document.getElementById('stocksValue').value),
+ targetPercent: Number(document.getElementById('stocksTarget').value),
+ },
+ {
+ name: 'Bonds',
+ currentValue: Number(document.getElementById('bondsValue').value),
+ targetPercent: Number(document.getElementById('bondsTarget').value),
+ },
+ ],
+ threshold: Number(document.getElementById('threshold').value),
+ }
+ showResult(runPortfolioRebalancing(input))
+ })
+
+ // ----- Copy to AI button -----
+ copyAiButton.addEventListener('click', () => {
+ const workflow = workflowSelect.value
+ let text = ''
+
+ if (workflow === 'fire_planning') {
+ const currentSavings = document.getElementById('currentSavings').value
+ const annualIncome = document.getElementById('annualIncome').value
+ const annualExpenses = document.getElementById('annualExpenses').value
+ const annualSavings = document.getElementById('annualSavings').value
+ const expectedReturn = document.getElementById('expectedReturn').value
+ const safeWithdrawalRate = document.getElementById('safeWithdrawalRate').value
+ text = `请根据下面的个人财务情况，帮我生成一份可执行的 FIRE 计划。
+ - 当前储蓄：${currentSavings} 元
+ - 年收入：${annualIncome} 元
+ - 年支出：${annualExpenses} 元
+ - 年储蓄：${annualSavings} 元
+ - 预期年收益率：${expectedReturn}%
+ - 安全提现率：${safeWithdrawalRate}%
+
+ 请给出：
+ 1. 目标资产
+ 2. 预计达到 FIRE 的年限
+ 3. 关键行动项
+ 4. 简洁的执行建议`
+ } else {
+ const stocksValue = document.getElementById('stocksValue').value
+ const bondsValue = document.getElementById('bondsValue').value
+ const stocksTarget = document.getElementById('stocksTarget').value
+ const bondsTarget = document.getElementById('bondsTarget').value
+ const threshold = document.getElementById('threshold').value
+ text = `请帮我评估以下投资组合是否需要再平衡：
+ - 股票当前价值：${stocksValue} 元（目标比例：${stocksTarget}%）
+ - 债券当前价值：${bondsValue} 元（目标比例：${bondsTarget}%）
+ - 再平衡阈值：${threshold}%
+
+ 请给出再平衡建议和具体操作。`
+ }
+
+ navigator.clipboard.writeText(text).then(() => {
+ const original = copyAiButton.textContent
+ copyAiButton.textContent = '已复制 ✓'
+ setTimeout(() => { copyAiButton.textContent = original }, 2000)
+ }).catch(() => {
+ alert('复制失败，请手动复制')
+ })
+ })
+
+ // ----- Try server fallback: if /api/run exists, use it -----
+ async function tryServer(input) {
+ try {
+ const response = await fetch('/api/run', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ workflow: workflowSelect.value, input }),
+ })
+ if (!response.ok) throw new Error('Server error')
+ return await response.json()
+ } catch (e) {
+ return null // fall back to client-side calculation
+ }
+ }
+ </script>
 </body>
 
 </html>
