@@ -46,7 +46,7 @@ Instead of just a static list of links, this repo provides:
 
 **No installation needed; the demo works in your browser.**
 
-This is a user-facing financial freedom planning tool. Enter your current savings, annual expenses, annual savings, and asset allocation, and the system will return:
+This is a user-facing financial freedom planning tool. Enter your current savings, annual income, annual expenses, annual savings, expected return, safe withdrawal rate, and asset allocation, and the system will return:
 
 - FIRE target
 - Estimated years to FIRE
