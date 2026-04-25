@@ -70,7 +70,7 @@ class FormRenderer {
     const { title, description, sections } = this.schema
 
     let html = `
-      <div class="fire-form">
+      <form id="fire-form" class="fire-form">
         <h1 class="form-title">${title}</h1>
         <p class="form-description">${description}</p>
     `
@@ -84,7 +84,7 @@ class FormRenderer {
           <button class="btn-primary" type="submit">获取 FIRE 评估</button>
           <button class="btn-secondary" type="reset">重置表单</button>
         </div>
-      </div>
+      </form>
     `
 
     return html
@@ -330,6 +330,8 @@ class FormManager {
   }
 
   showErrors(errors) {
+    const existing = document.querySelector('.error-alert')
+    if (existing) existing.remove()
     const errorContainer = document.createElement('div')
     errorContainer.className = 'error-alert'
     errorContainer.innerHTML = `
