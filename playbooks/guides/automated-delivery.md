@@ -34,11 +34,8 @@ steps:
 
 请执行上述步骤并返回结果。
 
-## 后续优化
+## 本地测试
 
-- 根据实际变更的节点动态生成步骤。
-- 增加结果接收和审计日志记录。
-- 实施 Webhook 签名校验。
-
-请在 package.json 的 scripts 中添加以下命令：
-"generate:task": "node scripts/generateTask.js"
+```bash
+npm run generate:task
+```

@@ -8,9 +8,9 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/ada/awesome-financial-freedom/discussions)
+[![Discussions](https://img.shields.io/badge/Discussions-Open-blue.svg)](https://github.com/adashuai5/awesome-financial-freedom/discussions)
 
-**Last updated**: see [`git log --reverse --format="%ad" | head -1`](https://github.com/ada/awesome-financial-freedom/commits?author=ada) for the earliest commit date
+**创建日期**: 2026-04-12 · **最后更新**: 2026-04-26
 
 ![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
 

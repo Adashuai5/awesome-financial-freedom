@@ -1,7 +1,7 @@
-import { fireTimeline } from '../fire-timeline.ts'
+import { calculateRetirementGoal } from '../retirement-goal.ts'
 import { strict as assert } from 'assert'
 
-const result = fireTimeline(50000, 20000, 40000, 0.06)
-assert.ok(result.targetCorpus > 0)
+const result = calculateRetirementGoal(50000, 40000, 20000, 0.06)
+assert.ok(result.targetAssets > 0)
 assert.ok(result.yearsToFI >= 0)
-console.log('fire-timeline tests passed.')
+console.log('fire-timeline tests passed (using retirement-goal).')

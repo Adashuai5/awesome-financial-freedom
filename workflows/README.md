@@ -4,9 +4,7 @@
 
 当前可用工作流：
 
-- `affiliate_seo_automation.yaml`
 - `index_fund_dca.yaml`
-- `twitter_ai_growth.yaml`
 - `fire_planning.yaml`
 - `portfolio_rebalancing.yaml`
 
