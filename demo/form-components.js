@@ -350,6 +350,8 @@ class FormManager {
 }
 
 // Export for use in browser or Node.js
+// Browser: classes are available globally since they're defined at top level
+// Node.js: CommonJS export
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     FormValidator,
@@ -358,6 +360,3 @@ if (typeof module !== 'undefined' && module.exports) {
     FormManager,
   }
 }
-
-// ESM exports
-export { FormValidator, FormRenderer, FormDataCollector, FormManager }

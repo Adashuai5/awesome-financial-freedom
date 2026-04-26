@@ -36,7 +36,7 @@ Money OS 是将 `awesome-financial-freedom` 仓库从“半结构化知识库”
 
 ## 工作流关系
 
-1. 用户或代理选择一个工作流文件，例如 `workflows/twitter_ai_growth.yaml`。
+1. 用户或代理选择一个工作流文件，例如 `workflows/fire_planning.yaml`。
 2. 系统加载工作流定义，并识别每个步骤的类型。
 3. 对于 `prompt` 步骤，读取 `prompts/` 中对应的模板，并生成具体指令。
 4. 对于 `calculator` 步骤，调用 `tools/calculators/` 中的计算器模块进行处理。

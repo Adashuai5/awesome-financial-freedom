@@ -32,8 +32,6 @@
 | `fire_planning` | [actionable-steps.md](guides/actionable-steps.md) + [learning-path.md](guides/learning-path.md) |
 | `portfolio_rebalancing` | [actionable-steps.md](guides/actionable-steps.md) 第4-5步 |
 | `index_fund_dca` | [money-making-methods.md](guides/money-making-methods.md) 第1节 |
-| `affiliate_seo_automation` | [money-making-methods.md](guides/money-making-methods.md) 第2节 |
-| `twitter_ai_growth` | [money-making-methods.md](guides/money-making-methods.md) 第3节 |
 
 ## 子目录说明
 

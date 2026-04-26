@@ -1,487 +1,490 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Awesome Financial Freedom - 财务自由执行系统</title>
- <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Awesome Financial Freedom - 财务自由计算器</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 新增样式：分段折叠、警告色、资产配置条 */
+    .section-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 0;
+    }
+    .section-toggle .arrow {
+      transition: transform 0.2s;
+      font-size: 0.7rem;
+      color: #94a3b8;
+    }
+    .section-toggle.collapsed .arrow { transform: rotate(-90deg); }
+    .section-collapsible { overflow: hidden; transition: max-height 0.3s ease; }
+    .section-collapsible.collapsed { max-height: 0 !important; }
+
+    /* 警告/危险/成功 徽标 */
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    .badge-warn { background: #fffbeb; color: #92400e; }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-info { background: #dbeafe; color: #1e40af; }
+
+    /* 资产配置进度条 */
+    .alloc-bar-wrap { margin-bottom: 8px; }
+    .alloc-bar-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 2px; }
+    .alloc-bar-track { height: 10px; border-radius: 5px; background: #e2e8f0; overflow: hidden; display: flex; }
+    .alloc-bar-fill { height: 100%; border-radius: 5px; }
+    .alloc-bar-fill.us { background: #2563eb; }
+    .alloc-bar-fill.cn { background: #dc2626; }
+    .alloc-bar-fill.gold { background: #f59e0b; }
+    .alloc-bar-fill.bond { background: #10b981; }
+    .alloc-bar-fill.cash { background: #94a3b8; }
+
+    /* 分段分隔 */
+    .divider { border: none; border-top: 1px solid #e2e8f0; margin: 18px 0; }
+
+    /* 内联提示 */
+    .inline-hint { font-size: 0.8rem; color: #94a3b8; margin-left: 6px; font-weight: 400; }
+
+    /* 净值表 */
+    .balance-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .balance-table td { padding: 6px 10px; border-bottom: 1px solid #f1f5f9; }
+    .balance-table td:first-child { color: #64748b; }
+    .balance-table td:last-child { text-align: right; font-weight: 600; }
+    .balance-table .total-row td { border-top: 2px solid #cbd5e1; font-size: 0.95rem; padding-top: 10px; }
+  </style>
 </head>
 
 <body>
- <div class="container">
+<div class="container">
 
   <header class="page-header">
-   <h1>Awesome Financial Freedom</h1>
-   <p class="tagline">输入财务数据 → 生成可执行的 FIRE 计划</p>
-   <p class="header-sub">无需注册，直接在浏览器运行 · 数据仅保存在本地</p>
+    <h1>Awesome Financial Freedom</h1>
+    <p class="tagline">输入你的真实财务数据 → 获得可执行的 FIRE 计划</p>
+    <p class="header-sub">无需注册 · 数据仅保存在浏览器本地 · 完全免费</p>
   </header>
 
-  <!-- 新手引导条 -->
   <div class="guide-bar">
-   <span class="guide-icon">💡</span>
-   第一次使用？<strong>年支出</strong>填实际花费，<strong>年储蓄</strong>= 年收入 - 年支出，<strong>安全提现率</strong>通常填 4%
-   <span class="guide-more">
-    <a href="fire-assessment-form.html" target="_blank">做完整评估 →</a>
-   </span>
+    <span class="guide-icon">💡</span>
+    不知道怎么填？<strong>年支出</strong>填实际总花费，<strong>年储蓄</strong> = 年收入 - 年支出
+    <span class="guide-more">
+      <a href="fire-assessment-form.html">做完整版 12 维度评估 →</a>
+    </span>
   </div>
 
   <div class="panel">
-   <!-- 工作流选择 -->
-   <div class="field-group">
-    <label>选择工作流</label>
-    <select id="workflowSelect">
-     <option value="fire_planning">FIRE 计划 — 计算目标资产与达成年限</option>
-     <option value="portfolio_rebalancing">组合再平衡 — 调整股债比例</option>
-    </select>
-   </div>
 
-   <!-- ========== FIRE 计划表单 ========== -->
-   <div id="fireFields">
-    <div class="section-label">基础财务</div>
+    <!-- ====== 个人信息 ====== -->
+    <div class="section-label">基本信息</div>
     <div class="form-grid">
-
-     <div class="field-wrap">
-      <label>当前储蓄 (元)</label>
-      <input id="currentSavings" type="number" value="200000" placeholder="目前存款总额，如 200000" />
-      <span class="field-hint">已存下的钱，用于投资</span>
-     </div>
-
-     <div class="field-wrap">
-      <label>年收入 (元)</label>
-      <input id="annualIncome" type="number" value="180000" placeholder="税后年收入，如 180000" />
-      <span class="field-hint">全年工资 + 副业等</span>
-     </div>
-
-     <div class="field-wrap">
-      <label>年支出 (元)</label>
-      <input id="annualExpenses" type="number" value="108000" placeholder="全年花销，如 108000" />
-      <span class="field-hint">支出越少，FIRE 越快</span>
-     </div>
-
-     <div class="field-wrap">
-      <label>年储蓄 (元)</label>
-      <input id="annualSavings" type="number" value="72000" placeholder="年收入 - 年支出" />
-      <span class="field-hint">每月可存 ≈ 年储蓄 ÷ 12</span>
-     </div>
-
+      <div class="field-wrap">
+        <label>年龄</label>
+        <input id="age" type="number" value="30" placeholder="你的年龄" min="18" max="80" />
+        <span class="field-hint">用于资产配置建议</span>
+      </div>
+      <div class="field-wrap">
+        <label>当前收入能维持多少年？</label>
+        <input id="careerSafeYears" type="number" value="20" placeholder="如不确定填 20" min="1" max="50" />
+        <span class="field-hint">程序员/高薪行业建议填 5-10 年</span>
+      </div>
     </div>
 
-    <div class="section-label" style="margin-top:20px;">投资参数</div>
-    <div class="form-grid">
-
-     <div class="field-wrap">
-      <label>预期年收益率 (%)</label>
-      <input id="expectedReturn" type="number" step="0.1" value="7" placeholder="长期平均，如 7" />
-      <span class="field-hint">指数基金历史平均约 7~10%</span>
-     </div>
-
-     <div class="field-wrap">
-      <label>安全提现率 (%)</label>
-      <input id="safeWithdrawalRate" type="number" step="0.1" value="4" placeholder="通常填 4" />
-      <span class="field-hint">4% 规则：每年提取本金的 4%</span>
-     </div>
-
+    <!-- ====== 资产明细（可折叠） ====== -->
+    <div class="section-toggle" id="assetsToggle">
+      <span class="section-label" style="margin-bottom:0;border:none;padding:0;">资产负债明细</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-collapsible" id="assetsSection" style="max-height:800px;">
+      <div class="form-grid" style="margin-top: 12px;">
+        <div class="field-wrap">
+          <label>银行存款 / 货币基金 (元)</label>
+          <input id="cash" type="number" value="" placeholder="活期、定期、余额宝等" />
+        </div>
+        <div class="field-wrap">
+          <label>公积金余额 (元)<span class="inline-hint">可能无法提取</span></label>
+          <input id="housingFund" type="number" value="" placeholder="如果提不出来也填上" />
+        </div>
+        <div class="field-wrap">
+          <label>A 股 / 基金 (元)</label>
+          <input id="stocks" type="number" value="" placeholder="股票+基金总市值" />
+        </div>
+        <div class="field-wrap">
+          <label>黄金 (元)</label>
+          <input id="gold" type="number" value="" placeholder="实物金、黄金ETF" />
+        </div>
+        <div class="field-wrap">
+          <label>其他资产 (元)</label>
+          <input id="otherAssets" type="number" value="" placeholder="数字货币、收藏品等" />
+        </div>
+        <div class="field-wrap">
+          <label>房产市值 (元)</label>
+          <input id="houseValue" type="number" value="" placeholder="目前市场价" />
+        </div>
+      </div>
+      <div class="form-grid" style="margin-top:12px;">
+        <div class="field-wrap">
+          <label>房贷余额 (元)</label>
+          <input id="mortgage" type="number" value="" placeholder="还欠银行多少" />
+        </div>
+        <div class="field-wrap">
+          <label>房贷月供 (元)</label>
+          <input id="mortgageMonthly" type="number" value="0" placeholder="公积金覆盖填 0" />
+        </div>
+        <div class="field-wrap">
+          <label>房贷利率 (%)</label>
+          <input id="mortgageRate" type="number" step="0.01" value="3.1" placeholder="如 3.1" />
+        </div>
+        <div class="field-wrap">
+          <label>其他负债 (元)</label>
+          <input id="otherDebt" type="number" value="0" placeholder="车贷、信用卡等" />
+        </div>
+      </div>
     </div>
 
-    <div id="fireError" class="error-msg hidden"></div>
-   </div>
+    <hr class="divider" />
 
-   <!-- ========== 组合再平衡表单 ========== -->
-   <div id="rebalanceFields" class="hidden">
-    <div class="section-label">当前资产</div>
+    <!-- ====== 收支 ====== -->
+    <div class="section-label">年度收支</div>
     <div class="form-grid">
-
-     <div class="field-wrap">
-      <label>股票当前价值 (元)</label>
-      <input id="stocksValue" type="number" value="700000" placeholder="股票类资产，如 700000" />
-      <span class="field-hint">含 A股、ETF、美股等</span>
-     </div>
-
-     <div class="field-wrap">
-      <label>债券当前价值 (元)</label>
-      <input id="bondsValue" type="number" value="300000" placeholder="债券类资产，如 300000" />
-      <span class="field-hint">含债基、国债等</span>
-     </div>
-
+      <div class="field-wrap">
+        <label>家庭年收入 — 到手 (元)</label>
+        <input id="annualIncome" type="number" value="" placeholder="税后到手的钱" />
+        <span class="field-hint">两人合计，不含公积金</span>
+      </div>
+      <div class="field-wrap">
+        <label>年总支出 (元)</label>
+        <input id="annualExpenses" type="number" value="" placeholder="所有花销（含房贷月供）" />
+        <span class="field-hint">含生活费、房贷、旅游、大件</span>
+      </div>
+      <div class="field-wrap">
+        <label>年储蓄 (元)</label>
+        <input id="annualSavings" type="number" value="" placeholder="年收入 - 年支出，约等于" />
+        <span class="field-hint">年收入 - 年支出（不含公积金）</span>
+      </div>
+      <div class="field-wrap">
+        <label>预期年化收益率 (%)</label>
+        <input id="expectedReturn" type="number" step="0.1" value="6" placeholder="长期平均，保守填 6" />
+        <span class="field-hint">保守 5-6%，正常 7-8%<br><span style="color:#f59e0b;">⚠ 标普500当前CAPE~40，预期不宜过高</span></span>
+      </div>
     </div>
 
-    <div class="section-label" style="margin-top:20px;">目标配置</div>
-    <div class="form-grid">
-
-     <div class="field-wrap">
-      <label>股票目标比例 (%)</label>
-      <input id="stocksTarget" type="number" value="60" placeholder="如 60" />
-      <span class="field-hint">年轻时可偏高（如 80%）</span>
-     </div>
-
-     <div class="field-wrap">
-      <label>债券目标比例 (%)</label>
-      <input id="bondsTarget" type="number" value="40" placeholder="如 40" />
-      <span class="field-hint">年龄越大，债券比例越高</span>
-     </div>
-
-     <div class="field-wrap">
-      <label>再平衡阈值 (%)</label>
-      <input id="threshold" type="number" step="0.01" value="5" placeholder="偏离多少%时触发，如 5" />
-      <span class="field-hint">超过阈值才建议操作</span>
-     </div>
-
+    <div class="btn-row">
+      <button id="runButton" class="btn-primary">生成 FIRE 计划</button>
+      <button id="copyAiButton" class="btn-secondary">复制报告给 AI 助手</button>
     </div>
 
-    <div id="rebalanceError" class="error-msg hidden"></div>
-   </div>
-
-   <!-- 操作按钮 -->
-   <div class="btn-row">
-    <button id="runButton" class="btn-primary">生成计划</button>
-    <button id="copyAiButton" class="btn-secondary">复制给 AI 助手</button>
-   </div>
-
-   <!-- 结果展示 -->
-   <div id="summary" class="result-card hidden"></div>
+    <div id="errorMsg" class="error-msg hidden"></div>
+    <div id="summary" class="result-card hidden"></div>
   </div>
 
-  <!-- 高级表单入口 -->
   <div class="panel panel-accent">
-   <div class="panel-accent-inner">
-    <div>
-     <h2>完整 FIRE 评估</h2>
-     <p>含应急金、房贷、家庭状况、税务优化等 12 个维度，生成个性化执行方案。</p>
+    <div class="panel-accent-inner">
+      <div>
+        <h2>需要更详细的分析？</h2>
+        <p>含应急金、家庭状况、税务优化等 12 个维度的完整版 FIRE 评估表单。</p>
+      </div>
+      <a href="fire-assessment-form.html" class="btn-accent">打开完整表单 →</a>
     </div>
-    <a href="fire-assessment-form.html" class="btn-accent">打开完整表单 →</a>
-   </div>
   </div>
 
-  <!-- 部署说明 -->
   <div class="panel panel-muted">
-   <h2>部署到 GitHub Pages</h2>
-   <p>推送到 GitHub 后，部署会自动构建 demo 产物，访问：</p>
-   <p><strong>https://<span class="hostname-placeholder">你的用户名</span>.github.io/awesome-financial-freedom/demo/</strong></p>
-   <p>本地调试：<code>npm run demo</code></p>
+    <h2>关于此工具</h2>
+    <p>基于 <strong>4% 安全提现率</strong> 和<strong>复利公式</strong>计算。所有数据仅在浏览器本地处理，不上传服务器。</p>
+    <p>部署地址：<strong>https://adashuai5.github.io/awesome-financial-freedom/demo/</strong></p>
+    <p>源码：<a href="https://github.com/adashuai5/awesome-financial-freedom">github.com/adashuai5/awesome-financial-freedom</a></p>
   </div>
 
- </div>
+</div>
 
- <script>
- // ===== Unified App: works with or without server =====
+<script>
+// ===== 工具函数 =====
+const $ = (id) => document.getElementById(id);
+const num = (el) => { const v = Number(el?.value); return Number.isFinite(v) ? v : 0; };
+function fmt(n) { return Math.round(n).toLocaleString('zh-CN'); }
+function pct(n) { return (n * 100).toFixed(1) + '%'; }
 
- const workflowSelect = document.getElementById('workflowSelect')
- const fireFields = document.getElementById('fireFields')
- const rebalanceFields = document.getElementById('rebalanceFields')
- const runButton = document.getElementById('runButton')
- const copyAiButton = document.getElementById('copyAiButton')
- const summary = document.getElementById('summary')
- const fireError = document.getElementById('fireError')
- const rebalanceError = document.getElementById('rebalanceError')
+// ===== 折叠面板 =====
+$('assetsToggle').addEventListener('click', () => {
+  $('assetsToggle').classList.toggle('collapsed');
+  $('assetsSection').classList.toggle('collapsed');
+});
 
- workflowSelect.addEventListener('change', () => {
-  const workflow = workflowSelect.value
-  fireFields.classList.toggle('hidden', workflow !== 'fire_planning')
-  rebalanceFields.classList.toggle('hidden', workflow !== 'portfolio_rebalancing')
-  summary.classList.add('hidden')
-  fireError.classList.add('hidden')
-  rebalanceError.classList.add('hidden')
- })
+// ===== 计算逻辑 =====
+function run() {
+  const err = $('errorMsg');
+  err.classList.add('hidden');
+  $('summary').classList.add('hidden');
 
- function normalizeNumber(value) {
-  const number = Number(value)
-  return Number.isFinite(number) ? number : null
- }
+  // 读取输入
+  const age = num($('age'));
+  const careerSafeYears = num($('careerSafeYears'));
+  const cash = num($('cash'));
+  const housingFund = num($('housingFund'));
+  const stocks = num($('stocks'));
+  const goldVal = num($('gold'));
+  const otherAssets = num($('otherAssets'));
+  const houseValue = num($('houseValue'));
+  const mortgage = num($('mortgage'));
+  const mortgageMonthly = num($('mortgageMonthly'));
+  const mortgageRate = num($('mortgageRate')) / 100;
+  const otherDebt = num($('otherDebt'));
+  const annualIncome = num($('annualIncome'));
+  const annualExpenses = num($('annualExpenses'));
+  const annualSavings = num($('annualSavings'));
+  let expectedReturn = num($('expectedReturn'));
 
- // ----- Real-time validation helper -----
- function showError(el, msg) {
-  el.textContent = msg
-  el.classList.remove('hidden')
- }
- function clearError(el) {
-  el.classList.add('hidden')
- }
+  // 输入验证
+  if (age < 18 || age > 80) { showErr('年龄需在 18-80 之间'); return; }
+  if (annualIncome <= 0) { showErr('年收入需大于 0'); return; }
+  if (annualExpenses <= 0) { showErr('年支出需大于 0'); return; }
+  if (annualSavings < 0) { showErr('年储蓄不能为负'); return; }
 
- function validateFireInputs(input) {
-  const errors = []
-  if (!input.annualIncome || input.annualIncome <= 0)
-   errors.push('年收入需大于 0')
-  if (!input.annualExpenses || input.annualExpenses <= 0)
-   errors.push('年支出需大于 0')
-  if (input.annualSavings === null || input.annualSavings < 0)
-   errors.push('年储蓄不能为负')
-  if (!input.safeWithdrawalRate || input.safeWithdrawalRate <= 0)
-   errors.push('安全提现率需大于 0')
-  if (input.safeWithdrawalRate && input.safeWithdrawalRate > 50)
-   errors.push('安全提现率建议在 1~10% 之间')
-  return errors
- }
+  // 收益率归一化
+  if (expectedReturn > 1) expectedReturn = expectedReturn / 100;
+  const safeWithdrawalRate = 0.04;
 
- // ----- Fire Planning calculation -----
- function runFirePlanning(input) {
-  let safeWithdrawalRate = normalizeNumber(input.safeWithdrawalRate)
-  let expectedReturn = normalizeNumber(input.expectedReturn)
+  // ---- 资产负债 ----
+  const totalAssets = cash + housingFund + stocks + goldVal + otherAssets + houseValue;
+  const totalLiabilities = mortgage + otherDebt;
+  const netAssets = totalAssets - totalLiabilities;
+  // 可投资资产 = 剔除自住房、公积金（可能无法提取）、应急现金
+  const emergencyFundTarget = annualExpenses * 0.5; // 6 个月
+  const liquidAssets = cash + stocks + goldVal + otherAssets; // 不含房产和公积金
+  const investableAssets = Math.max(0, liquidAssets - emergencyFundTarget);
+  // 受限资产
+  const restrictedAssets = housingFund + houseValue;
 
-  if (safeWithdrawalRate !== null && safeWithdrawalRate > 1)
-   safeWithdrawalRate = safeWithdrawalRate / 100
-  if (expectedReturn !== null && expectedReturn > 1)
-   expectedReturn = expectedReturn / 100
+  // ---- FIRE 计算 ----
+  const fireTarget = annualExpenses / safeWithdrawalRate;
+  const monthlyExpenses = annualExpenses / 12;
 
-  if (safeWithdrawalRate !== null)
-   input.safeWithdrawalRate = safeWithdrawalRate
-  if (expectedReturn !== null)
-   input.expectedReturn = expectedReturn
-
-  const savingsRate =
-   input.annualIncome > 0
-    ? Math.round((input.annualSavings / input.annualIncome) * 100)
-    : null
-  const targetAssets = Math.round(input.annualExpenses / input.safeWithdrawalRate)
-
-  // Compound interest formula: n = ln((FV*r+PMT)/(PV*r+PMT)) / ln(1+r)
-  const r = input.expectedReturn || 0.07
-  const PV = input.currentSavings
-  const PMT = input.annualSavings
-  const FV = targetAssets
-  const numerator = (FV * r + PMT)
-  const denominator = (PV * r + PMT)
-  let yearsToFI = null
-  if (denominator > 0 && numerator > 0 && r > 0) {
-   const n = Math.log(numerator / denominator) / Math.log(1 + r)
-   yearsToFI = Math.max(0, Math.ceil(n))
+  // 用精确复利公式: 每年底投入，复利增长
+  let balance = investableAssets;
+  let yearsToFI = 0;
+  const maxYears = 100;
+  while (balance < fireTarget && yearsToFI < maxYears) {
+    balance = balance * (1 + expectedReturn) + annualSavings;
+    yearsToFI++;
   }
-  if (yearsToFI === null) {
-   yearsToFI = Math.max(0, Math.round((targetAssets - input.currentSavings) / input.annualSavings))
-  }
+  if (yearsToFI >= maxYears) yearsToFI = null;
 
-  const fiDate = new Date()
-  fiDate.setFullYear(fiDate.getFullYear() + yearsToFI)
-  const fiYear = fiDate.getFullYear()
+  const fiAge = yearsToFI !== null ? age + yearsToFI : null;
+  const savingsRate = annualIncome > 0 ? annualSavings / annualIncome : 0;
 
-  return {
-   summary: `目标资产 <strong>${targetAssets.toLocaleString()} 元</strong>，预计 <strong>${yearsToFI} 年</strong>（${fiYear} 年）达到 FIRE。`,
-   savingsRate,
-   targetAssets,
-   yearsToFI,
-   fiYear,
-   monthlySavings: Math.round(input.annualSavings / 12),
-   fireNumber: targetAssets,
-   notes: savingsRate !== null ? `年储蓄率约 ${savingsRate}%` : '',
-   raw: { PV: input.currentSavings, PMT: input.annualSavings, r: input.expectedReturn, targetAssets, yearsToFI },
-  }
- }
+  // ---- 职业风险 ----
+  const careerGap = yearsToFI !== null && yearsToFI > careerSafeYears;
+  const careerWarning = careerGap
+    ? `⚠ 预计 ${yearsToFI} 年达成 FIRE，但你的收入安全期仅 ${careerSafeYears} 年，存在 ${yearsToFI - careerSafeYears} 年的缺口！`
+    : '✅ 当前职业安全期覆盖 FIRE 达成年限';
 
- // ----- Portfolio Rebalancing calculation -----
- function runPortfolioRebalancing(input) {
-  const totalValue = input.assets.reduce((sum, a) => sum + a.currentValue, 0)
-  const assets = input.assets.map((asset) => {
-   const targetValue = Math.round((asset.targetPercent / 100) * totalValue)
-   const diff = targetValue - asset.currentValue
-   const action = Math.abs(diff) < 1 ? 'hold' : diff > 0 ? 'buy' : 'sell'
-   const drift = totalValue > 0 ? Math.round((diff / totalValue) * 100 * 100) / 100 : 0
-   return { ...asset, targetValue, diff, action, amount: Math.abs(diff), drift }
-  })
-  const needsRebalance = assets.some(
-   (a) => Math.abs(a.drift) > input.threshold,
-  )
-  const tradePlan = assets.filter((a) => a.action !== 'hold')
+  // ---- 资产配置建议（基于年龄） ----
+  // 经典规则：股票比例 = 100 - 年龄，但可基于风险偏好微调
+  const stockBasePct = Math.max(30, Math.min(80, 100 - age));
+  // 拆分：美股 40% + A股 20% + 黄金 10% + 债券/现金 30%
+  const usPct = Math.round(stockBasePct * 0.55);
+  const cnPct = Math.round(stockBasePct * 0.25);
+  const goldTargetPct = 10;
+  const bondPct = 100 - usPct - cnPct - goldTargetPct;
 
-  return {
-   summary: needsRebalance
-    ? `<strong>${tradePlan.length} 项</strong>资产偏离目标，建议再平衡。`
-    : '各资产偏离目标幅度均在阈值内，无需操作。',
-   totalValue,
-   assets,
-   needsRebalance,
-   notes: '定期再平衡可维持风险偏好，避免单一资产过度集中。',
-   raw: { totalValue, assets, needsRebalance },
-  }
- }
+  // 定投建议：需要每月定投多少
+  const monthlyInvest = annualSavings / 12;
 
- // ----- Display result -----
- function showResult(result) {
-  let html = `<div class="result-header">计划结果</div>`
+  // ---- 负资产检查 ----
+  const houseUnderwater = mortgage > houseValue && houseValue > 0;
+  const houseNote = houseUnderwater
+    ? `⚠ 房贷 ${fmt(mortgage)} > 房产市值 ${fmt(houseValue)}，处于"负资产"状态。建议了解提前还款、出售止损或持有等待的利弊。`
+    : '';
 
-  if (result.fireNumber !== undefined) {
-   // FIRE 计划结果 — 卡片化
-   html += `
-   <div class="result-kpi-row">
-    <div class="result-kpi">
-     <div class="kpi-label">目标资产</div>
-     <div class="kpi-value">${result.targetAssets.toLocaleString()} 元</div>
-    </div>
-    <div class="result-kpi">
-     <div class="kpi-label">达成年限</div>
-     <div class="kpi-value">${result.yearsToFI} 年</div>
-    </div>
-    <div class="result-kpi">
-     <div class="kpi-label">预计 FIRE 年份</div>
-     <div class="kpi-value">${result.fiYear} 年</div>
-    </div>
-    <div class="result-kpi">
-     <div class="kpi-label">每月需存</div>
-     <div class="kpi-value">${result.monthlySavings.toLocaleString()} 元</div>
-    </div>
-   </div>`
+  // ---- 房贷占比 ----
+  const mortgageRatio = monthlyExpenses > 0 ? mortgageMonthly / monthlyExpenses : 0;
+  const mortgageNote = mortgageMonthly > 0 && mortgageRatio > 0.4
+    ? `⚠ 房贷月供占月支出 ${pct(mortgageRatio)}，偏高。考虑再融资或提前还款。`
+    : '';
 
-   if (result.notes) {
-    html += `<div class="result-note">${result.notes}</div>`
-   }
+  // ---- 定投 vs 一把梭 ----
+  const dcaNote = '💡 标普 500 当前 CAPE 约 40（历史高位），建议用定投方式分批买入，分 12-24 个月投入，避免在高位一把梭。如果后续市场下跌，你会在低位买到更便宜的份额。';
 
-   html += `<div class="result-actions-label">关键行动</div><ol class="result-actions">`
-   const actions = [
-    `设置目标：攒到 <strong>${result.targetAssets.toLocaleString()} 元</strong> 金融资产`,
-    `坚持每月储蓄 <strong>${result.monthlySavings.toLocaleString()} 元</strong>，减少非必要支出`,
-    `将储蓄投入低成本指数基金（沪深300、标普500、全世界股票等）`,
-    `每年审视进度，若收入/支出变化大则重新计算 FIRE 年限`,
-   ]
-   actions.forEach(a => { html += `<li>${a}</li>` })
-   html += `</ol>`
+  // ---- 应急金 ----
+  const emergencyNote = liquidAssets < emergencyFundTarget
+    ? `⚠ 流动资产 ${fmt(liquidAssets)} 低于 6 个月应急金 ${fmt(emergencyFundTarget)}，优先补足应急金再加大投资。`
+    : `✅ 应急金充足（${fmt(liquidAssets)} ≥ ${fmt(emergencyFundTarget)}）`;
 
-  } else {
-   // 再平衡结果 — 卡片化
-   html += `
-   <div class="result-kpi-row">
-    <div class="result-kpi">
-     <div class="kpi-label">总资产</div>
-     <div class="kpi-value">${result.totalValue.toLocaleString()} 元</div>
-    </div>
-    <div class="result-kpi">
-     <div class="kpi-label">状态</div>
-     <div class="kpi-value">${result.needsRebalance ? '需调整' : '已平衡'}</div>
-    </div>
-   </div>`
+  // ---- 生成结果 HTML ----
+  const yearsText = yearsToFI === null ? '>100 年（需提高储蓄率或收益率）' : `${yearsToFI} 年`;
+  const fiAgeText = fiAge !== null ? `${fiAge} 岁` : '—';
+  const progressPct = fireTarget > 0 ? Math.min(100, Math.round(investableAssets / fireTarget * 100)) : 0;
 
-   if (result.needsRebalance) {
-    html += `<div class="result-actions-label">操作建议</div><ol class="result-actions">`
-    result.assets.forEach(a => {
-     if (a.action !== 'hold') {
-      const emoji = a.action === 'buy' ? '📈' : '📉'
-      html += `<li>${emoji} ${a.name}：${a.action === 'buy' ? '买入' : '卖出'} <strong>${a.amount.toLocaleString()} 元</strong>（当前偏离 ${a.drift > 0 ? '+' : ''}${a.drift}%）</li>`
-     }
-    })
-    html += `</ol>`
-   }
+  let html = '';
 
-   if (result.notes) {
-    html += `<div class="result-note">${result.notes}</div>`
-   }
-  }
+  // 核心 KPI
+  html += `<div class="result-header">FIRE 计划报告</div>`;
+  html += `<div class="result-kpi-row">
+    <div class="result-kpi"><div class="kpi-label">净资产</div><div class="kpi-value">${fmt(netAssets)} 元</div></div>
+    <div class="result-kpi"><div class="kpi-label">可投资资产</div><div class="kpi-value">${fmt(investableAssets)} 元</div></div>
+    <div class="result-kpi"><div class="kpi-label">FIRE 目标</div><div class="kpi-value">${fmt(fireTarget)} 元</div></div>
+    <div class="result-kpi"><div class="kpi-label">当前进度</div><div class="kpi-value">${progressPct}%</div></div>
+    <div class="result-kpi"><div class="kpi-label">预计达成年限</div><div class="kpi-value">${yearsText}</div></div>
+    <div class="result-kpi"><div class="kpi-label">FIRE 年龄</div><div class="kpi-value">${fiAgeText}</div></div>
+  </div>`;
 
-  summary.innerHTML = html
-  summary.classList.remove('hidden')
- }
+  // 资产负债表
+  html += `<div class="result-actions-label">📊 资产负债表</div>`;
+  html += `<table class="balance-table">
+    <tr><td>银行存款</td><td>${fmt(cash)}</td></tr>
+    <tr><td>公积金 <span style="color:#94a3b8;font-weight:400;">(可能无法提取)</span></td><td>${fmt(housingFund)}</td></tr>
+    <tr><td>股票/基金</td><td>${fmt(stocks)}</td></tr>
+    <tr><td>黄金</td><td>${fmt(goldVal)}</td></tr>
+    <tr><td>其他资产</td><td>${fmt(otherAssets)}</td></tr>
+    <tr><td>房产市值</td><td>${fmt(houseValue)}</td></tr>
+    <tr class="total-row"><td><strong>总资产</strong></td><td><strong>${fmt(totalAssets)}</strong></td></tr>
+    <tr><td>房贷余额</td><td style="color:#dc2626;">-${fmt(mortgage)}</td></tr>
+    <tr><td>其他负债</td><td style="color:#dc2626;">-${fmt(otherDebt)}</td></tr>
+    <tr class="total-row"><td><strong>净资产</strong></td><td><strong style="color:${netAssets >= 0 ? '#065f46' : '#dc2626'}">${fmt(netAssets)}</strong></td></tr>
+  </table>`;
 
- // ----- Run button -----
- runButton.addEventListener('click', () => {
-  const workflow = workflowSelect.value
-  clearError(fireError)
-  clearError(rebalanceError)
-  summary.classList.add('hidden')
+  // 储蓄率
+  html += `<div style="margin-top:14px;">
+    <strong>年储蓄率：</strong>${pct(savingsRate)}
+    <span class="badge ${savingsRate >= 0.4 ? 'badge-success' : savingsRate >= 0.2 ? 'badge-info' : 'badge-warn'}">${savingsRate >= 0.4 ? '优秀' : savingsRate >= 0.2 ? '正常' : '需提升'}</span>
+    &nbsp; 每月可存 <strong>${fmt(monthlyInvest)} 元</strong>
+  </div>`;
 
-  if (workflow === 'fire_planning') {
-   const input = {
-    currentSavings: normalizeNumber(document.getElementById('currentSavings').value) || 0,
-    annualIncome: normalizeNumber(document.getElementById('annualIncome').value),
-    annualExpenses: normalizeNumber(document.getElementById('annualExpenses').value),
-    annualSavings: normalizeNumber(document.getElementById('annualSavings').value) || 0,
-    expectedReturn: normalizeNumber(document.getElementById('expectedReturn').value) || 0.07,
-    safeWithdrawalRate: normalizeNumber(document.getElementById('safeWithdrawalRate').value),
-   }
-   const errors = validateFireInputs(input)
-   if (errors.length > 0) {
-    showError(fireError, errors.join('；') + '。')
-    return
-   }
-   showResult(runFirePlanning(input))
-   return
+  // 资产配置建议
+  html += `<div class="result-actions-label" style="margin-top:16px;">🎯 建议资产配置（可投资资产 ${fmt(investableAssets)} 元）</div>`;
+  html += `<div class="alloc-bar-wrap">
+    <div class="alloc-bar-label"><span>🇺🇸 标普 500 / 全球指数</span><span>${usPct}% — ${fmt(Math.round(investableAssets * usPct / 100))} 元</span></div>
+    <div class="alloc-bar-track"><div class="alloc-bar-fill us" style="width:${usPct}%"></div></div>
+  </div>`;
+  html += `<div class="alloc-bar-wrap">
+    <div class="alloc-bar-label"><span>🇨🇳 A 股指数</span><span>${cnPct}% — ${fmt(Math.round(investableAssets * cnPct / 100))} 元</span></div>
+    <div class="alloc-bar-track"><div class="alloc-bar-fill cn" style="width:${cnPct}%"></div></div>
+  </div>`;
+  html += `<div class="alloc-bar-wrap">
+    <div class="alloc-bar-label"><span>🥇 黄金</span><span>${goldTargetPct}% — ${fmt(Math.round(investableAssets * goldTargetPct / 100))} 元</span></div>
+    <div class="alloc-bar-track"><div class="alloc-bar-fill gold" style="width:${goldTargetPct}%"></div></div>
+  </div>`;
+  html += `<div class="alloc-bar-wrap">
+    <div class="alloc-bar-label"><span>📄 债券 / 货币基金</span><span>${bondPct}% — ${fmt(Math.round(investableAssets * bondPct / 100))} 元</span></div>
+    <div class="alloc-bar-track"><div class="alloc-bar-fill bond" style="width:${bondPct}%"></div></div>
+  </div>`;
+  html += `<p style="font-size:0.82rem;color:#64748b;margin-top:6px;">
+    基于 100 - 年龄 规则（你 ${age} 岁 → 股票 ${stockBasePct}%）。美股/全球分散风险，A股占比较小，黄金对冲通胀，债券提供稳定。
+  </p>`;
+
+  // 警告与风险
+  html += `<div class="result-actions-label" style="margin-top:16px;">⚠️ 风险与提示</div>`;
+  html += `<ol class="result-actions">`;
+
+  // 职业风险
+  html += `<li>${careerWarning}
+    ${careerGap ? `<br><span style="font-size:0.82rem;color:#64748b;">建议：在安全期内加速储蓄、提升技能、探索副业或出海远程机会。</span>` : ''}
+  </li>`;
+
+  // 负资产
+  if (houseNote) html += `<li>${houseNote}</li>`;
+
+  // 房贷占比
+  if (mortgageNote) html += `<li>${mortgageNote}</li>`;
+
+  // 应急金
+  html += `<li>${emergencyNote}</li>`;
+
+  // 定投建议
+  html += `<li>${dcaNote}</li>`;
+
+  // 通用建议
+  html += `<li>每季度复盘一次：检查储蓄率是否达标、配置是否偏离、目标是否需调整。</li>`;
+  html += `</ol>`;
+
+  // 受限资产提示
+  if (housingFund > 0) {
+    html += `<div style="margin-top:12px;padding:10px 14px;background:#fffbeb;border:1px solid #f6d860;border-radius:10px;font-size:0.85rem;">
+      📌 你有 <strong>${fmt(housingFund)} 元公积金</strong> + 房产 <strong>${fmt(houseValue)} 元</strong>，合计 <strong>${fmt(restrictedAssets)} 元受限资产</strong>（不易变现或不可提取）。以上可投资资产和配置建议已剔除这部分。
+    </div>`;
   }
 
-  const stocksValue = normalizeNumber(document.getElementById('stocksValue').value)
-  const bondsValue = normalizeNumber(document.getElementById('bondsValue').value)
-  const stocksTarget = normalizeNumber(document.getElementById('stocksTarget').value)
-  const bondsTarget = normalizeNumber(document.getElementById('bondsTarget').value)
-  const threshold = normalizeNumber(document.getElementById('threshold').value)
+  $('summary').innerHTML = html;
+  $('summary').classList.remove('hidden');
+  $('summary').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  if (!stocksValue || stocksValue < 0 || !bondsValue || bondsValue < 0) {
-   showError(rebalanceError, '股票和债券价值需为正数。')
-   return
-  }
-  if (!stocksTarget || !bondsTarget || stocksTarget + bondsTarget !== 100) {
-   showError(rebalanceError, '股票和债券比例之和需等于 100%。')
-   return
-  }
-  if (!threshold || threshold <= 0 || threshold > 50) {
-   showError(rebalanceError, '再平衡阈值需在 0~50% 之间。')
-   return
-  }
+  // 保存结果供复制按钮使用
+  window._lastReport = {
+    netAssets, investableAssets, fireTarget, yearsToFI, fiAge, progressPct,
+    annualIncome, annualExpenses, annualSavings, savingsRate, expectedReturn,
+    usPct, cnPct, goldTargetPct, bondPct, monthlyInvest,
+    careerWarning, houseNote, mortgageNote, emergencyNote, dcaNote,
+    cash, housingFund, stocks, goldVal, otherAssets, houseValue,
+    mortgage, mortgageMonthly, mortgageRate, otherDebt, age, careerSafeYears,
+    totalAssets, totalLiabilities, restrictedAssets,
+  };
+}
 
-  showResult(runPortfolioRebalancing({
-   assets: [
-    { name: '股票', currentValue: stocksValue, targetPercent: stocksTarget },
-    { name: '债券', currentValue: bondsValue, targetPercent: bondsTarget },
-   ],
-   threshold,
-  }))
- })
+function showErr(msg) {
+  const err = $('errorMsg');
+  err.textContent = msg;
+  err.classList.remove('hidden');
+}
 
- // ----- Copy to AI button -----
- copyAiButton.addEventListener('click', () => {
-  const workflow = workflowSelect.value
-  let text = ''
+// ===== 事件绑定 =====
+$('runButton').addEventListener('click', run);
 
-  if (workflow === 'fire_planning') {
-   const currentSavings = document.getElementById('currentSavings').value
-   const annualIncome = document.getElementById('annualIncome').value
-   const annualExpenses = document.getElementById('annualExpenses').value
-   const annualSavings = document.getElementById('annualSavings').value
-   const expectedReturn = document.getElementById('expectedReturn').value
-   const safeWithdrawalRate = document.getElementById('safeWithdrawalRate').value
-   text = `请根据下面的个人财务情况，帮我生成一份可执行的 FIRE 计划。
- - 当前储蓄：${currentSavings} 元
- - 年收入：${annualIncome} 元
- - 年支出：${annualExpenses} 元
- - 年储蓄：${annualSavings} 元
- - 预期年收益率：${expectedReturn}%
- - 安全提现率：${safeWithdrawalRate}%
+$('copyAiButton').addEventListener('click', () => {
+  const r = window._lastReport;
+  if (!r) { showErr('请先生成 FIRE 计划'); return; }
 
- 请给出：
- 1. 目标资产
- 2. 预计达到 FIRE 的年限
- 3. 关键行动项
- 4. 简洁的执行建议`
-  } else {
-   const stocksValue = document.getElementById('stocksValue').value
-   const bondsValue = document.getElementById('bondsValue').value
-   const stocksTarget = document.getElementById('stocksTarget').value
-   const bondsTarget = document.getElementById('bondsTarget').value
-   const threshold = document.getElementById('threshold').value
-   text = `请帮我评估以下投资组合是否需要再平衡：
- - 股票当前价值：${stocksValue} 元（目标比例：${stocksTarget}%）
- - 债券当前价值：${bondsValue} 元（目标比例：${bondsTarget}%）
- - 再平衡阈值：${threshold}%
+  const text = `请根据以下财务数据，帮我做一份完整的 FIRE 财务自由分析：
 
- 请给出再平衡建议和具体操作。`
-  }
+【基本信息】年龄 ${r.age} 岁 | 职业安全期估计 ${r.careerSafeYears} 年
+
+【资产负债】
+- 银行存款: ${fmt(r.cash)} 元
+- 公积金: ${fmt(r.housingFund)} 元（可能无法提取）
+- 股票/基金: ${fmt(r.stocks)} 元
+- 黄金: ${fmt(r.goldVal)} 元
+- 其他资产: ${fmt(r.otherAssets)} 元
+- 房产市值: ${fmt(r.houseValue)} 元
+- 房贷余额: ${fmt(r.mortgage)} 元（月供 ${fmt(r.mortgageMonthly)} 元, 利率 ${(r.mortgageRate*100).toFixed(2)}%）
+- 其他负债: ${fmt(r.otherDebt)} 元
+- 净资产: ${fmt(r.netAssets)} 元
+
+【年度收支】
+- 家庭年收入（到手）: ${fmt(r.annualIncome)} 元
+- 年总支出: ${fmt(r.annualExpenses)} 元
+- 年储蓄: ${fmt(r.annualSavings)} 元
+- 储蓄率: ${pct(r.savingsRate)}
+
+【FIRE 目标】
+- 可投资资产: ${fmt(r.investableAssets)} 元
+- FIRE 目标资产（年支出÷4%）: ${fmt(r.fireTarget)} 元
+- 当前进度: ${r.progressPct}%
+- 预计达成年限: ${r.yearsToFI !== null ? r.yearsToFI + ' 年' : '需提高储蓄率'}
+- 预计 FIRE 年龄: ${r.fiAge !== null ? r.fiAge + ' 岁' : '—'}
+- 预期年化收益率: ${pct(r.expectedReturn)}
+
+请给出：
+1. 资产负债健康度分析
+2. FIRE 路径合理性与加速策略
+3. 具体资产配置方案（标普/A股/黄金/债券比例）
+4. 关键风险提示（职业窗口期、负资产、房贷占比等）
+5. 下一步可执行的具体行动项`;
 
   navigator.clipboard.writeText(text).then(() => {
-   const original = copyAiButton.textContent
-   copyAiButton.textContent = '已复制 ✓'
-   setTimeout(() => { copyAiButton.textContent = original }, 2000)
-  }).catch(() => {
-   alert('复制失败，请手动复制')
-  })
- })
+    const btn = $('copyAiButton');
+    const orig = btn.textContent;
+    btn.textContent = '已复制 ✓';
+    btn.style.background = '#10b981';
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
+  }).catch(() => alert('复制失败，请手动复制'));
+});
 
- // ----- Try server fallback -----
- async function tryServer(input) {
-  try {
-   const response = await fetch('/api/run', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ workflow: workflowSelect.value, input }),
-   })
-   if (!response.ok) throw new Error('Server error')
-   return await response.json()
-  } catch (e) {
-   return null
+// ===== 回车键触发 =====
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && document.activeElement?.tagName === 'INPUT') {
+    run();
   }
- }
- </script>
+});
+</script>
 </body>
 </html>

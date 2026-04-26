@@ -66,7 +66,7 @@ node tools/workflow-runner.js fire_planning --savings 200000 --income 180000 --e
 |------|---------|
 | `playbooks/guides/actionable-steps.md` | 完全零基础 |
 | `playbooks/guides/learning-path.md` | 想系统学习FIRE |
-| `playbooks/tutorials/fire-assessment-form.html` | 想做完整的FIRE评估 |
+| [在线 Demo](https://adashuai5.github.io/awesome-financial-freedom/demo/) | 直接体验 FIRE 计算 |
 
 ## 第五步：了解系统架构（可选）
 
