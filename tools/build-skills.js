@@ -1,3 +1,7 @@
+/**
+ * Build the claude-skill.md file from prompt templates.
+ * Updated 2026-04-29: merged duplicate EN/ZH files, removed chatgpt-gpt target.
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -5,16 +9,24 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const promptPath = path.resolve(__dirname, '../prompts/system-prompt.md')
-const claudePath = path.resolve(__dirname, '../skills/claude-skill.md')
-const chatgptPath = path.resolve(__dirname, '../skills/chatgpt-gpt.md')
+const systemPromptPath = path.resolve(__dirname, '../prompts/system.md')
+const outputPath = path.resolve(__dirname, '../skills/claude-skill.md')
 
-function buildSkill(templateTitle, outputPath) {
-  const prompt = fs.readFileSync(promptPath, 'utf-8')
-  const content = `# ${templateTitle}\n\n## System Prompt\n\n${prompt}\n`
-  fs.writeFileSync(outputPath, content, 'utf-8')
-  console.log(`Generated ${outputPath}`)
+function build() {
+  const systemMd = fs.readFileSync(systemPromptPath, 'utf-8')
+
+  // The skill file is maintained manually in the repo.
+  // This script regenerates the embedded system prompt section only.
+  // For full Hermes skill, see ~/.hermes/skills/financial-freedom-advisor/SKILL.md
+
+  const existing = fs.readFileSync(outputPath, 'utf-8')
+  // Replace the System Prompt block between the markdown code fences
+  const updated = existing.replace(
+    /```\n[\s\S]*?```/,
+    '```\n' + systemMd.trim() + '\n```'
+  )
+  fs.writeFileSync(outputPath, updated, 'utf-8')
+  console.log(`Updated system prompt in ${outputPath}`)
 }
 
-buildSkill('Awesome Financial Freedom - Claude Skill', claudePath)
-buildSkill('Awesome Financial Freedom Advisor - ChatGPT GPT', chatgptPath)
+build()

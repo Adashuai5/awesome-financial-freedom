@@ -2,7 +2,7 @@
 
 ## 2026-04-25: Initial ingest — README review and FIRE knowledge base
 
-**Source**: README.md, README.zh-CN.md, demo form analysis (fire-assessment-form.html)
+**Source**: README.md, README.zh-CN.md, demo form analysis (demo/index.html)
 **New pages**: 5
 - concepts/fire.md
 - concepts/asset-allocation.md

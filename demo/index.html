@@ -69,9 +69,6 @@
   <div class="guide-bar">
     <span class="guide-icon">💡</span>
     不知道怎么填？<strong>年支出</strong>填实际总花费，<strong>年储蓄</strong> = 年收入 - 年支出
-    <span class="guide-more">
-      <a href="fire-assessment-form.html">做完整版 12 维度评估 →</a>
-    </span>
   </div>
 
   <div class="panel">
@@ -88,6 +85,22 @@
         <label>当前收入能维持多少年？</label>
         <input id="careerSafeYears" type="number" value="20" placeholder="如不确定填 20" min="1" max="50" />
         <span class="field-hint">程序员/高薪行业建议填 5-10 年</span>
+      </div>
+      <div class="field-wrap">
+        <label>家庭状态</label>
+        <select id="familyStatus">
+          <option value="single">单身（6个月应急金）</option>
+          <option value="married">已婚无子女（9个月应急金）</option>
+          <option value="with_dependents">有子女/赡养（12个月应急金）</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <label>风险偏好</label>
+        <select id="riskTolerance">
+          <option value="low">低风险</option>
+          <option value="medium" selected>中风险</option>
+          <option value="high">高风险</option>
+        </select>
       </div>
     </div>
 
@@ -160,13 +173,23 @@
       </div>
       <div class="field-wrap">
         <label>年储蓄 (元)</label>
-        <input id="annualSavings" type="number" value="" placeholder="年收入 - 年支出，约等于" />
-        <span class="field-hint">年收入 - 年支出（不含公积金）</span>
+        <input id="annualSavings" type="number" value="" readonly />
+        <span class="field-hint">自动计算：年收入 - 年支出（不含公积金）</span>
+      </div>
+      <div class="field-wrap">
+        <label>月被动收入 (元)</label>
+        <input id="monthlyPassiveIncome" type="number" value="0" placeholder="租金、分红、利息" />
+        <span class="field-hint">用于降低 FIRE 目标资产</span>
       </div>
       <div class="field-wrap">
         <label>预期年化收益率 (%)</label>
         <input id="expectedReturn" type="number" step="0.1" value="6" placeholder="长期平均，保守填 6" />
         <span class="field-hint">保守 5-6%，正常 7-8%<br><span style="color:#f59e0b;">⚠ 标普500当前CAPE~40，预期不宜过高</span></span>
+      </div>
+      <div class="field-wrap">
+        <label>目标达成年限 (年)</label>
+        <input id="targetFIYears" type="number" value="15" min="1" max="80" placeholder="例如 10 / 15 / 20" />
+        <span class="field-hint">用于反推你每年需要储蓄多少</span>
       </div>
     </div>
 
@@ -179,16 +202,6 @@
     <div id="summary" class="result-card hidden"></div>
   </div>
 
-  <div class="panel panel-accent">
-    <div class="panel-accent-inner">
-      <div>
-        <h2>需要更详细的分析？</h2>
-        <p>含应急金、家庭状况、税务优化等 12 个维度的完整版 FIRE 评估表单。</p>
-      </div>
-      <a href="fire-assessment-form.html" class="btn-accent">打开完整表单 →</a>
-    </div>
-  </div>
-
   <div class="panel panel-muted">
     <h2>关于此工具</h2>
     <p>基于 <strong>4% 安全提现率</strong> 和<strong>复利公式</strong>计算。所有数据仅在浏览器本地处理，不上传服务器。</p>
@@ -198,12 +211,109 @@
 
 </div>
 
+<script src="fire-calculation-core.js"></script>
 <script>
 // ===== 工具函数 =====
 const $ = (id) => document.getElementById(id);
 const num = (el) => { const v = Number(el?.value); return Number.isFinite(v) ? v : 0; };
 function fmt(n) { return Math.round(n).toLocaleString('zh-CN'); }
 function pct(n) { return (n * 100).toFixed(1) + '%'; }
+const FIRE_SHARED_DRAFT_KEY = 'fire_shared_draft_v1';
+function getEmergencyMonths(status) {
+  if (status === 'with_dependents') return 12;
+  if (status === 'married') return 9;
+  return 6;
+}
+function getRiskLabel(riskTolerance) {
+  if (riskTolerance === 'high') return '高风险偏好';
+  if (riskTolerance === 'low') return '低风险偏好';
+  return '中风险偏好';
+}
+const INDEX_FIELD_IDS = [
+  'age', 'careerSafeYears', 'cash', 'housingFund', 'stocks', 'gold', 'otherAssets',
+  'houseValue', 'mortgage', 'mortgageMonthly', 'mortgageRate', 'otherDebt',
+  'annualIncome', 'annualExpenses', 'annualSavings', 'monthlyPassiveIncome', 'expectedReturn',
+  'familyStatus', 'riskTolerance', 'targetFIYears',
+];
+
+function buildSharedDraftFromIndex() {
+  const cash = num($('cash'));
+  const housingFund = num($('housingFund'));
+  const stocks = num($('stocks'));
+  const goldVal = num($('gold'));
+  const otherAssets = num($('otherAssets'));
+  const houseValue = num($('houseValue'));
+  const mortgage = num($('mortgage'));
+  const mortgageMonthly = num($('mortgageMonthly'));
+  const mortgageRate = num($('mortgageRate'));
+  const otherDebt = num($('otherDebt'));
+  const annualExpenses = num($('annualExpenses'));
+  const annualSavings = num($('annualSavings'));
+  const monthlyPassiveIncome = num($('monthlyPassiveIncome'));
+  const expectedReturn = num($('expectedReturn'));
+  const familyStatus = $('familyStatus')?.value || 'single';
+  const riskTolerance = $('riskTolerance')?.value || 'medium';
+  const totalAssets = cash + housingFund + stocks + goldVal + otherAssets + houseValue;
+  const totalLiabilities = mortgage + otherDebt;
+
+  return {
+    source: 'index',
+    timestamp: Date.now(),
+    fire_assessment: {
+      total_assets: totalAssets,
+      total_liabilities: totalLiabilities,
+      primary_residence_value: houseValue,
+      annual_fixed_expenses: annualExpenses,
+      annual_savings: annualSavings,
+      monthly_passive_income: monthlyPassiveIncome,
+      mortgage_balance: mortgage,
+      monthly_mortgage_payment: mortgageMonthly,
+      mortgage_rate: mortgageRate,
+      other_liabilities: otherDebt,
+      family_status: familyStatus,
+      dependents_count: 0,
+      risk_tolerance: riskTolerance,
+      expected_return_rate: expectedReturn || 7,
+      current_allocation: '',
+    },
+    index_raw: Object.fromEntries(INDEX_FIELD_IDS.map((id) => [id, $(id)?.value ?? ''])),
+  };
+}
+
+function saveSharedDraft() {
+  localStorage.setItem(FIRE_SHARED_DRAFT_KEY, JSON.stringify(buildSharedDraftFromIndex()));
+}
+
+function loadSharedDraft() {
+  try {
+    const raw = localStorage.getItem(FIRE_SHARED_DRAFT_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (error) {
+    console.warn('读取草稿失败:', error);
+    return null;
+  }
+}
+
+function hydrateIndexFromDraft() {
+  const draft = loadSharedDraft();
+  const values = draft?.index_raw;
+  if (!values) return;
+
+  INDEX_FIELD_IDS.forEach((id) => {
+    if (!(id in values)) return;
+    const el = $(id);
+    if (!el) return;
+    el.value = values[id];
+  });
+}
+
+function recomputeAnnualSavings() {
+  const annualIncome = num($('annualIncome'));
+  const annualExpenses = num($('annualExpenses'));
+  const savings = annualIncome - annualExpenses;
+  $('annualSavings').value = Number.isFinite(savings) ? String(Math.round(savings)) : '0';
+}
 
 // ===== 折叠面板 =====
 $('assetsToggle').addEventListener('click', () => {
@@ -233,6 +343,10 @@ function run() {
   const annualIncome = num($('annualIncome'));
   const annualExpenses = num($('annualExpenses'));
   const annualSavings = num($('annualSavings'));
+  const monthlyPassiveIncome = num($('monthlyPassiveIncome'));
+  const familyStatus = $('familyStatus')?.value || 'single';
+  const riskTolerance = $('riskTolerance')?.value || 'medium';
+  const targetFIYears = num($('targetFIYears'));
   let expectedReturn = num($('expectedReturn'));
 
   // 输入验证
@@ -250,25 +364,30 @@ function run() {
   const totalLiabilities = mortgage + otherDebt;
   const netAssets = totalAssets - totalLiabilities;
   // 可投资资产 = 剔除自住房、公积金（可能无法提取）、应急现金
-  const emergencyFundTarget = annualExpenses * 0.5; // 6 个月
+  const emergencyMonths = getEmergencyMonths(familyStatus);
+  const emergencyFundTarget = annualExpenses * (emergencyMonths / 12);
   const liquidAssets = cash + stocks + goldVal + otherAssets; // 不含房产和公积金
   const investableAssets = Math.max(0, liquidAssets - emergencyFundTarget);
   // 受限资产
   const restrictedAssets = housingFund + houseValue;
 
-  // ---- FIRE 计算 ----
-  const fireTarget = annualExpenses / safeWithdrawalRate;
+  // ---- FIRE 计算（共享核心口径）----
+  const coreMetrics = FireCalculationCore.calculateCoreMetrics({
+    totalAssets,
+    totalLiabilities,
+    primaryResidenceValue: houseValue,
+    annualExpenses,
+    annualSavings,
+    expectedReturnRate: expectedReturn,
+    monthlyPassiveIncome,
+    safeWithdrawalRate,
+    emergencyFundMonths: emergencyMonths,
+    investableAssets,
+  });
+  expectedReturn = coreMetrics.expectedReturnRate;
+  const fireTarget = coreMetrics.fireTarget;
+  const yearsToFI = coreMetrics.yearsToFI;
   const monthlyExpenses = annualExpenses / 12;
-
-  // 用精确复利公式: 每年底投入，复利增长
-  let balance = investableAssets;
-  let yearsToFI = 0;
-  const maxYears = 100;
-  while (balance < fireTarget && yearsToFI < maxYears) {
-    balance = balance * (1 + expectedReturn) + annualSavings;
-    yearsToFI++;
-  }
-  if (yearsToFI >= maxYears) yearsToFI = null;
 
   const fiAge = yearsToFI !== null ? age + yearsToFI : null;
   const savingsRate = annualIncome > 0 ? annualSavings / annualIncome : 0;
@@ -281,7 +400,8 @@ function run() {
 
   // ---- 资产配置建议（基于年龄） ----
   // 经典规则：股票比例 = 100 - 年龄，但可基于风险偏好微调
-  const stockBasePct = Math.max(30, Math.min(80, 100 - age));
+  const riskShift = riskTolerance === 'high' ? 10 : riskTolerance === 'low' ? -10 : 0;
+  const stockBasePct = Math.max(25, Math.min(85, 100 - age + riskShift));
   // 拆分：美股 40% + A股 20% + 黄金 10% + 债券/现金 30%
   const usPct = Math.round(stockBasePct * 0.55);
   const cnPct = Math.round(stockBasePct * 0.25);
@@ -290,6 +410,13 @@ function run() {
 
   // 定投建议：需要每月定投多少
   const monthlyInvest = annualSavings / 12;
+  const requiredAnnualSavings = FireCalculationCore.calculateRequiredAnnualSavingsForTargetYears({
+    investableAssets,
+    fireTarget,
+    expectedReturnRate: expectedReturn,
+    targetYears: targetFIYears,
+  });
+  const savingsGap = requiredAnnualSavings === null ? null : requiredAnnualSavings - annualSavings;
 
   // ---- 负资产检查 ----
   const houseUnderwater = mortgage > houseValue && houseValue > 0;
@@ -308,13 +435,13 @@ function run() {
 
   // ---- 应急金 ----
   const emergencyNote = liquidAssets < emergencyFundTarget
-    ? `⚠ 流动资产 ${fmt(liquidAssets)} 低于 6 个月应急金 ${fmt(emergencyFundTarget)}，优先补足应急金再加大投资。`
+    ? `⚠ 流动资产 ${fmt(liquidAssets)} 低于 ${emergencyMonths} 个月应急金 ${fmt(emergencyFundTarget)}，优先补足应急金再加大投资。`
     : `✅ 应急金充足（${fmt(liquidAssets)} ≥ ${fmt(emergencyFundTarget)}）`;
 
   // ---- 生成结果 HTML ----
   const yearsText = yearsToFI === null ? '>100 年（需提高储蓄率或收益率）' : `${yearsToFI} 年`;
   const fiAgeText = fiAge !== null ? `${fiAge} 岁` : '—';
-  const progressPct = fireTarget > 0 ? Math.min(100, Math.round(investableAssets / fireTarget * 100)) : 0;
+  const progressPct = coreMetrics.progressPct;
 
   let html = '';
 
@@ -350,6 +477,20 @@ function run() {
     <span class="badge ${savingsRate >= 0.4 ? 'badge-success' : savingsRate >= 0.2 ? 'badge-info' : 'badge-warn'}">${savingsRate >= 0.4 ? '优秀' : savingsRate >= 0.2 ? '正常' : '需提升'}</span>
     &nbsp; 每月可存 <strong>${fmt(monthlyInvest)} 元</strong>
   </div>`;
+  html += `<div style="margin-top:8px;">
+    <strong>家庭应急金目标：</strong>${fmt(emergencyFundTarget)} 元（${emergencyMonths} 个月）
+    &nbsp; | &nbsp; <strong>风险偏好：</strong>${getRiskLabel(riskTolerance)}
+  </div>`;
+  if (targetFIYears > 0 && requiredAnnualSavings !== null) {
+    const monthlyNeed = requiredAnnualSavings / 12;
+    const gapMonthly = (savingsGap ?? 0) / 12;
+    const gapText = savingsGap <= 0
+      ? `已满足目标（每月可多出 ${fmt(Math.abs(gapMonthly))} 元缓冲）`
+      : `还差每月 ${fmt(gapMonthly)} 元（年差额 ${fmt(savingsGap)} 元）`;
+    html += `<div style="margin-top:8px;">
+      <strong>目标反推：</strong>若要 <strong>${targetFIYears} 年</strong> 达成，需年储蓄 <strong>${fmt(requiredAnnualSavings)} 元</strong>（约每月 ${fmt(monthlyNeed)} 元）；当前 ${gapText}
+    </div>`;
+  }
 
   // 资产配置建议
   html += `<div class="result-actions-label" style="margin-top:16px;">🎯 建议资产配置（可投资资产 ${fmt(investableAssets)} 元）</div>`;
@@ -390,12 +531,16 @@ function run() {
 
   // 应急金
   html += `<li>${emergencyNote}</li>`;
+  html += `<li>被动收入覆盖支出 ${(annualExpenses > 0 ? ((monthlyPassiveIncome * 12 / annualExpenses) * 100) : 0).toFixed(1)}%，已自动下调 FIRE 目标。</li>`;
 
   // 定投建议
   html += `<li>${dcaNote}</li>`;
 
   // 通用建议
   html += `<li>每季度复盘一次：检查储蓄率是否达标、配置是否偏离、目标是否需调整。</li>`;
+  if (targetFIYears > 0 && requiredAnnualSavings !== null && savingsGap > 0) {
+    html += `<li>若坚持 ${targetFIYears} 年目标，需把年储蓄从 ${fmt(annualSavings)} 提升到 ${fmt(requiredAnnualSavings)}（可通过提收入/降支出/优化税费实现）。</li>`;
+  }
   html += `</ol>`;
 
   // 受限资产提示
@@ -413,6 +558,8 @@ function run() {
   window._lastReport = {
     netAssets, investableAssets, fireTarget, yearsToFI, fiAge, progressPct,
     annualIncome, annualExpenses, annualSavings, savingsRate, expectedReturn,
+    monthlyPassiveIncome, familyStatus, riskTolerance, emergencyMonths,
+    targetFIYears, requiredAnnualSavings, savingsGap,
     usPct, cnPct, goldTargetPct, bondPct, monthlyInvest,
     careerWarning, houseNote, mortgageNote, emergencyNote, dcaNote,
     cash, housingFund, stocks, goldVal, otherAssets, houseValue,
@@ -436,7 +583,7 @@ $('copyAiButton').addEventListener('click', () => {
 
   const text = `请根据以下财务数据，帮我做一份完整的 FIRE 财务自由分析：
 
-【基本信息】年龄 ${r.age} 岁 | 职业安全期估计 ${r.careerSafeYears} 年
+【基本信息】年龄 ${r.age} 岁 | 职业安全期估计 ${r.careerSafeYears} 年 | 家庭状态 ${r.familyStatus} | 风险偏好 ${r.riskTolerance}
 
 【资产负债】
 - 银行存款: ${fmt(r.cash)} 元
@@ -453,6 +600,7 @@ $('copyAiButton').addEventListener('click', () => {
 - 家庭年收入（到手）: ${fmt(r.annualIncome)} 元
 - 年总支出: ${fmt(r.annualExpenses)} 元
 - 年储蓄: ${fmt(r.annualSavings)} 元
+- 月被动收入: ${fmt(r.monthlyPassiveIncome)} 元
 - 储蓄率: ${pct(r.savingsRate)}
 
 【FIRE 目标】
@@ -462,6 +610,7 @@ $('copyAiButton').addEventListener('click', () => {
 - 预计达成年限: ${r.yearsToFI !== null ? r.yearsToFI + ' 年' : '需提高储蓄率'}
 - 预计 FIRE 年龄: ${r.fiAge !== null ? r.fiAge + ' 岁' : '—'}
 - 预期年化收益率: ${pct(r.expectedReturn)}
+- 目标反推: ${r.targetFIYears > 0 && Number.isFinite(r.requiredAnnualSavings) ? `若 ${r.targetFIYears} 年达成，需年储蓄 ${fmt(r.requiredAnnualSavings)} 元（当前差额 ${fmt(Math.max(0, r.savingsGap))} 元）` : '未设置'}
 
 请给出：
 1. 资产负债健康度分析
@@ -484,6 +633,30 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && document.activeElement?.tagName === 'INPUT') {
     run();
   }
+});
+
+hydrateIndexFromDraft();
+recomputeAnnualSavings();
+
+['annualIncome', 'annualExpenses'].forEach((id) => {
+  const el = $(id);
+  if (!el) return;
+  el.addEventListener('input', () => {
+    recomputeAnnualSavings();
+    saveSharedDraft();
+  });
+  el.addEventListener('change', () => {
+    recomputeAnnualSavings();
+    saveSharedDraft();
+  });
+});
+
+INDEX_FIELD_IDS.forEach((id) => {
+  const input = $(id);
+  if (!input) return;
+  if (id === 'annualIncome' || id === 'annualExpenses') return;
+  input.addEventListener('input', saveSharedDraft);
+  input.addEventListener('change', saveSharedDraft);
 });
 </script>
 </body>
