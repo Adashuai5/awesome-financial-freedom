@@ -1,6 +1,6 @@
 import { strict as assert } from 'assert'
+import { inspect } from 'util'
 import { compoundInterest } from '../compound-interest.ts'
-import { fireTimeline } from '../fire-timeline.ts'
 import { maxDrawdown, sharpeRatio } from '../portfolio-risk.ts'
 import { savingsRate } from '../savings-rate.ts'
 import { rebalancePortfolio } from '../rebalance.ts'
@@ -15,8 +15,8 @@ function testCompoundInterest() {
 }
 
 function testFireTimeline() {
-  const result = fireTimeline(50000, 20000, 40000, 0.06)
-  assert.equal(Math.round(result.targetCorpus), 1000000)
+  const result = calculateRetirementGoal(50000, 40000, 20000, 0.06)
+  assert.equal(Math.round(result.targetAssets), 1000000)
   assert.ok(result.yearsToFI >= 0)
 }
 
@@ -86,4 +86,13 @@ function run() {
   console.log('All calculator tests passed.')
 }
 
-run()
+try {
+  run()
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.stack ?? error.message)
+  } else {
+    console.error('Unhandled non-Error exception:', inspect(error, { depth: null }))
+  }
+  process.exit(1)
+}
