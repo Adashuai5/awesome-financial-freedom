@@ -236,23 +236,37 @@ const INDEX_FIELD_IDS = [
   'familyStatus', 'riskTolerance', 'targetFIYears',
 ];
 
+function readFormValues() {
+  return {
+    age: num($('age')),
+    careerSafeYears: num($('careerSafeYears')),
+    cash: num($('cash')),
+    housingFund: num($('housingFund')),
+    stocks: num($('stocks')),
+    goldVal: num($('gold')),
+    otherAssets: num($('otherAssets')),
+    houseValue: num($('houseValue')),
+    mortgage: num($('mortgage')),
+    mortgageMonthly: num($('mortgageMonthly')),
+    mortgageRate: num($('mortgageRate')),
+    otherDebt: num($('otherDebt')),
+    annualIncome: num($('annualIncome')),
+    annualExpenses: num($('annualExpenses')),
+    annualSavings: num($('annualSavings')),
+    monthlyPassiveIncome: num($('monthlyPassiveIncome')),
+    expectedReturn: num($('expectedReturn')),
+    familyStatus: $('familyStatus')?.value || 'single',
+    riskTolerance: $('riskTolerance')?.value || 'medium',
+    targetFIYears: num($('targetFIYears')),
+  };
+}
+
 function buildSharedDraftFromIndex() {
-  const cash = num($('cash'));
-  const housingFund = num($('housingFund'));
-  const stocks = num($('stocks'));
-  const goldVal = num($('gold'));
-  const otherAssets = num($('otherAssets'));
-  const houseValue = num($('houseValue'));
-  const mortgage = num($('mortgage'));
-  const mortgageMonthly = num($('mortgageMonthly'));
-  const mortgageRate = num($('mortgageRate'));
-  const otherDebt = num($('otherDebt'));
-  const annualExpenses = num($('annualExpenses'));
-  const annualSavings = num($('annualSavings'));
-  const monthlyPassiveIncome = num($('monthlyPassiveIncome'));
-  const expectedReturn = num($('expectedReturn'));
-  const familyStatus = $('familyStatus')?.value || 'single';
-  const riskTolerance = $('riskTolerance')?.value || 'medium';
+  const f = readFormValues();
+  const { cash, housingFund, stocks, goldVal, otherAssets, houseValue,
+          mortgage, mortgageMonthly, mortgageRate, otherDebt,
+          annualExpenses, annualSavings, monthlyPassiveIncome,
+          expectedReturn, familyStatus, riskTolerance } = f;
   const totalAssets = cash + housingFund + stocks + goldVal + otherAssets + houseValue;
   const totalLiabilities = mortgage + otherDebt;
 
@@ -327,27 +341,13 @@ function run() {
   err.classList.add('hidden');
   $('summary').classList.add('hidden');
 
-  // 读取输入
-  const age = num($('age'));
-  const careerSafeYears = num($('careerSafeYears'));
-  const cash = num($('cash'));
-  const housingFund = num($('housingFund'));
-  const stocks = num($('stocks'));
-  const goldVal = num($('gold'));
-  const otherAssets = num($('otherAssets'));
-  const houseValue = num($('houseValue'));
-  const mortgage = num($('mortgage'));
-  const mortgageMonthly = num($('mortgageMonthly'));
-  const mortgageRate = num($('mortgageRate')) / 100;
-  const otherDebt = num($('otherDebt'));
-  const annualIncome = num($('annualIncome'));
-  const annualExpenses = num($('annualExpenses'));
-  const annualSavings = num($('annualSavings'));
-  const monthlyPassiveIncome = num($('monthlyPassiveIncome'));
-  const familyStatus = $('familyStatus')?.value || 'single';
-  const riskTolerance = $('riskTolerance')?.value || 'medium';
-  const targetFIYears = num($('targetFIYears'));
-  let expectedReturn = num($('expectedReturn'));
+  const f = readFormValues();
+  const { age, careerSafeYears, cash, housingFund, stocks, goldVal, otherAssets,
+          houseValue, mortgage, mortgageMonthly, otherDebt,
+          annualIncome, annualExpenses, annualSavings, monthlyPassiveIncome,
+          familyStatus, riskTolerance, targetFIYears } = f;
+  const mortgageRate = f.mortgageRate / 100;
+  let expectedReturn = f.expectedReturn;
 
   // 输入验证
   if (age < 18 || age > 80) { showErr('年龄需在 18-80 之间'); return; }

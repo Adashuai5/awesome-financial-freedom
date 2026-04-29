@@ -1,36 +1,31 @@
 /**
  * LLM Integration Layer
- * Connects awesome-financial-freedom prompts to various LLM APIs
- * Supports: Claude, OpenAI GPT, Google Gemini, Open-source Llama
+ * Connects awesome-financial-freedom prompts to Claude API via @anthropic-ai/sdk.
+ * OpenAI / Gemini stubs preserved for documentation — not yet implemented.
  */
 
+import Anthropic from '@anthropic-ai/sdk';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/**
- * LLM Provider Configuration
- */
 const LLM_PROVIDERS = {
   claude: {
     name: 'Anthropic Claude',
-    models: ['claude-3-opus', 'claude-3-sonnet', 'claude-3-haiku'],
-    apiKey: process.env.ANTHROPIC_API_KEY,
-    endpoint: 'https://api.anthropic.com/v1/messages',
+    models: ['claude-sonnet-4-6', 'claude-opus-4-7', 'claude-haiku-4-5-20251001'],
+    envVar: 'ANTHROPIC_API_KEY',
   },
   openai: {
     name: 'OpenAI GPT',
-    models: ['gpt-4', 'gpt-4-turbo', 'gpt-3.5-turbo'],
-    apiKey: process.env.OPENAI_API_KEY,
-    endpoint: 'https://api.openai.com/v1/chat/completions',
+    models: ['gpt-4o', 'gpt-4-turbo', 'gpt-3.5-turbo'],
+    envVar: 'OPENAI_API_KEY',
   },
   gemini: {
     name: 'Google Gemini',
-    models: ['gemini-pro', 'gemini-pro-vision'],
-    apiKey: process.env.GOOGLE_API_KEY,
-    endpoint: 'https://generativelanguage.googleapis.com/v1beta/models',
+    models: ['gemini-1.5-pro', 'gemini-1.5-flash'],
+    envVar: 'GOOGLE_API_KEY',
   },
 };
 
@@ -84,155 +79,56 @@ function formatUserData(rawData) {
   };
 }
 
-/**
- * LLM Client - Abstract interface for different providers
- */
 class LLMClient {
   constructor(provider = 'claude', model = null) {
-    this.provider = provider;
     this.config = LLM_PROVIDERS[provider];
-    
-    if (!this.config) {
-      throw new Error(`Unknown provider: ${provider}`);
-    }
-    
+    if (!this.config) throw new Error(`Unknown provider: ${provider}`);
+
+    this.provider = provider;
     this.model = model || this.config.models[0];
-    this.apiKey = this.config.apiKey;
-    
+    this.apiKey = process.env[this.config.envVar];
+
     if (!this.apiKey) {
-      throw new Error(`API key not configured for ${provider}. Set ${this.getEnvVarName()}`);
+      throw new Error(`API key not set for ${provider}. Export ${this.config.envVar}`);
     }
   }
 
-  getEnvVarName() {
-    const envMap = {
-      claude: 'ANTHROPIC_API_KEY',
-      openai: 'OPENAI_API_KEY',
-      gemini: 'GOOGLE_API_KEY',
-    };
-    return envMap[this.provider];
-  }
-
-  /**
-   * Send request to LLM based on provider
-   */
   async sendRequest(messages, systemPrompt) {
     switch (this.provider) {
-      case 'claude':
-        return this.sendToClaude(messages, systemPrompt);
-      case 'openai':
-        return this.sendToOpenAI(messages, systemPrompt);
-      case 'gemini':
-        return this.sendToGemini(messages, systemPrompt);
-      default:
-        throw new Error(`Provider ${this.provider} not implemented`);
+      case 'claude': return this.sendToClaude(messages, systemPrompt);
+      case 'openai': return this.sendToOpenAI(messages, systemPrompt);
+      case 'gemini': return this.sendToGemini(messages, systemPrompt);
+      default: throw new Error(`Provider ${this.provider} not implemented`);
     }
   }
 
-  /**
-   * Claude API call format
-   */
   async sendToClaude(messages, systemPrompt) {
-    // This is a reference implementation
-    // In production, use @anthropic-ai/sdk
-    const payload = {
+    const client = new Anthropic({ apiKey: this.apiKey });
+    const response = await client.messages.create({
       model: this.model,
       max_tokens: 2048,
       system: systemPrompt,
-      messages: messages.map(msg => ({
-        role: msg.role,
-        content: msg.content,
-      })),
-    };
+      messages: messages.map(({ role, content }) => ({ role, content })),
+    });
 
-    console.log(`[${this.provider}] Sending request to Claude API...`);
-    console.log(`Model: ${this.model}`);
-    console.log(`Messages: ${messages.length}`);
-    
-    // In production, make actual HTTP request:
-    // const response = await fetch(this.config.endpoint, {
-    //   method: 'POST',
-    //   headers: {
-    //     'x-api-key': this.apiKey,
-    //     'content-type': 'application/json',
-    //   },
-    //   body: JSON.stringify(payload),
-    // });
-    
+    const text = response.content.map(b => b.type === 'text' ? b.text : '').join('');
     return {
       provider: this.provider,
       model: this.model,
-      status: 'mock',
-      message: 'Mock response for demonstration',
-      usage: { input_tokens: 100, output_tokens: 50 },
+      status: 'success',
+      message: text,
+      usage: response.usage,
     };
   }
 
-  /**
-   * OpenAI API call format
-   */
   async sendToOpenAI(messages, systemPrompt) {
-    const payload = {
-      model: this.model,
-      max_tokens: 2048,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages,
-      ],
-    };
-
-    console.log(`[${this.provider}] Sending request to OpenAI API...`);
-    console.log(`Model: ${this.model}`);
-    
-    // In production:
-    // const response = await fetch(this.config.endpoint, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${this.apiKey}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(payload),
-    // });
-    
-    return {
-      provider: this.provider,
-      model: this.model,
-      status: 'mock',
-      message: 'Mock response for demonstration',
-      usage: { prompt_tokens: 100, completion_tokens: 50 },
-    };
+    // Requires: npm install openai
+    throw new Error('OpenAI provider not yet implemented. Install openai SDK and implement sendToOpenAI.');
   }
 
-  /**
-   * Google Gemini API call format
-   */
   async sendToGemini(messages, systemPrompt) {
-    const contents = messages.map(msg => ({
-      role: msg.role === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.content }],
-    }));
-
-    console.log(`[${this.provider}] Sending request to Gemini API...`);
-    console.log(`Model: ${this.model}`);
-    
-    // In production:
-    // const endpoint = `${this.config.endpoint}/${this.model}:generateContent`;
-    // const response = await fetch(endpoint, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-goog-api-key': this.apiKey,
-    //   },
-    //   body: JSON.stringify({ contents }),
-    // });
-    
-    return {
-      provider: this.provider,
-      model: this.model,
-      status: 'mock',
-      message: 'Mock response for demonstration',
-      usage: { prompt_tokens: 100, output_tokens: 50 },
-    };
+    // Requires: npm install @google/generative-ai
+    throw new Error('Gemini provider not yet implemented. Install @google/generative-ai SDK and implement sendToGemini.');
   }
 }
 

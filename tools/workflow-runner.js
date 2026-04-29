@@ -118,18 +118,6 @@ function dcaPlanCalculator(state) {
   }
 }
 
-function twitterEngagementModel(state) {
-  const { audience_goal = 'grow audience', weekly_tweet_target = 5 } =
-    state.input
-  const impressions = weekly_tweet_target * 1200
-  return {
-    weeklyTweetTarget: weekly_tweet_target,
-    audienceGoal: audience_goal,
-    expectedWeeklyImpressions: impressions,
-    growthStrategy: '保持高频、有价值内容，并与粉丝互动来提高参与度。',
-    recommendation: `每周发布 ${weekly_tweet_target} 条推文，并结合热点话题以支持 ${audience_goal}。`,
-  }
-}
 
 function runPromptStep(step, state, workflow) {
   const promptText = loadPrompt(step.prompt_id)
@@ -142,9 +130,6 @@ function runPromptStep(step, state, workflow) {
     response: `模拟回答：执行 ${step.prompt_id}`,
   }
 
-  if (step.prompt_id === 'seo_article') {
-    result.generatedArticle = `这是基于 ${state.input.niche || '个人理财'} 的模拟SEO文章内容。`
-  }
   if (step.prompt_id === 'dca_risk_assessment') {
     result.riskProfile = {
       level: 'Moderate',
@@ -154,28 +139,6 @@ function runPromptStep(step, state, workflow) {
   if (step.prompt_id === 'dca_summary') {
     result.summary = `基于当前输入，建议每月投入 ${state.input.investment_amount || 5000} 元，目标指数为 ${state.input.target_index || 'S&P 500'}。`
   }
-  if (step.prompt_id === 'seo_review') {
-    result.review = '内容符合SEO要求，建议继续发布。'
-    result.passed = true
-  }
-  if (step.prompt_id === 'seo_publish_plan') {
-    result.publishPlan = {
-      channel: 'blog',
-      cadence: 'weekly',
-      promotion: '社交媒体和邮件列表',
-    }
-  }
-  if (step.prompt_id === 'twitter_ideas') {
-    result.topics = [
-      `${state.input.niche || '个人理财'} 创业故事`,
-      '理财小贴士',
-      '被动收入策略',
-    ]
-  }
-  if (step.prompt_id === 'twitter_schedule') {
-    result.schedule = `每周发布 ${state.input.weekly_tweet_target || 5} 条推文，集中在周二和周四。`
-  }
-
   if (step.prompt_id === 'fire_assessment') {
     const goal = calculateRetirementGoal(
       toNumber(state.input.current_savings, 0),
@@ -245,8 +208,6 @@ function runCalculatorStep(step, state) {
   switch (step.calculator_id) {
     case 'dca-plan-calculator':
       return dcaPlanCalculator(state)
-    case 'twitter-engagement-model':
-      return twitterEngagementModel(state)
     case 'fire-goal-calculator': {
       const {
         current_savings = 200000,
