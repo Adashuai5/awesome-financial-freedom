@@ -54,6 +54,46 @@
     .balance-table td:first-child { color: #64748b; }
     .balance-table td:last-child { text-align: right; font-weight: 600; }
     .balance-table .total-row td { border-top: 2px solid #cbd5e1; font-size: 0.95rem; padding-top: 10px; }
+
+    /* ===== 引导诊断 ===== */
+    #onboarding-overlay {
+      position: fixed; inset: 0; background: rgba(15,23,42,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; padding: 16px; transition: opacity 0.3s;
+    }
+    .onb-card {
+      background: #fff; border-radius: 20px; max-width: 480px; width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden;
+    }
+    .onb-header { text-align: center; padding: 28px 24px 16px; }
+    .onb-logo { font-size: 2.5rem; margin-bottom: 8px; }
+    .onb-header h2 { font-size: 1.3rem; margin: 0 0 6px; color: #0f172a; }
+    .onb-header p { color: #64748b; font-size: 0.9rem; margin: 0; }
+    .onb-progress-wrap { height: 4px; background: #e2e8f0; }
+    .onb-progress-fill { height: 100%; background: #2563eb; transition: width 0.4s ease; }
+    .onb-step { padding: 24px; }
+    .onb-qnum { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .onb-question { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.4; }
+    .onb-hint { font-size: 0.83rem; color: #64748b; margin-bottom: 20px; }
+    .onb-btns { display: flex; gap: 12px; }
+    .onb-btn { flex: 1; padding: 12px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
+    .onb-yes { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+    .onb-yes:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .onb-no { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+    .onb-no:hover { background: #475569; color: #fff; border-color: #475569; }
+    .onb-result { border: 2px solid; border-radius: 14px; padding: 18px; margin: 16px 24px 0; }
+    .onb-stage-badge { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; }
+    .onb-stage-desc { font-size: 0.88rem; color: #475569; margin: 0 0 12px; line-height: 1.5; }
+    .onb-action { font-size: 0.85rem; background: rgba(255,255,255,0.6); border-radius: 8px; padding: 10px 12px; line-height: 1.5; }
+    .onb-btn-primary { background: #2563eb; color: #fff; border: none; border-radius: 10px; padding: 14px 28px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+    .onb-btn-primary:hover { background: #1d4ed8; }
+    .onb-footer { padding: 14px 24px 20px; text-align: center; }
+    .onb-footer button { background: none; border: none; color: #94a3b8; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+
+    /* ===== 历史追踪面板 ===== */
+    .tracker-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; padding: 4px 0; }
+    .tracker-toggle .arrow { transition: transform 0.2s; font-size: 0.7rem; color: #94a3b8; }
+    .tracker-toggle.collapsed .arrow { transform: rotate(-90deg); }
   </style>
 </head>
 
@@ -202,6 +242,17 @@
     <div id="summary" class="result-card hidden"></div>
   </div>
 
+  <!-- ===== 历史追踪面板 ===== -->
+  <div class="panel" style="margin-top:16px;">
+    <div class="tracker-toggle" id="trackerToggle">
+      <span class="section-label" style="margin-bottom:0;border:none;padding:0;">📅 历史快照记录</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-collapsible collapsed" id="tracker-section" style="max-height:0;">
+      <div id="tracker-panel" style="margin-top:14px;"></div>
+    </div>
+  </div>
+
   <div class="panel panel-muted">
     <h2>关于此工具</h2>
     <p>基于 <strong>4% 安全提现率</strong> 和<strong>复利公式</strong>计算。所有数据仅在浏览器本地处理，不上传服务器。</p>
@@ -212,6 +263,8 @@
 </div>
 
 <script src="fire-calculation-core.js"></script>
+<script src="onboarding.js"></script>
+<script src="tracker.js"></script>
 <script>
 // ===== 工具函数 =====
 const $ = (id) => document.getElementById(id);
@@ -495,23 +548,23 @@ function run() {
   // 资产配置建议
   html += `<div class="result-actions-label" style="margin-top:16px;">🎯 建议资产配置（可投资资产 ${fmt(investableAssets)} 元）</div>`;
   html += `<div class="alloc-bar-wrap">
-    <div class="alloc-bar-label"><span>🇺🇸 标普 500 / 全球指数</span><span>${usPct}% — ${fmt(Math.round(investableAssets * usPct / 100))} 元</span></div>
+    <div class="alloc-bar-label"><span>🇺🇸 标普500/全球 <span style="color:#94a3b8;font-size:0.78rem;">QDII 如 513500 / 159632</span></span><span>${usPct}% — ${fmt(Math.round(investableAssets * usPct / 100))} 元</span></div>
     <div class="alloc-bar-track"><div class="alloc-bar-fill us" style="width:${usPct}%"></div></div>
   </div>`;
   html += `<div class="alloc-bar-wrap">
-    <div class="alloc-bar-label"><span>🇨🇳 A 股指数</span><span>${cnPct}% — ${fmt(Math.round(investableAssets * cnPct / 100))} 元</span></div>
+    <div class="alloc-bar-label"><span>🇨🇳 A 股宽基 <span style="color:#94a3b8;font-size:0.78rem;">510300 / 159919 沪深300</span></span><span>${cnPct}% — ${fmt(Math.round(investableAssets * cnPct / 100))} 元</span></div>
     <div class="alloc-bar-track"><div class="alloc-bar-fill cn" style="width:${cnPct}%"></div></div>
   </div>`;
   html += `<div class="alloc-bar-wrap">
-    <div class="alloc-bar-label"><span>🥇 黄金</span><span>${goldTargetPct}% — ${fmt(Math.round(investableAssets * goldTargetPct / 100))} 元</span></div>
+    <div class="alloc-bar-label"><span>🥇 黄金 <span style="color:#94a3b8;font-size:0.78rem;">518880 黄金ETF / 实物金</span></span><span>${goldTargetPct}% — ${fmt(Math.round(investableAssets * goldTargetPct / 100))} 元</span></div>
     <div class="alloc-bar-track"><div class="alloc-bar-fill gold" style="width:${goldTargetPct}%"></div></div>
   </div>`;
   html += `<div class="alloc-bar-wrap">
-    <div class="alloc-bar-label"><span>📄 债券 / 货币基金</span><span>${bondPct}% — ${fmt(Math.round(investableAssets * bondPct / 100))} 元</span></div>
+    <div class="alloc-bar-label"><span>📄 债券/货币基金 <span style="color:#94a3b8;font-size:0.78rem;">短债基金 / 余额宝类</span></span><span>${bondPct}% — ${fmt(Math.round(investableAssets * bondPct / 100))} 元</span></div>
     <div class="alloc-bar-track"><div class="alloc-bar-fill bond" style="width:${bondPct}%"></div></div>
   </div>`;
   html += `<p style="font-size:0.82rem;color:#64748b;margin-top:6px;">
-    基于 100 - 年龄 规则（你 ${age} 岁 → 股票 ${stockBasePct}%）。美股/全球分散风险，A股占比较小，黄金对冲通胀，债券提供稳定。
+    基于 100 - 年龄 规则（你 ${age} 岁 → 股票 ${stockBasePct}%）。美股/全球分散风险，A股宽基跟踪沪深300，黄金对冲通胀，债券提供稳定。以上为通用品类建议，非具体产品推荐，购买前请自行了解费率和风险。
   </p>`;
 
   // 警告与风险
@@ -566,6 +619,11 @@ function run() {
     mortgage, mortgageMonthly, mortgageRate, otherDebt, age, careerSafeYears,
     totalAssets, totalLiabilities, restrictedAssets,
   };
+
+  // 追踪：在结果下方加"保存快照"按钮
+  if (window.fireTracker) {
+    window.fireTracker.addSaveButton(window._lastReport);
+  }
 }
 
 function showErr(msg) {
@@ -626,6 +684,17 @@ $('copyAiButton').addEventListener('click', () => {
     btn.style.background = '#10b981';
     setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
   }).catch(() => alert('复制失败，请手动复制'));
+});
+
+// ===== 历史追踪面板折叠 =====
+$('trackerToggle').addEventListener('click', () => {
+  const toggle = $('trackerToggle');
+  const sec = $('tracker-section');
+  const isCollapsed = sec.classList.contains('collapsed');
+  toggle.classList.toggle('collapsed', !isCollapsed);
+  sec.classList.toggle('collapsed', !isCollapsed);
+  if (isCollapsed) sec.style.maxHeight = '800px';
+  else sec.style.maxHeight = '0';
 });
 
 // ===== 回车键触发 =====
