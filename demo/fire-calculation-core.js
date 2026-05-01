@@ -11,24 +11,25 @@
   }
 
   function calculateYearsToFI(investableAssets, fireTarget, expectedReturnRate, annualSavings) {
-    if (investableAssets >= fireTarget) {
-      return 0;
+    if (investableAssets >= fireTarget) return 0;
+
+    if (expectedReturnRate === 0) {
+      if (annualSavings <= 0) return null;
+      const n = (fireTarget - investableAssets) / annualSavings;
+      return n > 100 ? null : Math.ceil(n);
     }
 
-    const maxYears = 100;
-    let years = 0;
-    let balance = investableAssets;
+    // Closed-form: P*(1+r)^n + S*((1+r)^n - 1)/r = T
+    // → n = ln((T + S/r) / (P + S/r)) / ln(1+r)
+    const r = expectedReturnRate;
+    const denom = investableAssets + annualSavings / r;
+    const numer = fireTarget + annualSavings / r;
+    if (denom <= 0 || numer / denom <= 0) return null;
 
-    while (balance < fireTarget && years < maxYears) {
-      balance = balance * (1 + expectedReturnRate) + annualSavings;
-      years += 1;
+    const years = Math.log(numer / denom) / Math.log(1 + r);
+    if (!Number.isFinite(years) || years <= 0 || years > 100) return null;
 
-      if (!Number.isFinite(balance) || balance < 0) {
-        return null;
-      }
-    }
-
-    return years >= maxYears ? null : years;
+    return Math.ceil(years);
   }
 
   function calculateCoreMetrics(input) {

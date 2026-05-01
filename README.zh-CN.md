@@ -2,8 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> 一个 AI 原生的财务自由执行系统，不是收藏夹列表。
-> 小白问 AI：我月薪 5000，存 1000，多久能退休？AI 直接给计划。
+> 回答5个问题 → 明确你的FIRE阶段 → 获得专属工具 → 月度追踪进度 → 一键发给AI深度分析。
+> 为不知道从哪开始的投资小白而建，不只是给能读JSON的开发者。
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -12,7 +12,7 @@
 
 **创建日期**: 2026-04-12 · **最后更新**: 2026-04-26
 
-![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
+![阶段诊断 → 6套工具 → 月度追踪 → AI分析](assets/hero-demo.svg)
 
 ## 🧭 快速导航
 
@@ -26,25 +26,17 @@
 
 ## 🤔 这是什么？
 
-**Awesome Financial Freedom** 是一个开源、AI 原生的财务自由知识库。它将 awesome 列表的结构化策划与 AI Skill 对话能力结合，实现 *零门槛* 学习。
+**Awesome Financial Freedom** 是一个面向中国投资者的开源、AI 原生 FIRE 规划系统。结构化知识、确定性计算器、阶段化引导 UX 三合一，让投资小白知道今天该做什么——而不只是"数学上20年后能退休"。
 
-这个项目不只是静态链接列表，它提供：
+核心组件：
 
-- 📚 **结构化 JSON 知识节点**：覆盖心态、储蓄、投资和 FIRE 原则。
-- 🤖 **开箱即用的 AI Skills**：兼容 Claude 和 ChatGPT，你可以问：
-  - _"我月薪 5000，存 1000，多久能退休？"_
-  - _"我的组合是 70% 标普 500、30% 债券，帮我看看。"_
-  - _"什么是'双轮配置'方法？"_
-- 🧮 **嵌入式计算器**：公式透明、步骤可验证。
-- 📍 **学习路径指南**：分阶段推进、个性化目标设定。
-- ✅ **可执行行动指南**：快速见效、风险意识的第一步，见 [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md)。
-
-这是一个面向用户的财务自由规划工具。输入你的当前存款、年收入、年支出、预期回报率、安全提取率和资产配置，系统返回：
-
-- FIRE 目标金额
-- 预计达成年限
-- 关键行动建议
-- 组合再平衡指导
+- 🎯 **5题阶段诊断** — 30秒内定位你的FIRE阶段（负债清偿 → 应急建设 → 投资启动 → 储蓄加速 → 配置优化 → 冲刺FIRE）
+- 🛠️ **6套阶段专属工具** — 债务雪崩/雪球计算器、应急金进度条、DCA收益模拟、储蓄率敏感性表、再平衡检查清单、Coast FIRE计算
+- 📊 **扩展FIRE计算器** — 收入增长模拟、副业场景对比、退休生活方式对比（大城市/二线/东南亚套利/极简）、Coast FIRE检查
+- 🏦 **中国市场特化** — 个人养老金（12000元/年抵税）、ETF代码（510300/159919沪深300、513500 QDII、518880黄金ETF）、公积金处理
+- 💾 **月度快照追踪** — localStorage存储，折线图，趋势箭头，无需后端
+- 🧠 **28个JSON知识节点** — 页面内知识速查卡，结构化供AI消费
+- 🤖 **一键AI报告** — 结构化8段提示词，供Claude/ChatGPT深度分析
 
 ## 🎯 目标用户
 
@@ -62,27 +54,23 @@
 
 ## 📚 知识来源
 
-精选洞察来自：
-
-- 托尼·罗宾斯《钱：七步创造终身收入》（[Amazon](https://www.amazon.com/Money-Master-Game-7-Simple/dp/1476757801)）
-- JL·柯林斯《简单到足以让孩子管钱》（[Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926)）
-- FIRE 数学（4% 法则、Trinity Study）（[Wikipedia](https://en.wikipedia.org/wiki/Trinity_study)）
-- 邱岩《让钱去工作》（双轮配置）
+- FIRE 数学：4% 法则、Trinity Study（[Wikipedia](https://en.wikipedia.org/wiki/Trinity_study)）
+- 双轮配置（沪深300 + 标普500 + 黄金 + 债券）
+- 中国第三支柱养老金（个人养老金）规则
+- FIRE 社区关于储蓄率、Coast FIRE、地理套利的研究
 - 更多来源见 [`playbooks/book-summaries/`](playbooks/book-summaries/)
 
 ## 🔧 如何使用
 
 ### 1️⃣ 立即体验（无需安装）
 
-打开 **`https://adashuai5.github.io/awesome-financial-freedom/demo/`** 并输入你的数字，你会获得：
+打开 **`https://adashuai5.github.io/awesome-financial-freedom/demo/`**
 
-- **FIRE 目标金额** 和预计达成年限
-- 关键行动建议
-- 组合再平衡指导
+页面第一件事：5个是/否问题，30秒内定位你的FIRE阶段，对应工具自动加载——不需要读完整计算器。
 
-### 2️⃣ 准备你的数字
+### 2️⃣ 填入你的数字（可选但建议）
 
-打开演示前，收集：当前存款、年收入、年支出、预期回报率、安全提取率、资产配置（如 60% 股票 / 40% 债券）。
+主表单需要：年龄、收入、支出、各类资产（银行/公积金/股票/房产）、负债、风险偏好。新增字段：个人养老金缴费、收入增长率、副业月收入、目标退休年龄、退休生活方式。
 
 ### 3️⃣ 深入探索
 

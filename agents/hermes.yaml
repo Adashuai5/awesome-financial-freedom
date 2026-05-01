@@ -1,14 +1,20 @@
-name: Hermes Workflow Executor
+name: financial-freedom-advisor
 
 description: |
-  占位符 Agent 定义，用于将来支持 Hermes 代理执行 Money OS 工作流。
+  Hermes skill agent for awesome-financial-freedom.
+  Loads the financial-freedom-advisor skill from ~/.hermes/skills/.
 
 agent_config:
   type: hermes
-  endpoint: https://example.com/hermes/api
-  auth: Bearer <token>
+  skill: financial-freedom-advisor
 
 capabilities:
-  - execute_workflow
-  - fetch_tools
-  - report_status
+  - fire_assessment
+  - dca_planning
+  - portfolio_rebalancing
+
+usage: |
+  hermes -s financial-freedom-advisor
+
+  Skill file: ~/.hermes/skills/financial-freedom-advisor/SKILL.md
+  System prompt: prompts/system.md
