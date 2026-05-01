@@ -1,23 +1,143 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420">
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#0f172a"/>
       <stop offset="100%" stop-color="#111827"/>
     </linearGradient>
+    <linearGradient id="card1" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#162032"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1e3a2f"/>
+      <stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1e2d3a"/>
+      <stop offset="100%" stop-color="#0f1e2a"/>
+    </linearGradient>
   </defs>
-  <rect width="960" height="360" fill="url(#bg)" rx="24"/>
-  <rect x="24" y="24" width="912" height="312" rx="20" fill="#111827" stroke="#334155" stroke-width="2"/>
-  <text x="48" y="64" fill="#f8fafc" font-family="Inter,ui-sans-serif,sans-serif" font-size="24" font-weight="700">AI 对话演示：退休规划与组合再平衡</text>
-  <rect x="48" y="92" width="400" height="92" rx="14" fill="#1e293b"/>
-  <text x="64" y="124" fill="#cbd5e1" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">用户：</text>
-  <text x="64" y="148" fill="#e2e8f0" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">我每月收入 5000，美金，存 1000，何时可以退休？</text>
-  <rect x="48" y="204" width="400" height="112" rx="14" fill="#0f172a" stroke="#475569" stroke-width="1"/>
-  <text x="64" y="236" fill="#7dd3fc" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">AI：</text>
-  <text x="64" y="260" fill="#e2e8f0" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">估算 FIRE 目标：约 120 万美元；</text>
-  <text x="64" y="284" fill="#e2e8f0" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">预计 20 年后达到，建议：提高储蓄率、优化资产配置。</text>
-  <rect x="472" y="92" width="424" height="224" rx="18" fill="#0f172a" stroke="#475569" stroke-width="1"/>
-  <text x="496" y="124" fill="#7dd3fc" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">本地验证命令</text>
-  <text x="496" y="156" fill="#e2e8f0" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">npm run run:workflow workflows/fire_planning.yaml</text>
-  <text x="496" y="182" fill="#e2e8f0" font-family="Inter,ui-sans-serif,sans-serif" font-size="16">npm run run:workflow workflows/portfolio_rebalancing.yaml</text>
-  <text x="496" y="216" fill="#cbd5e1" font-family="Inter,ui-sans-serif,sans-serif" font-size="14">本截图展示了仓库内 AI 工作流执行结果</text>
+
+  <!-- Background -->
+  <rect width="960" height="420" fill="url(#bg)" rx="20"/>
+  <rect x="1" y="1" width="958" height="418" fill="none" stroke="#1e293b" stroke-width="2" rx="20"/>
+
+  <!-- Header -->
+  <text x="480" y="44" fill="#f8fafc" font-family="'PingFang SC',Inter,ui-sans-serif,sans-serif" font-size="20" font-weight="700" text-anchor="middle">Awesome Financial Freedom — 投资小白的财务自由系统</text>
+  <text x="480" y="68" fill="#64748b" font-family="'PingFang SC',Inter,ui-sans-serif,sans-serif" font-size="13" text-anchor="middle">5个问题 → 明确阶段 → 专属工具 → 月度追踪 → AI深度分析</text>
+
+  <!-- Arrow connectors -->
+  <line x1="286" y1="240" x2="320" y2="240" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="620" y1="240" x2="654" y2="240" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Card 1: Stage Diagnosis -->
+  <rect x="32" y="90" width="254" height="300" rx="14" fill="url(#card1)" stroke="#334155" stroke-width="1"/>
+  <rect x="32" y="90" width="254" height="36" rx="14" fill="#1e40af" opacity="0.4"/>
+  <rect x="32" y="112" width="254" height="14" rx="0" fill="#1e40af" opacity="0.4"/>
+  <text x="48" y="114" fill="#93c5fd" font-family="'PingFang SC',Inter,sans-serif" font-size="13" font-weight="600">① 阶段诊断（5问题）</text>
+
+  <text x="48" y="148" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="12">有利率 &gt;5% 的贷款？</text>
+  <rect x="244" y="136" width="32" height="18" rx="4" fill="#ef4444" opacity="0.3"/>
+  <text x="260" y="149" fill="#fca5a5" font-family="Inter,sans-serif" font-size="12" text-anchor="middle">否</text>
+
+  <text x="48" y="176" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="12">有6个月应急金？</text>
+  <rect x="244" y="164" width="32" height="18" rx="4" fill="#ef4444" opacity="0.3"/>
+  <text x="260" y="177" fill="#fca5a5" font-family="Inter,sans-serif" font-size="12" text-anchor="middle">否</text>
+
+  <text x="48" y="204" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="12">在坚持每月定投？</text>
+  <rect x="244" y="192" width="32" height="18" rx="4" fill="#22c55e" opacity="0.2"/>
+  <text x="260" y="205" fill="#86efac" font-family="Inter,sans-serif" font-size="12" text-anchor="middle">是</text>
+
+  <text x="48" y="232" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="12">储蓄率 &gt;20%？</text>
+  <rect x="244" y="220" width="32" height="18" rx="4" fill="#22c55e" opacity="0.2"/>
+  <text x="260" y="233" fill="#86efac" font-family="Inter,sans-serif" font-size="12" text-anchor="middle">是</text>
+
+  <text x="48" y="260" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="12">知道FIRE目标金额？</text>
+  <rect x="244" y="248" width="32" height="18" rx="4" fill="#22c55e" opacity="0.2"/>
+  <text x="260" y="261" fill="#86efac" font-family="Inter,sans-serif" font-size="12" text-anchor="middle">是</text>
+
+  <!-- Stage Badge -->
+  <rect x="48" y="282" width="220" height="48" rx="10" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="158" y="302" fill="#67e8f9" font-family="'PingFang SC',Inter,sans-serif" font-size="12" text-anchor="middle">当前阶段</text>
+  <text x="158" y="322" fill="#e0f2fe" font-family="'PingFang SC',Inter,sans-serif" font-size="15" font-weight="700" text-anchor="middle">📊 储蓄加速期</text>
+
+  <text x="48" y="364" fill="#64748b" font-family="'PingFang SC',Inter,sans-serif" font-size="11">6个阶段：负债清偿 → 应急建设 → 投资启动</text>
+  <text x="48" y="380" fill="#64748b" font-family="'PingFang SC',Inter,sans-serif" font-size="11">→ 储蓄加速 → 配置优化 → 冲刺FIRE</text>
+
+  <!-- Card 2: Stage Tools -->
+  <rect x="330" y="90" width="298" height="300" rx="14" fill="url(#card2)" stroke="#166534" stroke-width="1"/>
+  <rect x="330" y="90" width="298" height="36" rx="14" fill="#15803d" opacity="0.3"/>
+  <rect x="330" y="112" width="298" height="14" rx="0" fill="#15803d" opacity="0.3"/>
+  <text x="346" y="114" fill="#86efac" font-family="'PingFang SC',Inter,sans-serif" font-size="13" font-weight="600">② 专属工具（储蓄加速期）</text>
+
+  <!-- Savings rate table preview -->
+  <text x="346" y="148" fill="#6ee7b7" font-family="'PingFang SC',Inter,sans-serif" font-size="12" font-weight="600">储蓄率敏感性表</text>
+  <rect x="346" y="154" width="264" height="1" fill="#1e4035"/>
+
+  <text x="346" y="174" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11">储蓄率</text>
+  <text x="520" y="174" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11" text-anchor="end">约需年限</text>
+  <text x="346" y="194" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11">20%</text>
+  <text x="520" y="194" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11" text-anchor="end">37 年</text>
+  <text x="346" y="212" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11">30%</text>
+  <text x="520" y="212" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11" text-anchor="end">28 年</text>
+
+  <!-- Highlighted current row -->
+  <rect x="342" y="216" width="276" height="20" rx="4" fill="#15803d" opacity="0.35"/>
+  <text x="346" y="230" fill="#4ade80" font-family="Inter,sans-serif" font-size="11" font-weight="700">40%  ← 你在这里</text>
+  <text x="520" y="230" fill="#4ade80" font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="end">22 年</text>
+
+  <text x="346" y="250" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11">50%</text>
+  <text x="520" y="250" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11" text-anchor="end">17 年</text>
+  <text x="346" y="268" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11">60%</text>
+  <text x="520" y="268" fill="#94a3b8" font-family="Inter,sans-serif" font-size="11" text-anchor="end">12 年</text>
+
+  <rect x="346" y="284" width="264" height="1" fill="#1e4035"/>
+  <text x="346" y="304" fill="#6ee7b7" font-family="'PingFang SC',Inter,sans-serif" font-size="11">提高10%储蓄率 → 少6年</text>
+
+  <!-- Coast FIRE -->
+  <rect x="346" y="320" width="264" height="50" rx="8" fill="#0f2318" stroke="#166534" stroke-width="1"/>
+  <text x="358" y="340" fill="#86efac" font-family="'PingFang SC',Inter,sans-serif" font-size="11" font-weight="600">Coast FIRE</text>
+  <text x="358" y="358" fill="#6ee7b7" font-family="'PingFang SC',Inter,sans-serif" font-size="11">目标：55万  当前：37万  差距：18万</text>
+
+  <!-- Card 3: Tracking + AI -->
+  <rect x="658" y="90" width="268" height="300" rx="14" fill="url(#card3)" stroke="#1e3a5f" stroke-width="1"/>
+  <rect x="658" y="90" width="268" height="36" rx="14" fill="#1d4ed8" opacity="0.3"/>
+  <rect x="658" y="112" width="268" height="14" rx="0" fill="#1d4ed8" opacity="0.3"/>
+  <text x="674" y="114" fill="#93c5fd" font-family="'PingFang SC',Inter,sans-serif" font-size="13" font-weight="600">③ 追踪 + AI分析</text>
+
+  <!-- Sparkline -->
+  <text x="674" y="148" fill="#7dd3fc" font-family="'PingFang SC',Inter,sans-serif" font-size="12" font-weight="600">月度净资产趋势</text>
+  <polyline points="674,200 700,192 726,188 752,182 778,178 804,170 830,162 856,155 882,148 908,142" fill="none" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="908" cy="142" r="4" fill="#60a5fa"/>
+
+  <!-- Snapshot table -->
+  <text x="674" y="226" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="11">月份</text>
+  <text x="774" y="226" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="11">净资产</text>
+  <text x="890" y="226" fill="#94a3b8" font-family="'PingFang SC',Inter,sans-serif" font-size="11" text-anchor="end">进度</text>
+  <rect x="662" y="228" width="256" height="1" fill="#1e3a5f"/>
+  <text x="674" y="246" fill="#64748b" font-family="Inter,sans-serif" font-size="10">2025-09</text>
+  <text x="774" y="246" fill="#94a3b8" font-family="Inter,sans-serif" font-size="10">45.2万</text>
+  <text x="890" y="246" fill="#94a3b8" font-family="Inter,sans-serif" font-size="10" text-anchor="end">18%</text>
+  <text x="674" y="264" fill="#64748b" font-family="Inter,sans-serif" font-size="10">2025-10</text>
+  <text x="774" y="264" fill="#94a3b8" font-family="Inter,sans-serif" font-size="10">46.8万 ↑</text>
+  <text x="890" y="264" fill="#94a3b8" font-family="Inter,sans-serif" font-size="10" text-anchor="end">19% ↑</text>
+  <text x="674" y="282" fill="#93c5fd" font-family="Inter,sans-serif" font-size="10" font-weight="700">2025-11</text>
+  <text x="774" y="282" fill="#60a5fa" font-family="Inter,sans-serif" font-size="10" font-weight="700">48.1万 ↑</text>
+  <text x="890" y="282" fill="#60a5fa" font-family="Inter,sans-serif" font-size="10" font-weight="700" text-anchor="end">20% ↑</text>
+
+  <!-- AI section -->
+  <rect x="674" y="296" width="238" height="72" rx="8" fill="#0f1e2a" stroke="#1e3a5f" stroke-width="1"/>
+  <text x="686" y="316" fill="#7dd3fc" font-family="'PingFang SC',Inter,sans-serif" font-size="11" font-weight="600">一键复制 → Claude / ChatGPT</text>
+  <text x="686" y="334" fill="#64748b" font-family="'PingFang SC',Inter,sans-serif" font-size="10">8段结构分析：评分、目标、配置、</text>
+  <text x="686" y="350" fill="#64748b" font-family="'PingFang SC',Inter,sans-serif" font-size="10">税务优化、副业场景、3步行动...</text>
+  <rect x="686" y="356" width="214" height="4" rx="2" fill="#1e3a5f"/>
+  <rect x="686" y="356" width="128" height="4" rx="2" fill="#3b82f6"/>
+
+  <!-- Footer -->
+  <text x="480" y="408" fill="#475569" font-family="'PingFang SC',Inter,sans-serif" font-size="11" text-anchor="middle">github.com/adashuai5/awesome-financial-freedom · 纯静态，零依赖，数据本地存储</text>
 </svg>

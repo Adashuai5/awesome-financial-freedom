@@ -2,8 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> An AI-native financial freedom execution system, not just a knowledge list.
-> A beginner asks AI: I earn $5,000/month and save $1,000. When can I retire? AI gives the answer.
+> Answer 5 questions → know your FIRE stage → get a stage-specific tool → track monthly progress → send to AI for deep analysis.
+> Built for beginners who don't know where to start, not just developers who can read JSON.
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -12,7 +12,7 @@
 
 **Created**: 2026-04-12 · **Last updated**: 2026-04-26
 
-![Demo: AI answers retirement and rebalancing](assets/hero-demo.svg)
+![Stage diagnosis → 6 tools → monthly tracking → AI analysis](assets/hero-demo.svg)
 
 ## 🧭 Quick Navigation
 
@@ -26,25 +26,17 @@
 
 ## 🤔 What is this?
 
-**Awesome Financial Freedom** is an open-source, AI-native knowledge base for financial freedom. It combines the structured curation of awesome lists with AI Skill conversational capabilities, enabling *effortless* learning.
+**Awesome Financial Freedom** is an open-source, AI-native FIRE planning system for Chinese investors. It combines structured knowledge, deterministic calculators, and a stage-based UX so a financial beginner knows exactly what to do today — not just what the math says in 20 years.
 
-Instead of just a static list of links, this repo provides:
+Core components:
 
-- 📚 **Structured JSON knowledge nodes** covering mindset, saving, investing, and FIRE principles.
-- 🤖 **Ready-to-use AI Skills** for Claude and ChatGPT, so you can ask questions like:
-  - _"I earn $5,000/month and save $1,000. When can I retire?"_
-  - _"Review my portfolio: 70% S&P 500, 30% bonds."_
-  - _"What's the 'Dual-Wheel Asset Allocation' method?"_
-- 🧮 **Embedded calculators** and formulas for transparent, step-by-step answers.
-- 📍 **Learning path guide** for stage-based progression and personalized financial goals.
-- ✅ **Actionable steps guide** for quick wins and risk-aware first moves, see [`playbooks/guides/actionable-steps.md`](playbooks/guides/actionable-steps.md).
-
-This is a user-facing financial freedom planning tool. Enter your current savings, annual income, annual expenses, annual savings, expected return, safe withdrawal rate, and asset allocation, and the system will return:
-
-- FIRE target
-- Estimated years to FIRE
-- Key action recommendations
-- Portfolio rebalancing guidance
+- 🎯 **5-question stage diagnosis** — detects your current FIRE stage (debt phase → emergency fund → investing → accelerating → optimizing → sprinting) in under 30 seconds
+- 🛠️ **6 stage-specific tools** — debt avalanche/snowball calculator, emergency fund progress bar, DCA simulator, savings-rate sensitivity table, rebalancing checklist, Coast FIRE calculator
+- 📊 **Extended FIRE calculator** — income growth simulation, side-income scenarios, retirement lifestyle comparison (city / smaller city / Southeast Asia arbitrage / minimal), Coast FIRE check
+- 🏦 **China-specific** — 个人养老金 (¥12,000/yr tax deduction), ETF codes (510300/159919 沪深300, 513500 QDII, 518880 黄金ETF), 公积金 handling
+- 💾 **Monthly snapshot tracking** — localStorage snapshots, sparkline chart, trend arrows, no backend needed
+- 🧠 **28 JSON knowledge nodes** — visible in-UI knowledge card, structured for accurate AI consumption
+- 🤖 **One-click AI report** — structured 8-section prompt for Claude/ChatGPT, covers all new fields
 
 ## 🎯 Target audience
 
@@ -62,27 +54,23 @@ This project fills that gap by providing a **community-driven, transparent, and 
 
 ## 📚 Knowledge Sources
 
-Curated insights from:
-
-- Tony Robbins' _Money: Master the Game_ trilogy ([Amazon](https://www.amazon.com/Money-Master-Game-7-Simple/dp/1476757801))
-- JL Collins' _The Simple Path to Wealth_ ([Amazon](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926))
-- FIRE mathematics (4% rule, Trinity Study) ([Wikipedia](https://en.wikipedia.org/wiki/Trinity_study))
-- A Qiu's _Let Money Work_ (Dual-Wheel Asset Allocation)
+- FIRE mathematics: 4% rule, Trinity Study ([Wikipedia](https://en.wikipedia.org/wiki/Trinity_study))
+- Dual-Wheel Asset Allocation (沪深300 + S&P 500 + Gold + Bonds)
+- China third-pillar pension (个人养老金) rules
+- FIRE community research on savings rate, Coast FIRE, geographic arbitrage
 - Additional sources in [`playbooks/book-summaries/`](playbooks/book-summaries/)
 
 ## 🚀 How to Use
 
 ### 1️⃣ Try the demo (no install needed)
 
-Open **`https://adashuai5.github.io/awesome-financial-freedom/demo/`** and enter your numbers. You'll get:
+Open **`https://adashuai5.github.io/awesome-financial-freedom/demo/`**
 
-- **FIRE target** and estimated years to financial independence
-- Key action recommendations
-- Portfolio rebalancing guidance
+First thing you'll see: 5 yes/no questions that detect your FIRE stage in under 30 seconds. Then a stage-specific tool loads automatically — no need to read the full calculator.
 
-### 2️⃣ Prepare your numbers
+### 2️⃣ Fill in your numbers (optional but recommended)
 
-Before opening the demo, gather: current savings, annual income, annual expenses, expected return, safe withdrawal rate, and asset mix (e.g. 60% stocks / 40% bonds).
+The main form takes: age, income, expenses, assets (bank / 公积金 / stocks / real estate), debt, and risk profile. New fields: 个人养老金 contribution, income growth rate, side income, target retirement age, and retirement lifestyle preference.
 
 ### 3️⃣ Explore deeper
 
