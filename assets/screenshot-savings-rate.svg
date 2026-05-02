@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420">
+  <rect width="960" height="420" fill="#f1f5f9"/>
+
+  <!-- Card -->
+  <rect x="80" y="30" width="800" height="360" rx="16" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="120" y="76" font-family="'PingFang SC',sans-serif" font-size="16" font-weight="700" fill="#0f172a">📊 储蓄加速期专属工具</text>
+  <text x="120" y="100" font-family="'PingFang SC',sans-serif" font-size="13" fill="#64748b">储蓄率是 FIRE 里最重要的变量——提高 10%，能省几年？</text>
+
+  <!-- Table header -->
+  <rect x="120" y="116" width="720" height="32" rx="6" fill="#f8fafc"/>
+  <text x="200" y="137" font-family="'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#64748b" text-anchor="middle">储蓄率</text>
+  <text x="480" y="137" font-family="'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#64748b" text-anchor="middle">约需年限</text>
+  <text x="760" y="137" font-family="'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#64748b" text-anchor="middle">比 10% 省</text>
+
+  <!-- Row 1: 10% -->
+  <line x1="120" y1="148" x2="840" y2="148" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="200" y="170" font-family="'PingFang SC',sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">10%</text>
+  <text x="480" y="170" font-family="'PingFang SC',sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">43 年</text>
+  <text x="760" y="170" font-family="'PingFang SC',sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">—</text>
+
+  <!-- Row 2: 20% -->
+  <line x1="120" y1="180" x2="840" y2="180" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="200" y="202" font-family="'PingFang SC',sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">20%</text>
+  <text x="480" y="202" font-family="'PingFang SC',sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">37 年</text>
+  <text x="760" y="202" font-family="'PingFang SC',sans-serif" font-size="14" fill="#64748b" text-anchor="middle">省 6 年</text>
+
+  <!-- Row 3: 30% HIGHLIGHTED -->
+  <rect x="120" y="212" width="720" height="36" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="200" y="235" font-family="'PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">30%</text>
+  <text x="370" y="230" font-family="'PingFang SC',sans-serif" font-size="11" fill="#2563eb">← 你在这里</text>
+  <text x="480" y="235" font-family="'PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">28 年</text>
+  <text x="760" y="235" font-family="'PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">省 15 年</text>
+
+  <!-- Row 4: 40% -->
+  <line x1="120" y1="248" x2="840" y2="248" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="200" y="272" font-family="'PingFang SC',sans-serif" font-size="14" fill="#0f172a" text-anchor="middle">40%</text>
+  <text x="480" y="272" font-family="'PingFang SC',sans-serif" font-size="14" fill="#0f172a" text-anchor="middle">22 年</text>
+  <rect x="700" y="256" width="120" height="22" rx="4" fill="#dcfce7"/>
+  <text x="760" y="272" font-family="'PingFang SC',sans-serif" font-size="14" font-weight="600" fill="#15803d" text-anchor="middle">省 21 年 ↑</text>
+
+  <!-- Row 5: 50% -->
+  <line x1="120" y1="282" x2="840" y2="282" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="200" y="306" font-family="'PingFang SC',sans-serif" font-size="14" fill="#0f172a" text-anchor="middle">50%</text>
+  <text x="480" y="306" font-family="'PingFang SC',sans-serif" font-size="14" fill="#0f172a" text-anchor="middle">17 年</text>
+  <rect x="700" y="290" width="120" height="22" rx="4" fill="#dcfce7"/>
+  <text x="760" y="306" font-family="'PingFang SC',sans-serif" font-size="14" font-weight="600" fill="#15803d" text-anchor="middle">省 26 年 ↑</text>
+
+  <!-- Row 6: 60% -->
+  <line x1="120" y1="316" x2="840" y2="316" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="200" y="340" font-family="'PingFang SC',sans-serif" font-size="14" fill="#0f172a" text-anchor="middle">60%</text>
+  <text x="480" y="340" font-family="'PingFang SC',sans-serif" font-size="14" fill="#0f172a" text-anchor="middle">12 年</text>
+  <rect x="700" y="324" width="120" height="22" rx="4" fill="#dcfce7"/>
+  <text x="760" y="340" font-family="'PingFang SC',sans-serif" font-size="14" font-weight="600" fill="#15803d" text-anchor="middle">省 31 年 ↑</text>
+
+  <!-- Footer insight -->
+  <rect x="120" y="360" width="720" height="1" fill="#e2e8f0"/>
+  <text x="480" y="384" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">从 30% 提升到 40%，少工作 6 年。储蓄率的杠杆远大于投资收益率。</text>
+</svg>

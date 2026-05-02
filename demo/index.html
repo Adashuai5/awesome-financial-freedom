@@ -108,7 +108,9 @@
 
     /* ===== 内联知识卡片 ===== */
     .knowledge-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px 16px; font-size:0.85rem; }
-    .knowledge-card summary { cursor:pointer; color:#2563eb; font-weight:600; user-select:none; padding:4px 0; }
+    .knowledge-card summary { cursor:pointer; color:#2563eb; font-weight:600; user-select:none; padding:4px 0; display:flex; align-items:center; gap:6px; }
+    .knowledge-card summary::after { content:'展开'; font-size:0.72rem; color:#94a3b8; font-weight:400; border:1px solid #e2e8f0; border-radius:4px; padding:1px 6px; }
+    details.knowledge-card[open] summary::after { content:'收起'; }
     .knowledge-card summary:hover { color:#1d4ed8; }
     .knowledge-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:12px; margin-top:12px; }
     .kn-item { background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:10px 12px; }
@@ -120,6 +122,19 @@
     .tracker-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; padding: 4px 0; }
     .tracker-toggle .arrow { transition: transform 0.2s; font-size: 0.7rem; color: #94a3b8; }
     .tracker-toggle.collapsed .arrow { transform: rotate(-90deg); }
+
+    /* ===== 移动端适配 ===== */
+    @media (max-width: 600px) {
+      .container { padding: 12px; }
+      .form-row { flex-wrap: wrap; }
+      .form-row .field { min-width: 100%; }
+      .st-debt-row { flex-direction: column; }
+      .st-form-row { flex-direction: column; }
+      .st-field { min-width: 100%; }
+      .knowledge-grid { grid-template-columns: 1fr; }
+      .onb-card { border-radius: 14px; }
+      #stage-badge-bar { flex-direction: column; align-items: flex-start !important; }
+    }
   </style>
 </head>
 

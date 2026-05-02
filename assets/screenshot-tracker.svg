@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380">
+  <rect width="960" height="380" fill="#f1f5f9"/>
+
+  <!-- Card -->
+  <rect x="80" y="24" width="800" height="332" rx="16" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Header -->
+  <text x="120" y="66" font-family="'PingFang SC',sans-serif" font-size="15" font-weight="700" fill="#0f172a">📅 历史快照记录 ▾</text>
+  <text x="120" y="88" font-family="'PingFang SC',sans-serif" font-size="12" fill="#64748b">共 3 条记录 · 净资产变化 <tspan fill="#16a34a" font-weight="600">+48,000 元</tspan>（2025-09 → 2025-11）</text>
+
+  <!-- Sparkline area -->
+  <rect x="660" y="52" width="180" height="52" rx="8" fill="#f8fafc"/>
+  <text x="750" y="68" font-family="'PingFang SC',sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">净资产趋势</text>
+  <polyline points="676,94 706,88 736,82 766,74 796,68 826,60" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="826" cy="60" r="4" fill="#2563eb"/>
+
+  <!-- Table header -->
+  <rect x="120" y="112" width="720" height="30" rx="6" fill="#f8fafc"/>
+  <text x="168" y="131" font-family="'PingFang SC',sans-serif" font-size="12" font-weight="600" fill="#64748b">月份</text>
+  <text x="340" y="131" font-family="'PingFang SC',sans-serif" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">净资产</text>
+  <text x="500" y="131" font-family="'PingFang SC',sans-serif" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">可投资</text>
+  <text x="650" y="131" font-family="'PingFang SC',sans-serif" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">FIRE进度</text>
+  <text x="790" y="131" font-family="'PingFang SC',sans-serif" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">储蓄率</text>
+
+  <!-- Row 1 -->
+  <line x1="120" y1="142" x2="840" y2="142" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="168" y="164" font-family="'PingFang SC',sans-serif" font-size="13" fill="#64748b">2025-09</text>
+  <text x="340" y="164" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">45.2 万</text>
+  <text x="500" y="164" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">28.1 万</text>
+  <text x="650" y="164" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">18%</text>
+  <text x="790" y="164" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">32%</text>
+
+  <!-- Row 2 -->
+  <line x1="120" y1="174" x2="840" y2="174" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="168" y="196" font-family="'PingFang SC',sans-serif" font-size="13" fill="#64748b">2025-10</text>
+  <text x="340" y="196" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">46.8 万 <tspan fill="#16a34a">↑</tspan></text>
+  <text x="500" y="196" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">29.3 万 <tspan fill="#16a34a">↑</tspan></text>
+  <text x="650" y="196" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">19% <tspan fill="#16a34a">↑</tspan></text>
+  <text x="790" y="196" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">34% <tspan fill="#16a34a">↑</tspan></text>
+
+  <!-- Row 3 LATEST highlighted -->
+  <rect x="120" y="206" width="720" height="36" rx="4" fill="#f0fdf4"/>
+  <text x="168" y="229" font-family="'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#15803d">2025-11</text>
+  <text x="240" y="222" font-family="'PingFang SC',sans-serif" font-size="10" fill="#16a34a" font-weight="600">最新</text>
+  <text x="340" y="229" font-family="'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#15803d" text-anchor="middle">48.1 万 ↑</text>
+  <text x="500" y="229" font-family="'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#15803d" text-anchor="middle">30.7 万 ↑</text>
+  <text x="650" y="229" font-family="'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#15803d" text-anchor="middle">20% ↑</text>
+  <text x="790" y="229" font-family="'PingFang SC',sans-serif" font-size="13" fill="#475569" text-anchor="middle">33% <tspan fill="#ef4444">↓</tspan></text>
+
+  <line x1="120" y1="242" x2="840" y2="242" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Save button -->
+  <rect x="120" y="258" width="720" height="48" rx="10" fill="#1e293b"/>
+  <text x="480" y="288" font-family="'PingFang SC',sans-serif" font-size="15" font-weight="600" fill="#f8fafc" text-anchor="middle">💾 保存本月快照</text>
+
+  <!-- Footer note -->
+  <text x="480" y="332" font-family="'PingFang SC',sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">数据仅保存在浏览器本地，不上传服务器 · 每月更新一次，一年后看见方向</text>
+</svg>
