@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480">
+  <rect width="960" height="480" fill="#0f172a" opacity="0.55"/>
+  <rect width="960" height="480" fill="#f1f5f9"/>
+
+  <!-- Card -->
+  <rect x="240" y="40" width="480" height="400" rx="20" fill="#fff" filter="url(#shadow)"/>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Header -->
+  <text x="480" y="100" font-family="'PingFang SC',sans-serif" font-size="28" font-weight="800" fill="#0f172a" text-anchor="middle">🔥</text>
+  <text x="480" y="134" font-family="'PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">先搞清楚你在哪个阶段</text>
+  <text x="480" y="158" font-family="'PingFang SC',sans-serif" font-size="13" fill="#64748b" text-anchor="middle">5 个问题，30 秒内给出你的财务阶段和今日行动</text>
+
+  <!-- Progress bar -->
+  <rect x="240" y="170" width="480" height="4" fill="#e2e8f0"/>
+  <rect x="240" y="170" width="192" height="4" fill="#2563eb"/>
+
+  <!-- Question number -->
+  <text x="280" y="210" font-family="'PingFang SC',sans-serif" font-size="11" fill="#94a3b8" font-weight="600">问题 2 / 5</text>
+
+  <!-- Question -->
+  <text x="280" y="242" font-family="'PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#0f172a">你有 6 个月以上的应急储蓄吗？</text>
+  <text x="280" y="268" font-family="'PingFang SC',sans-serif" font-size="13" fill="#64748b">活期存款 + 货币基金，可随时取用的流动资金</text>
+
+  <!-- Buttons -->
+  <rect x="280" y="296" width="184" height="52" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="372" y="327" font-family="'PingFang SC',sans-serif" font-size="16" font-weight="600" fill="#2563eb" text-anchor="middle">✅ 有</text>
+
+  <rect x="496" y="296" width="184" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="588" y="327" font-family="'PingFang SC',sans-serif" font-size="16" font-weight="600" fill="#475569" text-anchor="middle">❌ 没有</text>
+
+  <!-- Divider -->
+  <line x1="280" y1="372" x2="680" y2="372" stroke="#f1f5f9" stroke-width="1"/>
+
+  <!-- Result preview -->
+  <rect x="280" y="386" width="400" height="32" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="480" y="406" font-family="'PingFang SC',sans-serif" font-size="12" fill="#15803d" text-anchor="middle">✦ 回答完毕后立即显示你的专属阶段和行动建议</text>
+
+  <!-- Skip -->
+  <text x="480" y="436" font-family="'PingFang SC',sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">跳过，直接使用计算器</text>
+</svg>

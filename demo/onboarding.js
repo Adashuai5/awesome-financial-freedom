@@ -187,6 +187,7 @@
       <div>
         <strong style="font-size:0.9rem;color:${stage.borderColor}">${stage.emoji} 当前阶段：${stage.name}</strong>
         <div style="font-size:0.82rem;color:#475569;margin-top:3px;">${stage.action}</div>
+        <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px;letter-spacing:0.01em;">↓ 你的专属工具已在下方就绪</div>
       </div>
       <button onclick="window.fireOnboarding.restart()" style="font-size:0.78rem;color:#64748b;background:none;border:1px solid #cbd5e1;border-radius:6px;padding:4px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0;">重新诊断</button>
     `;
