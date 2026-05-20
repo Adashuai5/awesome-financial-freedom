@@ -348,6 +348,45 @@
           <span class="field-hint">第三支柱，锁定至退休，缴满抵扣应税收入</span>
         </div>
       </div>
+
+      <!-- CN 综合所得税专项扣除 -->
+      <details style="margin-top:14px;background:#fafafa;border-radius:10px;padding:10px 14px;">
+        <summary style="cursor:pointer;font-weight:600;color:#475569;font-size:0.9rem;">🇨🇳 综合所得税 & 专项附加扣除（精确计算"税后真实储蓄率"）</summary>
+        <div class="form-grid" style="margin-top:12px;">
+          <div class="field-wrap">
+            <label>年五险一金合计 (元)</label>
+            <input id="socialInsuranceAnnual" type="number" value="0" placeholder="个人缴存部分年合计" />
+            <span class="field-hint">公积金+养老+医疗+失业+工伤+生育的个人部分</span>
+          </div>
+          <div class="field-wrap">
+            <label>子女数（≥3岁）</label>
+            <input id="deductChildren" type="number" min="0" value="0" />
+            <span class="field-hint">每孩 2000 元/月</span>
+          </div>
+          <div class="field-wrap">
+            <label>3 岁以下婴幼儿数</label>
+            <input id="deductInfants" type="number" min="0" value="0" />
+            <span class="field-hint">每孩 2000 元/月</span>
+          </div>
+          <div class="field-wrap">
+            <label>住房</label>
+            <select id="deductHousing">
+              <option value="none">无</option>
+              <option value="mortgage">首套房贷利息（1000/月）</option>
+              <option value="tier1">租房-一线（1500/月）</option>
+              <option value="tier2">租房-二线（1100/月）</option>
+              <option value="tier3">租房-其他（800/月）</option>
+            </select>
+          </div>
+          <div class="field-wrap">
+            <label>赡养老人（独生子女）</label>
+            <select id="deductElderly">
+              <option value="no">否</option>
+              <option value="yes">是（3000/月）</option>
+            </select>
+          </div>
+        </div>
+      </details>
     </div>
 
     <hr class="divider" />
@@ -424,11 +463,19 @@
 
     <div class="btn-row">
       <button id="runButton" class="btn-primary">生成 FIRE 计划</button>
-      <button id="copyAiButton" class="btn-secondary">复制报告给 AI 助手</button>
+      <button id="addScenarioBtn" class="btn-secondary">➕ 加入对比</button>
+      <button id="byokAiButton" class="btn-secondary">🤖 用 AI 分析</button>
+      <button id="copyAiButton" class="btn-secondary">复制报告</button>
     </div>
 
     <div id="errorMsg" class="error-msg hidden"></div>
     <div id="summary" class="result-card hidden"></div>
+  </div>
+
+  <!-- ===== 多方案对比 ===== -->
+  <div class="panel" style="margin-top:16px;">
+    <div class="section-label">📊 方案对比器</div>
+    <div id="scenarios-panel"></div>
   </div>
 
   <!-- ===== 历史追踪面板 ===== -->
@@ -451,11 +498,41 @@
 
 </div>
 
-<script src="fire-calculation-core.js"></script>
 <script src="onboarding.js"></script>
 <script src="tracker.js"></script>
 <script src="stage-tool.js"></script>
-<script>
+<script type="module">
+import {
+  calculateCoreMetrics,
+  calculateRequiredAnnualSavingsForTargetYears,
+  simIncomeGrowth as _simIncomeGrowth,
+  simWithSideIncome as _simWithSideIncome,
+  calcCoastFIRE as _calcCoastFIRE,
+} from './calculators/fire-core.js';
+import {
+  calculateAfterTaxSavingsRate,
+  totalSpecialDeductionAnnual,
+} from './calculators/cn-tax.js';
+import { initScenarios, addScenarioFromCurrent } from './scenario-ui.js';
+import { renderKnowledgeCardsHTML } from './knowledge-cards.js';
+import { initBYOK } from './ai-byok.js';
+
+// 暴露给下方非 module 脚本使用（下方 script 是 classic，需要全局）
+window.FireCalculationCore = {
+  calculateCoreMetrics,
+  calculateRequiredAnnualSavingsForTargetYears,
+};
+window.simIncomeGrowth = _simIncomeGrowth;
+window.simWithSideIncome = _simWithSideIncome;
+window.calcCoastFIRE = _calcCoastFIRE;
+window.calculateAfterTaxSavingsRate = calculateAfterTaxSavingsRate;
+window.totalSpecialDeductionAnnual = totalSpecialDeductionAnnual;
+window.renderKnowledgeCardsHTML = renderKnowledgeCardsHTML;
+window.addScenarioFromCurrent = addScenarioFromCurrent;
+initScenarios();
+initBYOK();
+</script>
+<script defer>
 // ===== 工具函数 =====
 const $ = (id) => document.getElementById(id);
 const num = (el) => { const v = Number(el?.value); return Number.isFinite(v) ? v : 0; };
@@ -590,40 +667,10 @@ $('workToggle').addEventListener('click', () => {
   $('workSection').style.maxHeight = isCollapsed ? '600px' : '0';
 });
 
-// ===== 工作与生活模拟函数 =====
-function simIncomeGrowth(investable, fireTarget, rate, annualIncome, annualExpenses, growthRatePct) {
-  if (investable >= fireTarget) return 0;
-  const g = growthRatePct / 100;
-  let balance = investable;
-  let income = annualIncome;
-  for (let yr = 1; yr <= 100; yr++) {
-    income *= (1 + g);
-    const savings = Math.max(0, income - annualExpenses);
-    balance = balance * (1 + rate) + savings;
-    if (balance >= fireTarget) return yr;
-  }
-  return null;
-}
-
-function calcCoastFIRE(fireTarget, rate, yearsToCoast) {
-  if (yearsToCoast <= 0) return fireTarget;
-  return fireTarget / Math.pow(1 + rate, yearsToCoast);
-}
-
-function simWithSideIncome(investable, fireTarget, rate, annualSavings, sideMonthly) {
-  if (investable >= fireTarget) return 0;
-  const S = annualSavings + sideMonthly * 12;
-  if (rate === 0) {
-    if (S <= 0) return null;
-    const n = (fireTarget - investable) / S;
-    return n > 100 ? null : Math.ceil(n);
-  }
-  const denom = investable + S / rate;
-  const numer = fireTarget + S / rate;
-  if (denom <= 0 || numer / denom <= 0) return null;
-  const years = Math.log(numer / denom) / Math.log(1 + rate);
-  return (!Number.isFinite(years) || years <= 0 || years > 100) ? null : Math.ceil(years);
-}
+// ===== 工作与生活模拟函数 ===== (从 ESM 模块导入，挂在 window)
+const simIncomeGrowth = (...args) => window.simIncomeGrowth(...args);
+const simWithSideIncome = (...args) => window.simWithSideIncome(...args);
+const calcCoastFIRE = (...args) => window.calcCoastFIRE(...args);
 
 // ===== 计算逻辑 =====
 function run() {
@@ -967,6 +1014,47 @@ function run() {
     不同生活地点对应不同支出水平，FIRE 目标和年限随之变化。以上假设储蓄率不变。
   </p>`;
 
+  // ---- CN 综合所得税 & 税后真实储蓄率 ----
+  const socialInsuranceAnnual = num($('socialInsuranceAnnual'));
+  const deductChildren = num($('deductChildren'));
+  const deductInfants = num($('deductInfants'));
+  const deductHousing = $('deductHousing')?.value || 'none';
+  const deductElderly = $('deductElderly')?.value === 'yes';
+  const specialDeductionAnnual = window.totalSpecialDeductionAnnual({
+    children: deductChildren,
+    infants: deductInfants,
+    hasMortgage: deductHousing === 'mortgage',
+    rentTier: ['tier1','tier2','tier3'].includes(deductHousing) ? deductHousing : null,
+    elderlyCare: deductElderly,
+  });
+  const taxAnalysis = window.calculateAfterTaxSavingsRate({
+    grossIncomeAnnual: annualIncome,
+    annualExpenses,
+    socialInsuranceAnnual,
+    specialDeductionAnnual,
+    pensionContribAnnual: annualPension,
+  });
+  html += `<div class="result-actions-label" style="margin-top:20px;">🇨🇳 综合所得税分析</div>`;
+  html += `<table class="balance-table">
+    <tr><td>税前年收入</td><td>${fmt(annualIncome)}</td></tr>
+    <tr><td>起征点（60,000）</td><td style="color:#64748b;">-60,000</td></tr>
+    <tr><td>五险一金（个人）</td><td style="color:#64748b;">-${fmt(socialInsuranceAnnual)}</td></tr>
+    <tr><td>专项附加扣除</td><td style="color:#64748b;">-${fmt(specialDeductionAnnual)}</td></tr>
+    <tr><td>个人养老金抵扣</td><td style="color:#64748b;">-${fmt(Math.min(12000, annualPension))}</td></tr>
+    <tr><td>应纳税所得额</td><td><strong>${fmt(taxAnalysis.taxableIncome)}</strong></td></tr>
+    <tr><td>边际税率</td><td>${(taxAnalysis.marginalRate * 100).toFixed(0)}%</td></tr>
+    <tr><td>预计应缴个税</td><td style="color:#dc2626;">${fmt(taxAnalysis.tax)}</td></tr>
+    <tr><td>个人养老金节税</td><td style="color:#16a34a;">+${fmt(taxAnalysis.pensionTaxSaving)}</td></tr>
+    <tr class="total-row"><td><strong>税后到手收入</strong></td><td><strong>${fmt(taxAnalysis.afterTaxIncome)}</strong></td></tr>
+    <tr><td><strong>税后真实储蓄率</strong></td><td><strong style="color:${taxAnalysis.realSavingsRate >= 0.4 ? '#065f46' : taxAnalysis.realSavingsRate >= 0.2 ? '#2563eb' : '#92400e'};">${(taxAnalysis.realSavingsRate * 100).toFixed(1)}%</strong></td></tr>
+  </table>
+  <p style="font-size:0.78rem;color:#94a3b8;margin-top:6px;">
+    税档基于 2026 综合所得税法。若已申报"年收入"是税后到手（多数工薪族表格如此），此处可仅作复核参考；若填的是税前总收入，则真实储蓄率以本表为准。
+  </p>`;
+
+  // ---- 知识卡片（在最末）----
+  // 推迟到下方拼装时（需要先填 window._lastReport）
+
   $('summary').innerHTML = html;
   $('summary').classList.remove('hidden');
   $('summary').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -993,6 +1081,19 @@ function run() {
   if (window.fireTracker) {
     window.fireTracker.addSaveButton(window._lastReport);
   }
+
+  // 知识卡片下沉（基于结果挑选 2-4 张）
+  if (window.renderKnowledgeCardsHTML) {
+    const cardsHtml = window.renderKnowledgeCardsHTML(window._lastReport);
+    if (cardsHtml) {
+      const cardsDiv = document.createElement('div');
+      cardsDiv.innerHTML = cardsHtml;
+      $('summary').appendChild(cardsDiv);
+    }
+  }
+
+  // 刷新方案对比面板
+  if (window.fireScenarios) window.fireScenarios.render();
 }
 
 function showErr(msg) {
@@ -1003,6 +1104,25 @@ function showErr(msg) {
 
 // ===== 事件绑定 =====
 $('runButton').addEventListener('click', run);
+
+$('addScenarioBtn')?.addEventListener('click', () => {
+  if (!window._lastReport) { showErr('请先生成 FIRE 计划'); return; }
+  const name = prompt('给这个方案起个名字（如"现状"、"搬清迈"、"副业 3k"）：', '方案 ' + (Date.now().toString().slice(-4)));
+  if (name === null) return;
+  const ok = window.addScenarioFromCurrent(name.trim() || '未命名');
+  if (ok) {
+    const btn = $('addScenarioBtn');
+    const o = btn.textContent;
+    btn.textContent = '✓ 已加入对比';
+    setTimeout(() => btn.textContent = o, 1800);
+    document.getElementById('scenarios-panel')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+});
+
+$('byokAiButton')?.addEventListener('click', () => {
+  if (!window._lastReport) { showErr('请先生成 FIRE 计划'); return; }
+  window.fireBYOK?.open();
+});
 
 $('copyAiButton').addEventListener('click', () => {
   const r = window._lastReport;

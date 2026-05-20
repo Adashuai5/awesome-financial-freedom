@@ -147,13 +147,6 @@ GitHub：[github.com/adashuai5/awesome-financial-freedom](https://github.com/ada
 
 ![储蓄率敏感性表：当前储蓄率自动高亮，一眼看出提升10%能省几年](https://raw.githubusercontent.com/adashuai5/awesome-financial-freedom/main/assets/screenshot-savings-rate.svg)
 
-| 储蓄率 | 约需年限 |
-|--------|---------|
-| 20% | 37 年 |
-| 30% | 28 年（← 你在这里）|
-| 40% | 22 年 |
-| 50% | 17 年 |
-| 60% | 12 年 |
 
 当前储蓄率自动高亮。一眼看出：从 30% 提到 40%，省 6 年。这比任何理论都有说服力。
 
