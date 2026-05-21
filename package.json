@@ -8,12 +8,14 @@
     "validate": "npm run validate:nodes && npm run check:readmes",
     "pretest": "npm run validate",
     "build:skills": "node tools/build-skills.js",
-    "test": "node --loader ts-node/esm tools/calculators/__tests__/run-tests.ts",
+    "build:knowledge-cards": "node tools/build-knowledge-cards.js",
+    "test": "node --loader ts-node/esm tools/calculators/__tests__/run-tests.ts && node demo/__tests__/run-tests.mjs",
+    "test:demo": "node demo/__tests__/run-tests.mjs",
     "generate:task": "node scripts/generateTask.js",
     "run:workflow": "node tools/run-workflow.js",
     "demo": "node demo/server.js",
     "check:readmes": "node tools/check-readmes-sync.js",
-    "ci": "npm run validate && npm run build:skills && npm run test"
+    "ci": "npm run validate && npm run build:skills && npm run build:knowledge-cards && npm run test"
   },
   "devDependencies": {
     "js-yaml": "^4.1.1",

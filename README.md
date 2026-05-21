@@ -33,8 +33,10 @@ Core components:
 - 🎯 **5-question stage diagnosis** — detects your current FIRE stage (debt phase → emergency fund → investing → accelerating → optimizing → sprinting) in under 30 seconds
 - 🛠️ **6 stage-specific tools** — debt avalanche/snowball calculator, emergency fund progress bar, DCA simulator, savings-rate sensitivity table, rebalancing checklist, Coast FIRE calculator
 - 📊 **Extended FIRE calculator** — income growth simulation, side-income scenarios, retirement lifestyle comparison (city / smaller city / Southeast Asia arbitrage / minimal), Coast FIRE check
-- 🏦 **China-specific** — 个人养老金 (¥12,000/yr tax deduction), ETF codes (510300/159919 沪深300, 513500 QDII, 518880 黄金ETF), 公积金 handling
-- 💾 **Monthly snapshot tracking** — localStorage snapshots, sparkline chart, trend arrows, no backend needed
+- 🏦 **China-specific** — 综合所得税档 + 专项附加扣除 → "税后真实储蓄率"; 个人养老金 (¥12,000/yr tax deduction); 公积金 optimization; A-share/QDII/Gold ETF codes (510300/513500/518880)
+- 📊 **Multi-scenario comparator** — save 2–4 scenarios (e.g. "现状 / 加薪 10% / 副业 3k / 搬清迈") and see FIRE-age delta side-by-side
+- 💾 **Monthly snapshot tracking** — localStorage snapshots, sparkline chart, trend arrows, **CSV / JSON export**, no backend
+- 🤖 **One-click AI analysis (BYOK)** — paste your own Anthropic API key (stored locally), streams Claude analysis directly in the browser; or copy a structured 8-section prompt for any LLM
 - 🧠 **28 JSON knowledge nodes** — visible in-UI knowledge card, structured for accurate AI consumption
 - 🤖 **One-click AI report** — structured 8-section prompt for Claude/ChatGPT, covers all new fields
 

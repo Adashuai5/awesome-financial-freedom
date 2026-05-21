@@ -114,10 +114,31 @@
           <tbody>${rows}</tbody>
         </table>
       </div>
-      <div style="margin-top:8px;text-align:right;">
+      <div style="margin-top:8px;display:flex;justify-content:flex-end;gap:12px;align-items:center;">
+        <button onclick="window.fireTracker.exportCSV()" style="font-size:0.78rem;color:#2563eb;background:none;border:1px solid #bfdbfe;border-radius:6px;padding:3px 10px;cursor:pointer;">导出 CSV</button>
+        <button onclick="window.fireTracker.exportJSON()" style="font-size:0.78rem;color:#2563eb;background:none;border:1px solid #bfdbfe;border-radius:6px;padding:3px 10px;cursor:pointer;">导出 JSON</button>
         <button onclick="window.fireTracker.clearAll()" style="font-size:0.75rem;color:#94a3b8;background:none;border:none;cursor:pointer;text-decoration:underline;">清除所有记录</button>
       </div>
     `;
+  }
+
+  function download(filename, mime, content) {
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function toCSV(snapshots) {
+    if (!snapshots.length) return '';
+    const headers = ['date','netAssets','investableAssets','progressPct','savingsRate','fireTarget','yearsToFI','annualIncome','annualSavings'];
+    const rows = snapshots.map(s => headers.map(h => s[h] ?? '').join(','));
+    return [headers.join(','), ...rows].join('\n');
   }
 
   function addSaveButton(reportData) {
@@ -161,6 +182,18 @@
   window.fireTracker = {
     addSaveButton,
     renderHistory,
+    exportCSV() {
+      const snaps = getSnapshots();
+      if (!snaps.length) { alert('暂无快照可导出'); return; }
+      const today = new Date().toISOString().slice(0,10);
+      download(`fire-snapshots-${today}.csv`, 'text/csv;charset=utf-8', '﻿' + toCSV(snaps));
+    },
+    exportJSON() {
+      const snaps = getSnapshots();
+      if (!snaps.length) { alert('暂无快照可导出'); return; }
+      const today = new Date().toISOString().slice(0,10);
+      download(`fire-snapshots-${today}.json`, 'application/json', JSON.stringify(snaps, null, 2));
+    },
     clearAll() {
       if (confirm('确认清除所有历史快照记录？')) {
         localStorage.removeItem(SNAPSHOTS_KEY);

@@ -46,6 +46,13 @@
       "file": "knowledge/nodes/02-foundation/insurance-basics.json"
     },
     {
+      "id": "housing-fund-optimization",
+      "title": "公积金优化指南",
+      "chapter": "02-foundation",
+      "tags": ["公积金", "CN", "节税", "房贷"],
+      "file": "knowledge/nodes/02-foundation/housing-fund-optimization.json"
+    },
+    {
       "id": "savings-rate",
       "title": "储蓄率",
       "chapter": "03-accumulation",
