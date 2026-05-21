@@ -14,6 +14,9 @@ import {
   pensionTaxSaving,
 } from '../calculators/cn-tax.js';
 import { evaluateScenario, compareScenarios } from '../calculators/scenario.js';
+import {
+  monteCarloAccumulation, monteCarloRetirement, sigmaForRisk,
+} from '../calculators/monte-carlo.js';
 
 // ---- 阶段诊断 ----
 function testOnboardingStage() {
@@ -196,6 +199,51 @@ function testFireTargetConsistency() {
   assert.equal(m.fireTarget, 2500000);
 }
 
+// ---- 蒙特卡洛 ----
+function testMonteCarlo() {
+  // 风险档对应不同 sigma
+  assert.ok(sigmaForRisk('high') > sigmaForRisk('medium'));
+  assert.ok(sigmaForRisk('medium') > sigmaForRisk('low'));
+  assert.equal(sigmaForRisk('unknown'), sigmaForRisk('medium'));
+
+  // 累积期：500 万投资 + 100 万年储 + 7% 收益 → 早就达成 250 万目标
+  const acc = monteCarloAccumulation({
+    investableAssets: 5000000, annualSavings: 0,
+    fireTarget: 2500000, expectedReturn: 0.07, sigma: 0.12,
+    horizonYears: 30, trials: 200,
+  });
+  assert.equal(acc.successRate, 1); // 起始就已超目标
+  assert.equal(acc.medianYears, 1); // 第一年验证
+
+  // 累积期：5 万投资 + 5 万年储 → 难以快速到 250 万
+  const slow = monteCarloAccumulation({
+    investableAssets: 50000, annualSavings: 50000,
+    fireTarget: 2500000, expectedReturn: 0.07, sigma: 0.18,
+    horizonYears: 50, trials: 300,
+  });
+  // 50 年内有相当概率达成，但不是 100%
+  assert.ok(slow.successRate > 0 && slow.successRate <= 1);
+  assert.ok(slow.p5Years <= slow.p95Years);
+
+  // 退休期：250 万、4% 提取（10 万/年）、30 年、7% 收益 → 应有高成功率（>80%）
+  const ret = monteCarloRetirement({
+    startingBalance: 2500000, annualWithdrawal: 100000,
+    expectedReturn: 0.07, sigma: 0.12, inflation: 0.03,
+    retirementYears: 30, trials: 500,
+  });
+  assert.ok(ret.successRate > 0.5, `retirement success ${ret.successRate} should be > 50%`);
+  assert.ok(ret.p5EndBalance <= ret.medianEndBalance);
+  assert.ok(ret.medianEndBalance <= ret.p95EndBalance);
+
+  // 退休期：100 万、每年取 10 万、30 年 → 几乎必破产
+  const bankrupt = monteCarloRetirement({
+    startingBalance: 1000000, annualWithdrawal: 100000,
+    expectedReturn: 0.07, sigma: 0.18, inflation: 0.03,
+    retirementYears: 30, trials: 300,
+  });
+  assert.ok(bankrupt.successRate < 0.5, `under-funded retirement should mostly fail, got ${bankrupt.successRate}`);
+}
+
 const tests = [
   ['onboarding stage', testOnboardingStage],
   ['snapshot algorithm', testSnapshot],
@@ -203,6 +251,7 @@ const tests = [
   ['CN comprehensive income tax', testCNTax],
   ['scenario comparison', testScenario],
   ['FIRE target consistency (4% rule)', testFireTargetConsistency],
+  ['monte carlo (accumulation + retirement)', testMonteCarlo],
 ];
 
 let failed = 0;
